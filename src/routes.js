@@ -7,6 +7,9 @@ import WifiContainer from './containers/wifi-container';
 
 const Routes = () => (
   <Layout>
+    <div className="col-3">
+      SideBar
+    </div>
     {window.location.pathname.includes('index.html') && <Redirect to="/" />}
     <Route exact path="/" component={SelectKit} />
     <Route path="/kit/:ip/:hostname" component={WifiContainer} />

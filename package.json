@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
-    "start-dev": "webpack-dev-server --open && ELECTRON_START_URL=http://localhost:8080 electron .",
+    "start-dev": "webpack-dev-server --open & sudo npm run electron-dev",
     "dev-server": "webpack-dev-server --open",
     "electron": "electron .",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:8080 electron ."
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3002 electron ."
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,15 @@
   "dependencies": {
     "axios": "^0.16.2",
     "electron": "^1.7.6",
-    "history": "^4.7.2",
     "react": "^15.6.1",
+    "react-dnd": "^2.5.3",
+    "react-dnd-html5-backend": "^2.5.3",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.4",
     "socket.io": "^1.7.3",
     "spectre.css": "^0.4.1",
     "tcp-ping": "^0.1.1"
@@ -38,12 +42,14 @@
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.1.1",
+    "babel-plugin-transform-es2015-literals": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.7",
+    "electron-devtools-installer": "^2.2.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
@@ -52,6 +58,7 @@
     "html-webpack-plugin": "^2.30.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
+    "octal-number-loader": "^0.1.4",
     "style-loader": "^0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",

@@ -5,14 +5,20 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, 'src/dist'),
+    contentBase: path.resolve(__dirname, 'dist'),
     hot: true,
+    port: 3002,
   },
-  entry: ['babel-polyfill', './src/client.js'],
+  entry: [
+    // './dist/compatibility/index.js',
+    'babel-polyfill',
+    './src/client.js',
+  ],
   target: 'electron-renderer',
   output: {
-    path: path.resolve(__dirname, 'src/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    // publicPath: '/assets/',
   },
   plugins: [
     // new HtmlWebpackPlugin({

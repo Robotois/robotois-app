@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="775px" height="503px" viewBox="0 0 775 503" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Shield-Robotois</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="22" y="-5.68434189e-14" width="740" height="488" rx="1"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-4" y="-4" width="748" height="496">
+            <rect x="18" y="-4" width="748" height="496" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+        <rect id="path-3" x="-1.13686838e-13" y="337" width="127" height="75" rx="6"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="127" height="75" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="-2.27373675e-13" y="0" width="107" height="115"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="107" height="115" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="-2.27373675e-13" y="0" width="107" height="115"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="107" height="115" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <rect id="path-9" x="0" y="0" width="107" height="115"></rect>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="107" height="115" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+        <rect id="path-11" x="-1.13686838e-12" y="0" width="107" height="115"></rect>
+        <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="107" height="115" fill="white">
+            <use xlink:href="#path-11"></use>
+        </mask>
+        <rect id="path-13" x="-7.95807864e-13" y="0" width="119" height="122"></rect>
+        <mask id="mask-14" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="119" height="122" fill="white">
+            <use xlink:href="#path-13"></use>
+        </mask>
+        <rect id="path-15" x="0" y="0" width="119" height="122"></rect>
+        <mask id="mask-16" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="119" height="122" fill="white">
+            <use xlink:href="#path-15"></use>
+        </mask>
+        <rect id="path-17" x="-4.54747351e-13" y="0" width="114" height="106"></rect>
+        <mask id="mask-18" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="114" height="106" fill="white">
+            <use xlink:href="#path-17"></use>
+        </mask>
+        <rect id="path-19" x="-5.68434189e-13" y="-5.68434189e-14" width="114" height="106"></rect>
+        <mask id="mask-20" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="114" height="106" fill="white">
+            <use xlink:href="#path-19"></use>
+        </mask>
+    </defs>
+    <g id="Shield-Light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Shield-Robotois">
+            <g id="Shield" transform="translate(387.500000, 249.500000) rotate(180.000000) translate(-387.500000, -249.500000) translate(-0.000000, 0.000000)">
+                <g id="Rectangle">
+                    <use fill="#F1F5F7" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use stroke="#75848D" mask="url(#mask-2)" stroke-width="8" xlink:href="#path-1"></use>
+                </g>
+                <use id="Rectangle-3" stroke="#F1F5F7" mask="url(#mask-4)" stroke-width="4" fill="#4A4A4A" xlink:href="#path-3"></use>
+                <g id="Pines" transform="translate(90.000000, 11.000000)" stroke="#75848D" stroke-width="3" fill="#FFFFFF">
+                    <circle id="Oval-3" cx="6" cy="6" r="6"></circle>
+                    <circle id="Oval-3" cx="6" cy="28" r="6"></circle>
+                    <ellipse id="Oval-3" cx="29" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="29" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="50" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="50" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="73" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="73" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="94" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="94" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="117" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="117" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="138" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="138" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="161" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="161" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="183" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="183" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="206" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="206" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="227" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="227" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="250" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="250" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="271" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="271" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="294" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="294" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="315" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="315" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="338" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="338" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="359" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="359" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="382" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="382" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="403" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="403" cy="28" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="426" cy="6" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" cx="426" cy="28" rx="6" ry="6"></ellipse>
+                </g>
+                <circle id="Oval" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF" cx="53.5" cy="454.5" r="18.5"></circle>
+                <circle id="Oval" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF" cx="393.5" cy="310.5" r="18.5"></circle>
+                <circle id="Oval" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF" cx="558.5" cy="454.5" r="18.5"></circle>
+                <circle id="Oval" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF" cx="393.5" cy="172.5" r="18.5"></circle>
+                <circle id="Oval" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF" cx="558.5" cy="28.5" r="18.5"></circle>
+                <text id="ROBOTOIS" transform="translate(392.500000, 244.000000) rotate(180.000000) translate(-392.500000, -244.000000) " font-family="SuperGroteskC-Bd" font-size="36" font-weight="700" fill="#5764C6">
+                    <tspan x="300" y="257">ROBOTOIS</tspan>
+                </text>
+                <g id="Group-3" transform="translate(279.000000, 384.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-6)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-5"></use>
+                    <text id="E2" transform="translate(53.000000, 58.000000) rotate(180.000000) translate(-53.000000, -58.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="43" y="71">2</tspan>
+                    </text>
+                </g>
+                <g id="Group-2" transform="translate(148.000000, 384.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-8)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-7"></use>
+                    <text id="E1" transform="translate(54.000000, 58.000000) rotate(180.000000) translate(-54.000000, -58.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="44" y="71">1</tspan>
+                    </text>
+                </g>
+                <g id="Group-4" transform="translate(409.000000, 384.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-10)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-9"></use>
+                    <text id="E3" transform="translate(53.000000, 58.000000) rotate(180.000000) translate(-53.000000, -58.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="43" y="71">3</tspan>
+                    </text>
+                </g>
+                <g id="Group-5" transform="translate(605.000000, 384.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-12)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-11"></use>
+                    <text id="E4" transform="translate(53.000000, 58.000000) rotate(180.000000) translate(-53.000000, -58.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="43" y="71">4</tspan>
+                    </text>
+                </g>
+                <g id="Group-6" transform="translate(656.000000, 215.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-14)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-13"></use>
+                    <text id="E5" transform="translate(59.000000, 61.000000) rotate(180.000000) translate(-59.000000, -61.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="49" y="74">5</tspan>
+                    </text>
+                </g>
+                <g id="Group-7" transform="translate(655.000000, 84.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-16)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-15"></use>
+                    <text id="E6" transform="translate(60.000000, 61.000000) rotate(180.000000) translate(-60.000000, -61.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="50" y="74">6</tspan>
+                    </text>
+                </g>
+                <g id="Group-8" transform="translate(10.000000, 210.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-18)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-17"></use>
+                    <text id="M1" transform="translate(57.000000, 53.000000) rotate(180.000000) translate(-57.000000, -53.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="37" y="66">M1</tspan>
+                    </text>
+                </g>
+                <g id="Group-9" transform="translate(10.000000, 80.000000)">
+                    <use id="Rectangle-2" stroke="#5764C6" mask="url(#mask-20)" stroke-width="4" fill="#E1DEFD" xlink:href="#path-19"></use>
+                    <text id="M2" transform="translate(57.000000, 53.000000) rotate(180.000000) translate(-57.000000, -53.000000) " font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                        <tspan x="37" y="66">M2</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

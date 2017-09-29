@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="351px" viewBox="0 0 256 351" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Servo Motor</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="65" height="63"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="65" height="63" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M112.704959,40.3425658 C113.324919,33.1905971 119.643778,27.392781 126.821856,27.392781 L129.833136,27.392781 C137.009723,27.392781 143.297881,33.1941565 143.863554,40.3488026 C143.863554,40.3488026 150.392781,118.626846 150.392781,155.392781 C150.392781,192.158716 143.861578,270.462046 143.861578,270.462046 C143.290471,277.603494 137.011215,283.392781 129.833136,283.392781 L126.821856,283.392781 C119.64527,283.392781 113.317937,277.594285 112.704959,270.442996 C112.704959,270.442996 105.607219,191.903313 105.607219,155.392781 C105.607219,118.882249 112.704959,40.3425658 112.704959,40.3425658 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44.7855619" height="256" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Shield-Light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Servo-Motor" transform="translate(128.000000, 175.500000) rotate(180.000000) translate(-128.000000, -175.500000) ">
+            <g id="Group" transform="translate(102.000000, 58.000000)">
+                <path d="M23.128551,3.74489705 C23.128551,14.3410148 13.0892079,51.122941 13.0892079,51.122941" id="Path-3" stroke="#B4F0A7" stroke-width="7"></path>
+                <path d="M0,0 C4.02756828,5.37497546 12.6998377,17.3904985 17.6797197,27.8928539 C22.6596017,38.3952093 25.5,51 25.5,51" id="Path-2" stroke="#EEB7BD" stroke-width="7"></path>
+                <path d="M42.0878883,1.00935486 C42.0878883,17.0862233 27.0472394,52.1088962 27.0472394,52.1088962" id="Path-4" stroke="#75848D" stroke-width="6"></path>
+            </g>
+            <rect id="Rectangle-18" fill="#75848D" x="82" y="104" width="94" height="247" rx="11"></rect>
+            <g id="Conector-3" transform="translate(95.000000, 0.000000)">
+                <g id="Group">
+                    <use id="Rectangle-6" stroke="#6AE6F6" mask="url(#mask-2)" stroke-width="2" fill="#C0F5FC" xlink:href="#path-1"></use>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="13" cy="11" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="33" cy="11" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="53" cy="11" rx="6" ry="6"></ellipse>
+                </g>
+            </g>
+            <use id="Rectangle-19" stroke="#9B9B9B" mask="url(#mask-4)" stroke-width="2" fill="#F1F5F7" transform="translate(128.000000, 155.392781) rotate(-90.000000) translate(-128.000000, -155.392781) " xlink:href="#path-3"></use>
+            <circle id="Oval-8" stroke="#9B9B9B" fill="#75848D" cx="129.5" cy="155.5" r="9.5"></circle>
+            <circle id="Oval-8-Copy" stroke="#9B9B9B" fill="#FFFFFF" cx="128.5" cy="339.5" r="9.5"></circle>
+            <circle id="Oval-8-Copy-2" stroke="#9B9B9B" fill="#FFFFFF" cx="128.5" cy="116.5" r="9.5"></circle>
+            <ellipse id="Oval-3" stroke="#9B9B9B" fill="#75848D" cx="156" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-14" stroke="#9B9B9B" fill="#75848D" cx="175" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-15" stroke="#9B9B9B" fill="#FFFFFF" cx="193" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-16" stroke="#9B9B9B" fill="#FFFFFF" cx="212" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-17" stroke="#9B9B9B" fill="#FFFFFF" cx="230" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-18" stroke="#9B9B9B" fill="#FFFFFF" cx="249" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-24" stroke="#9B9B9B" fill="#FFFFFF" cx="8" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-23" stroke="#9B9B9B" fill="#FFFFFF" cx="27" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-22" stroke="#9B9B9B" fill="#FFFFFF" cx="45" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-21" stroke="#9B9B9B" fill="#FFFFFF" cx="64" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-20" stroke="#9B9B9B" fill="#75848D" cx="82" cy="155" rx="4" ry="4"></ellipse>
+            <ellipse id="Oval-3-Copy-19" stroke="#9B9B9B" fill="#75848D" cx="101" cy="155" rx="4" ry="4"></ellipse>
+        </g>
+    </g>
+</svg>

@@ -20,20 +20,12 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, '/src/dist/index.html'),
+    pathname: path.join(__dirname, '/dist/index.html'),
     protocol: 'file:',
     slashes: true,
   });
   // and load the index.html of the app.
-  // mainWindow.loadURL(url.format({
-  //   pathname: path.join(__dirname, 'index.html'),
-  //   protocol: 'file:',
-  //   slashes: true,
-  // }));
   mainWindow.loadURL(startUrl);
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -42,6 +34,15 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err));
+  installExtension(REDUX_DEVTOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err));
 }
 
 // This method will be called when Electron has finished
