@@ -1,5 +1,6 @@
 // require('./lib/draw2d/dependencies/jquery-2.0.3.min');
 // require('./lib/draw2d/dependencies/Class');
+// require('./lib/draw2d/dependencies/raphael.min');
 // require('./lib/draw2d/dependencies/json2');
 // require('./lib/draw2d/dependencies/shifty');
 // require('./lib/draw2d/draw2d');
@@ -30,3 +31,16 @@ require('./ServoConnector');
 require('./Shield');
 require('./SoundSensor');
 require('./TemperatureSensor');
+
+Robotois = {
+  CANVAS: null,
+  selectedFigure: null,
+  dropCoordinates: {
+    x: 100,
+    y: 100,
+  },
+  canvasDOMRef: null,
+};
+
+addSelection = null;
+currentSelection = '';

@@ -50,10 +50,34 @@ export const getVisibleTois = (used = [], queryStr = '') => {
   return visibleTois;
 };
 
+const addUsedToi = (currentUsedTois, newToi) => {
+  // const usedTois = Session.get('usedTois') || [];
+  const lastInstance = currentUsedTois.reduce(
+    (count, toi) => {
+      if (toi.type === newToi.type) {
+        if (toi.instance > count) {
+          return toi.instance;
+        }
+      }
+      return count;
+    },
+    0,
+  );
+  const newUsedTois = [
+    ...currentUsedTois,
+    {
+      ...newToi,
+      instance: lastInstance !== 0 ? lastInstance + 1 : 1,
+    },
+  ];
+  return newUsedTois;
+};
+
+
 const usedTois = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TOI':
-      return [...state, { ...action.toi }];
+    case 'ADD_USED_TOI':
+      return addUsedToi(state, action.toi);
     default:
       return state;
   }

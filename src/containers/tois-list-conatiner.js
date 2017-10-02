@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ToisList from '../components/tois-list/ToisList';
 import { getVisibleTois } from '../reducers/used-tois';
+import { addUsedToi } from '../actions';
 
 const mapStateToProps = ({ usedTois, form: { task } }) => {
   const query = task && task.values ? task.values.task : '';
@@ -9,9 +10,13 @@ const mapStateToProps = ({ usedTois, form: { task } }) => {
   });
 };
 
+const mapDispatchToProps = dispatch => ({
+  addUsedToi: toi => dispatch(addUsedToi(toi)),
+});
+
 const ToisContainer = connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(ToisList);
 
 export default ToisContainer;

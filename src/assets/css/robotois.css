@@ -17,3 +17,17 @@
 .sidebar .tois-list .toi-item {
   width: 12.5rem;
 }
+
+.workspace {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+
+.visual-and-code-editor-container .code-editor{
+  display: block;
+  background-color: #2A2734;
+  height: 100%;
+  flex: 1;
+  color: #FFFFFF;
+}

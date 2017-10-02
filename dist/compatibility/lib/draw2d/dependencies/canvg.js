@@ -17,7 +17,7 @@
 
     // ...or as browserify
     else if ( typeof module !== 'undefined' && module.exports ) {
-        module.exports = factory( require( './rgbcolor' ), require( './stackblur.min' ) );
+        module.exports = factory( require( './rgbcolor.js' ), require( './stackblur.min.js' ) );
     }
 
     global.canvg = factory( global.RGBColor, global.stackBlur );

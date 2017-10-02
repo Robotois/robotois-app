@@ -14,7 +14,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
    */
   onSelect(canvas, figure, isPrimarySelection) {
     this._super(canvas, figure, isPrimarySelection);
-    Session.set('currentSelection', {
+    addSelection({
       figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
       figureId: figure.id,
       isDragging: false,
@@ -30,15 +30,15 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
    */
   onUnselect(canvas, figure) {
     this._super(canvas, figure);
-    Session.set('currentSelection', null);
+    addSelection(null);
     Robotois.selectedFigure = null;
   },
 
   onDrag(canvas, figure) {
     this._super(canvas, figure);
-    const currentSelection = Session.get('currentSelection');
+    // const selection = currentSelection;
     if (!currentSelection.isDragging) {
-      Session.set('currentSelection', {
+      addSelection({
         figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
         figureId: figure.id,
         isDragging: true,
@@ -47,7 +47,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
   },
   onDragEnd(canvas, figure) {
     this._super(canvas, figure);
-    Session.set('currentSelection', {
+    addSelection({
       figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
       figureId: figure.id,
       isDragging: false,

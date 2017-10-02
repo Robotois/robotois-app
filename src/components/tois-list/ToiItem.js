@@ -2,32 +2,9 @@ import React, { PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 
 import ItemTypes from './ItemTypes';
-// import ShapeTypes from './ShapeTypes';
+import ShapeTypes from './ShapeTypes';
 
 let offsetX = 0;
-
-const addUsedTois = (item, figureId) => {
-  const usedTois = Session.get('usedTois') || [];
-  const lastInstance = usedTois.reduce(
-    (count, toi) => {
-      if (toi.type === item.type) {
-        if (toi.instance > count) {
-          return toi.instance;
-        }
-      }
-      return count;
-    },
-    0
-  );
-  usedTois.push({
-    type: item.type,
-    hasEvents: item.hasEvents,
-    instance: lastInstance !== 0 ? lastInstance + 1 : 1,
-    figureId,
-  });
-  // console.log('usedTois: ', usedTois);
-  Session.set('usedTois', usedTois);
-};
 
 const getMousePos = function getMousePos(canvas, evt) {
   const rect = canvas.getBoundingClientRect();
@@ -46,11 +23,12 @@ const toiItemSource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     let position;
+    // console.log('endDrag-component:', props);
     if (dropResult) {
-      // position = getMousePos(Robotois.canvasDOMRef, Robotois.dropCoordinates);
-      // const figure = new ShapeTypes[item.type]();
-      // Robotois.CANVAS.add(figure, position.x, position.y);
-      // addUsedTois(item, figure.id);
+      position = getMousePos(Robotois.canvasDOMRef, Robotois.dropCoordinates);
+      const figure = new ShapeTypes[item.type]();
+      Robotois.CANVAS.add(figure, position.x, position.y);
+      props.addUsedToi({ ...item, figureId: figure.id });
     }
   },
 };
@@ -68,6 +46,7 @@ class ToiItem extends React.Component {
   }
   render() {
     const { toi, connectDragSource, isDragging } = this.props;
+    // console.log('ToiItem-props:', this.props);
     return connectDragSource(
       <div
         style={{
@@ -75,7 +54,7 @@ class ToiItem extends React.Component {
           cursor: 'move',
         }}
         role="link"
-        className="card toi-item"
+        className="card toi-item my-1"
         onMouseDown={this.onMouseDown}
       >
         <div className="card-header">
@@ -98,7 +77,7 @@ class ToiItem extends React.Component {
 ToiItem.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  toi: PropTypes.object.isRequired
+  toi: PropTypes.object.isRequired,
 };
 
 export default DragSource(ItemTypes.TOIITEM, toiItemSource, collect)(ToiItem);

@@ -1193,10 +1193,11 @@ draw2d.shape.robotois.TemperatureSensor = draw2d.shape.robotois.AnalogSensor.ext
 },{}],24:[function(require,module,exports){
 // require('./lib/draw2d/dependencies/jquery-2.0.3.min');
 // require('./lib/draw2d/dependencies/Class');
+// require('./lib/draw2d/dependencies/raphael.min');
 // require('./lib/draw2d/dependencies/json2');
 // require('./lib/draw2d/dependencies/shifty');
-require('./lib/draw2d/dependencies/canvg');
 // require('./lib/draw2d/draw2d');
+require('./lib/draw2d/dependencies/canvg');
 require('./lib/DragConnectionCreatePolicy');
 require('./lib/SelectionMenuPolicy');
 
@@ -1223,6 +1224,19 @@ require('./ServoConnector');
 require('./Shield');
 require('./SoundSensor');
 require('./TemperatureSensor');
+
+Robotois = {
+  CANVAS: null,
+  selectedFigure: null,
+  dropCoordinates: {
+    x: 100,
+    y: 100,
+  },
+  canvasDOMRef: null,
+};
+
+addSelection = null;
+currentSelection = '';
 
 },{"./AbstractComponent":1,"./AnalogConnector":2,"./AnalogInputPort":3,"./AnalogOutputPort":4,"./AnalogSensor":5,"./Button":6,"./DistanceSensor":7,"./Lcd":8,"./Led":9,"./LedRGB":10,"./LightSensor":11,"./Motion":12,"./Motor":13,"./MotorConnector":14,"./MotorInputPort":15,"./MotorOutputPort":16,"./Relay":17,"./RotarySensor":18,"./Servo":19,"./ServoConnector":20,"./Shield":21,"./SoundSensor":22,"./TemperatureSensor":23,"./lib/DragConnectionCreatePolicy":25,"./lib/SelectionMenuPolicy":26,"./lib/draw2d/dependencies/canvg":27}],25:[function(require,module,exports){
 /**
@@ -1392,7 +1406,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
    */
   onSelect(canvas, figure, isPrimarySelection) {
     this._super(canvas, figure, isPrimarySelection);
-    Session.set('currentSelection', {
+    addSelection({
       figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
       figureId: figure.id,
       isDragging: false,
@@ -1408,15 +1422,15 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
    */
   onUnselect(canvas, figure) {
     this._super(canvas, figure);
-    Session.set('currentSelection', null);
+    addSelection(null);
     Robotois.selectedFigure = null;
   },
 
   onDrag(canvas, figure) {
     this._super(canvas, figure);
-    const currentSelection = Session.get('currentSelection');
+    // const selection = currentSelection;
     if (!currentSelection.isDragging) {
-      Session.set('currentSelection', {
+      addSelection({
         figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
         figureId: figure.id,
         isDragging: true,
@@ -1425,7 +1439,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
   },
   onDragEnd(canvas, figure) {
     this._super(canvas, figure);
-    Session.set('currentSelection', {
+    addSelection({
       figureClass: figure.cssClass.replace('draw2d_shape_robotois_', ''),
       figureId: figure.id,
       isDragging: false,
@@ -1453,7 +1467,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
 
     // ...or as browserify
     else if ( typeof module !== 'undefined' && module.exports ) {
-        module.exports = factory( require( './rgbcolor' ), require( './stackblur.min' ) );
+        module.exports = factory( require( './rgbcolor.js' ), require( './stackblur.min.js' ) );
     }
 
     global.canvg = factory( global.RGBColor, global.stackBlur );
@@ -4552,7 +4566,7 @@ draw2d.robotois.SelectionMenuPolicy = draw2d.policy.figure.SelectionPolicy.exten
 
 }));
 
-},{"./rgbcolor":28,"./stackblur.min":29}],28:[function(require,module,exports){
+},{"./rgbcolor.js":28,"./stackblur.min.js":29}],28:[function(require,module,exports){
 /**
  * A class to parse color values
  * @author Stoyan Stefanov <sstoo@gmail.com>
