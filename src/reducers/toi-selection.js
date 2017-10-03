@@ -12,7 +12,7 @@ export function getCurrentItem(currentSelection, usedTois) {
       type,
       title: 'Tarjeta Robotois',
       image: 'img/tois/shield-robotois.svg',
-      isDragging: currentSelection.isDragging,
+      // isDragging: currentSelection.isDragging,
       description: 'Esta es la tarjeta robotois y nos sirve para conectar todos nuestros componentes',
     };
   }
@@ -21,7 +21,7 @@ export function getCurrentItem(currentSelection, usedTois) {
   return {
     ...itemDescription,
     ...toi,
-    isDragging: currentSelection.isDragging,
+    // isDragging: currentSelection.isDragging,
   };
 }
 

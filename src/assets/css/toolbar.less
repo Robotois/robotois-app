@@ -1,0 +1,57 @@
+.toolbar {
+  height: 60px;
+  background: @light-dark;
+  display: flex;
+  align-items: center;
+  font-family: 'Ubuntu', sans-serif !important;
+  .col-4 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .btn-action {
+    background-color: @light-dark;;
+    margin-left: 1em;
+    .icon-apps {
+      color: @purple-text;
+      //color: @blue;
+    }
+  }
+  .kit-status {
+    display: flex;
+    padding: 1.5em;
+    color: @light-text;
+    span{
+      margin-right: 0.5em;
+    }
+  }
+  .view-options {
+    justify-content: center;
+  }
+  .run-code {
+    justify-content: flex-end;
+    padding-right: 2em;
+    button {
+      width: 153px;
+      background-color: @blue;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 4px;
+      // font-family: 'Ubuntu', sans-serif !important;
+    }
+  }
+}
+
+.circle {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 50%;
+}
+
+.online:extend(.circle) {
+  background-color: @green;
+}
+.offline:extend(.circle) {
+  background-color: @red;
+}

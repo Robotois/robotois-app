@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import Sidebar from '../components/sidebar/sidebar';
 import { changeMenuSelection } from '../actions';
 
-const mapStateToProps = ({ sidebar: { menuSelection } }) => ({
-  menuSelection,
+const mapStateToProps = ({ currentSelection }) => ({
+  currentSelection,
 });
 
 const mapDispatchToProps = dispatch => ({
