@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
-import ItemTypes from '../tois-list/ItemTypes';
+import ItemTypes from '../sidebar/ItemTypes';
 
 const canvasTarget = {
   drop(props, monitor) {
@@ -46,6 +46,7 @@ class VisualEditor extends React.Component {
           border: isOver ? '1px solid #5764C6' : 'none',
           visibility: visible ? 'visible' : 'hidden',
           width: '100%',
+          height: '100%',
         }}
       />,
     );

@@ -1,15 +1,27 @@
+.drawer {
+	overflow-y: auto;
+	height: 100% !important;
+	width: 400px !important;
+  bottom: 0rem;
+  top: 2.1rem;
+  right: -webkit-calc(0%); /*50% - half your wrapper width*/
+  right: calc(0%);
+}
+.drawer-closed {
+	max-width: 0 !important;
+}
 .sidebar {
-  width: 14rem;
+  width: 15rem;
 }
 .sidebar .tois-search {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   margin-right: 1rem;
 }
 .sidebar .tois-list {
   bottom: 0rem;
   overflow-y: auto;
   position: fixed;
-  top: 3rem;
+  top: 5rem;
   width: 13.5rem;
   margin-left: 0.5rem;
   /*padding-right: 0.5rem;*/
@@ -27,6 +39,7 @@
 .visual-and-code-editor-container .code-editor{
   display: block;
   background-color: #2A2734;
+  overflow-y: auto;
   height: 100%;
   flex: 1;
   color: #FFFFFF;

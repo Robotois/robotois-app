@@ -11,3 +11,8 @@ export const addCurrentSelection = currentSelection => ({
 export const removeCurrentSelection = () => ({
   type: 'REMOVE_CURRENT_SELECTION',
 });
+
+export const changeMenuSelection = menuSelection => ({
+  type: 'CHANGE_SELECTION',
+  menuSelection,
+});

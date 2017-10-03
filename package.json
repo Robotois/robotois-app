@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
-    "start-dev": "webpack-dev-server --open & sudo npm run electron-dev",
-    "dev-server": "webpack-dev-server --open",
+    "start-dev": "node_modules/.bin/webpack-dev-server --open & sudo npm run electron-dev",
+    "dev-server": "node_modules/.bin/webpack-dev-server --open",
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3002 electron ."
   },

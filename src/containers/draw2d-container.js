@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import Draw2d from '../components/draw2d-lib';
 import { addCurrentSelection } from '../actions';
 
-const mapStateToProps = state => ({
-  selection: state.currentSelection,
+const mapStateToProps = ({ currentSelection }) => ({
+  selection: currentSelection,
 });
 
 const mapDispatchToProps = dispatch => ({

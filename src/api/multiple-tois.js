@@ -1,4 +1,4 @@
-const multipleTois = {
+export default {
   distance: 6,
   button: 6,
   led: 6,
@@ -17,20 +17,20 @@ const multipleTois = {
   motor: 4,
 };
 
-export const nonAvailable = () => {
-  const usedTois = Session.get('usedTois') || [];
-  // checar si ya se tiene el maximo permitido de los multiples
-  const multiTois = Object.keys(multipleTois).reduce(
-    (result, key) => {
-      const items = usedTois.filter(toi => toi.type === key);
-      return items.length >= multipleTois[key] ? result.concat(items[0].type) : result;
-    },
-    []
-  );
-  const singleTois = usedTois.reduce(
-    (result, toi) => (!multipleTois[toi.type] ? result.concat(toi.type) : result),
-    []
-  );
-
-  return multiTois.concat(singleTois);
-};
+// export const nonAvailable = () => {
+//   const usedTois = Session.get('usedTois') || [];
+//   // checar si ya se tiene el maximo permitido de los multiples
+//   const multiTois = Object.keys(multipleTois).reduce(
+//     (result, key) => {
+//       const items = usedTois.filter(toi => toi.type === key);
+//       return items.length >= multipleTois[key] ? result.concat(items[0].type) : result;
+//     },
+//     []
+//   );
+//   const singleTois = usedTois.reduce(
+//     (result, toi) => (!multipleTois[toi.type] ? result.concat(toi.type) : result),
+//     []
+//   );
+//
+//   return multiTois.concat(singleTois);
+// };

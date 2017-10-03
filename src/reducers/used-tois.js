@@ -1,26 +1,8 @@
 import Tois from '../api/tois';
-
-const multipleTois = {
-  distance: 6,
-  button: 6,
-  led: 6,
-  ledRGB: 2,
-  lcd: 2,
-  relay: 6,
-  motion: 6,
-  analogConnector: 2,
-  rotary: 8,
-  temperature: 8,
-  sound: 8,
-  light: 8,
-  servosConnector: 2,
-  servo: 6,
-  motorsConnector: 2,
-  motor: 4,
-};
+import InputModules from '../api/input-modules';
+import multipleTois from '../api/multiple-tois';
 
 const nonAvailable = (used) => {
-  // const usedTois = Session.get('usedTois') || [];
   // checar si ya se tiene el maximo permitido de los multiples
   const multiTois = Object.keys(multipleTois).reduce(
     (result, key) => {
@@ -39,19 +21,17 @@ const nonAvailable = (used) => {
 
 export const getVisibleTois = (used = [], queryStr = '') => {
   const noAv = nonAvailable(used);
-  // const query = new RegExp(queryStr, 'i');
   const visibleTois = queryStr !== '' ?
     Tois.filter(toi =>
-      noAv.findIndex(na => na.type === toi.type) === -1 &&
+      noAv.findIndex(na => na === toi.type) === -1 &&
       toi.title.toLowerCase().search(queryStr) !== -1,
     )
     :
-    Tois.filter(toi => noAv.findIndex(na => na.type === toi.type) === -1);
+    Tois.filter(toi => noAv.findIndex(na => na === toi.type) === -1);
   return visibleTois;
 };
 
 const addUsedToi = (currentUsedTois, newToi) => {
-  // const usedTois = Session.get('usedTois') || [];
   const lastInstance = currentUsedTois.reduce(
     (count, toi) => {
       if (toi.type === newToi.type) {
@@ -73,6 +53,25 @@ const addUsedToi = (currentUsedTois, newToi) => {
   return newUsedTois;
 };
 
+export const getInputModules = currentUsedTois => currentUsedTois.reduce(
+  (result, toi) => (
+    toi.hasEvents ? result.concat({
+      ...InputModules.find(module => module.type === toi.type),
+      ...toi,
+    }) :
+      result
+  ),
+  [],
+);
+
+export const multiModules = (currentUsedTois, itemType) => {
+  const total = currentUsedTois.reduce(
+    (count, toi) => (toi.type === itemType ? count + 1 : count),
+    0,
+  );
+
+  return total > 1;
+};
 
 const usedTois = (state = [], action) => {
   switch (action.type) {

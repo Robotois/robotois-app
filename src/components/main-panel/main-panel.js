@@ -8,10 +8,6 @@ const MainPanel = () => (
     <div className="workspace">
       <VisualEditor visible />
     </div>
-    <div className="panel">
-      <div className="panel-nav">
-      </div>
-    </div>
   </div>
 );
 

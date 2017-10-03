@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ToisList from '../components/tois-list/ToisList';
+import ToisList from '../components/sidebar/ToisList';
 import { getVisibleTois } from '../reducers/used-tois';
 import { addUsedToi } from '../actions';
 
