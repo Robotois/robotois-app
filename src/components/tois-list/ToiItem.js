@@ -46,28 +46,26 @@ class ToiItem extends React.Component {
   }
   render() {
     const { toi, connectDragSource, isDragging } = this.props;
-    // console.log('ToiItem-props:', this.props);
     return connectDragSource(
       <div
         style={{
           opacity: isDragging ? 0.5 : 1,
           cursor: 'move',
         }}
-        role="link"
-        className="card toi-item my-1"
+        role="presentation"
+        className="tile toi-item"
         onMouseDown={this.onMouseDown}
       >
-        <div className="card-header">
-          <div className="card-subtitle">{toi.title}</div>
-        </div>
-        <div className="card-image col-mx-auto">
+        <div className="tile-icon">
           <img
             src={toi.image}
             alt={toi.title}
             className="img-responsive"
-            style={{ transform: 'rotate(90deg)' }}
-            width="50px"
           />
+        </div>
+        <div className="tile-content">
+          <p className="tile-title">{toi.title}</p>
+          <p className="tile-subtitle">{toi.description}</p>
         </div>
       </div>,
     );
