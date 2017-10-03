@@ -1,16 +1,15 @@
 import React from 'react';
-import TabMenu from './tab-menu';
+import Toolbar from './Toolbar';
 import VisualEditor from './VisualEditor';
 
 const MainPanel = () => (
   <div className="column">
-    <TabMenu />
+    <Toolbar />
     <div className="workspace">
       <VisualEditor visible />
     </div>
     <div className="panel">
-      <div className="panel-nav">
-      </div>
+      <div className="panel-nav" />
     </div>
   </div>
 );

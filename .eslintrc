@@ -7,8 +7,22 @@
     "es6": true,
     "mocha": true
   },
+   "globals": {
+      "draw2d": true,
+      "$": true,
+      "Robotois": true,
+      "window": true
+    },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": [
+        2,
+        {
+          "forbid": [
+            "object"
+          ]
+        }
+      ],
     # "valid-jsdoc": ["error", {
     #   "requireReturn": true,
     #   "requireReturnType": true,
