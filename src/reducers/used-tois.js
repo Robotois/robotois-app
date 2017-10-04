@@ -53,18 +53,7 @@ const addUsedToi = (currentUsedTois, newToi) => {
   return newUsedTois;
 };
 
-export const getInputModules = currentUsedTois => currentUsedTois.reduce(
-  (result, toi) => (
-    toi.hasEvents ? result.concat({
-      ...InputModules.find(module => module.type === toi.type),
-      ...toi,
-    }) :
-      result
-  ),
-  [],
-);
-
-export const multiModules = (currentUsedTois, itemType) => {
+export const multipleInstances = (currentUsedTois, itemType) => {
   const total = currentUsedTois.reduce(
     (count, toi) => (toi.type === itemType ? count + 1 : count),
     0,
@@ -72,6 +61,18 @@ export const multiModules = (currentUsedTois, itemType) => {
 
   return total > 1;
 };
+
+export const getInputModules = currentUsedTois => currentUsedTois.reduce(
+  (result, toi) => (
+    toi.hasEvents ? result.concat({
+      ...InputModules.find(module => module.type === toi.type),
+      ...toi,
+      hasMultiple: multipleInstances(currentUsedTois, toi.type),
+    }) :
+      result
+  ),
+  [],
+);
 
 const usedTois = (state = [], action) => {
   switch (action.type) {

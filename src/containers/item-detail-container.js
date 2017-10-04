@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import ItemDetail from '../components/item-detail/item-detail';
 import { getCurrentItem } from '../reducers/toi-selection';
-import { getInputModules } from '../reducers/used-tois';
+import { getInputModules, multipleInstances } from '../reducers/used-tois';
 
 const mapStateToProps = ({ currentSelection, usedTois }) => {
   const currentItem = getCurrentItem(currentSelection, usedTois);
-  // console.log('getInputModules:', getInputModules(usedTois));
+  const hasMulti = currentItem && multipleInstances(usedTois, currentItem.type);
   return ({
     currentItem,
+    multipleInstances: hasMulti,
     currentInputModules: getInputModules(usedTois),
   });
 };
