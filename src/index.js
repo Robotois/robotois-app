@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import 'spectre.css/dist/spectre.min.css';
 import 'spectre.css/dist/spectre-icons.min.css';
 import 'spectre.css/dist/spectre-exp.min.css';
-import './assets/css/robotois.less';
+import './assets/css/robotois.css';
+import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import App from './components/app';
 import Draw2dContainer from './containers/draw2d-container';
-// import '../dist/compatibility/index';
 
 const store = createStore(
   reducers,
@@ -23,4 +23,5 @@ ReactDOM.render((
       <App />
     </div>
   </Provider>
-), document.getElementById('app'));
+), document.getElementById('root'));
+registerServiceWorker();

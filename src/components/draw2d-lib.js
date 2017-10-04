@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Draw2d = ({ addCurrentSelection, selection }) => {
-  addSelection = addCurrentSelection;
-  currentSelection = selection;
+  window.addSelection = addCurrentSelection;
+  window.currentSelection = selection;
   return (false);
 };
 

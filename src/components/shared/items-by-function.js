@@ -17,14 +17,4 @@ export const isLogger = item => loggersMap.findIndex(logger => logger === item) 
 
 export const isIoLogger = item => ioLoggersMap.findIndex(logger => logger === item) !== -1;
 
-export const multiModules = (type) => {
-  const usedTois = Session.get('usedTois') || [];
-  const total = usedTois.reduce(
-    (count, toi) => (toi.type === type ? count + 1 : count),
-    0
-  );
-
-  return total > 1;
-};
-
 export const isInput = type => isSensor(type) || isDigitalInput(type);

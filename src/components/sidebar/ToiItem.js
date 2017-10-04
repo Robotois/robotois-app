@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 
 import ItemTypes from './ItemTypes';
@@ -25,9 +26,9 @@ const toiItemSource = {
     let position;
     // console.log('endDrag-component:', props);
     if (dropResult) {
-      position = getMousePos(Robotois.canvasDOMRef, Robotois.dropCoordinates);
+      position = getMousePos(window.Robotois.canvasDOMRef, window.Robotois.dropCoordinates);
       const figure = new ShapeTypes[item.type]();
-      Robotois.CANVAS.add(figure, position.x, position.y);
+      window.Robotois.CANVAS.add(figure, position.x, position.y);
       props.addUsedToi({ ...item, figureId: figure.id });
     }
   },

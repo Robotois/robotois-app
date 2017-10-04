@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../sidebar/ItemTypes';
 
 const canvasTarget = {
   drop(props, monitor) {
-    Robotois.dropCoordinates = monitor.getSourceClientOffset();
+    window.Robotois.dropCoordinates = monitor.getSourceClientOffset();
   },
 };
 
@@ -18,10 +19,10 @@ function collect(connect, monitor) {
 
 class VisualEditor extends React.Component {
   componentDidMount() {
-    const shield = new draw2d.shape.robotois.Shield();
-    const canvas = new draw2d.Canvas('canvas');
-    canvas.installEditPolicy(new draw2d.policy.canvas.ShowGridEditPolicy());
-    canvas.installEditPolicy(new draw2d.robotois.DragConnectionCreatePolicy());
+    const shield = new window.draw2d.shape.robotois.Shield();
+    const canvas = new window.draw2d.Canvas('canvas');
+    canvas.installEditPolicy(new window.draw2d.policy.canvas.ShowGridEditPolicy());
+    canvas.installEditPolicy(new window.draw2d.robotois.DragConnectionCreatePolicy());
     /*
     No keyboard events, this will disable deleting tois with DEL key
      */
@@ -31,11 +32,11 @@ class VisualEditor extends React.Component {
     // canvas.on('figure:add', (emitter, event) => {
     //   console.log("figure id:", event.figure.id);
     // });
-    console.log('width:', canvas.getWidth(), 'height:', canvas.getHeight());
+    // console.log('width:', canvas.getWidth(), 'height:', canvas.getHeight());
     // we center canvas
     canvas.add(shield, (canvas.getWidth() / 2) - 213, (canvas.getHeight() / 2) - 75);
-    Robotois.CANVAS = canvas;
-    Robotois.canvasDOMRef = document.getElementById('canvas');
+    window.Robotois.CANVAS = canvas;
+    window.Robotois.canvasDOMRef = document.getElementById('canvas');
   }
   render() {
     const { connectDropTarget, isOver, visible } = this.props;
