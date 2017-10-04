@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="206px" height="256px" viewBox="0 0 206 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Temperature</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="206" height="247" rx="22"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="206" height="247" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="0" y="0" width="65" height="63"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="65" height="63" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Shield-Light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Temperature">
+            <use id="Rectangle-5" stroke="#75848D" mask="url(#mask-2)" stroke-width="4" fill="#F1F5F7" xlink:href="#path-1"></use>
+            <g id="ranura" transform="translate(19.000000, 106.000000)" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF">
+                <circle id="Oval" cx="18.5" cy="18.5" r="18.5"></circle>
+            </g>
+            <g id="ranura" transform="translate(150.000000, 106.000000)" stroke="#E1DEFD" stroke-width="2" fill="#FFFFFF">
+                <circle id="Oval" cx="18.5" cy="18.5" r="18.5"></circle>
+            </g>
+            <g id="Conector-3" transform="translate(70.000000, 193.000000)">
+                <g id="Group">
+                    <use id="Rectangle-6" stroke="#6AE6F6" mask="url(#mask-4)" stroke-width="2" fill="#C0F5FC" xlink:href="#path-3"></use>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="13" cy="11" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="33" cy="11" rx="6" ry="6"></ellipse>
+                    <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="53" cy="11" rx="6" ry="6"></ellipse>
+                </g>
+            </g>
+            <path d="M102.5,82 C114.926407,82 125,71.9264069 125,59.5 C125,53.3748507 123.908883,45.4637337 120.251559,45.4637337 C116.594236,45.4637337 108.801258,45.4637337 102.5,45.4637337 L85.3625062,45.4637337 C81.6181323,45.4637337 80,53.1219536 80,59.5 C80,71.9264069 90.0735931,82 102.5,82 Z" id="Oval-2" stroke="#75848D" fill="#4A4A4A"></path>
+        </g>
+    </g>
+</svg>

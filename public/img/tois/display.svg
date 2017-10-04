@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="709px" height="221px" viewBox="0 0 709 221" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Display</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="100" height="110"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="100" height="110" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="248.5" y="-239.5" width="220" height="700" rx="10"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="220" height="700" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="39" y="41" width="640" height="140"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="640" height="140" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Shield-Light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Display">
+            <g id="conector" transform="translate(0.000000, 26.000000)" stroke="#5764C6" stroke-width="4" fill="#E1DEFD">
+                <use id="Rectangle-2" mask="url(#mask-2)" xlink:href="#path-1"></use>
+            </g>
+            <use id="Rectangle-5" stroke="#75848D" mask="url(#mask-4)" stroke-width="4" fill="#F1F5F7" transform="translate(358.500000, 110.500000) rotate(-90.000000) translate(-358.500000, -110.500000) " xlink:href="#path-3"></use>
+            <use id="Rectangle-12" stroke="#75848D" mask="url(#mask-6)" stroke-width="8" fill="#95EDF9" xlink:href="#path-5"></use>
+            <text id="ABC" font-family="OperatorMono-Medium, Operator Mono" font-size="36" font-weight="400" fill="#5764C6">
+                <tspan x="589" y="146">ABC</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

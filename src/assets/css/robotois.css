@@ -1,0 +1,156 @@
+/*
+SELECTED TOI #2F2C53;
+BG LIST #3A375C;
+*/
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+.toolbar {
+  height: 60px;
+  background: #474B7E;
+  display: flex;
+  align-items: center;
+  font-family: 'Ubuntu', sans-serif !important;
+}
+.toolbar .col-4 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.toolbar .btn-action {
+  background-color: #474B7E;
+  margin-left: 1em;
+}
+.toolbar .btn-action .icon-apps {
+  color: #8A81C3;
+}
+.toolbar .kit-status {
+  display: flex;
+  padding: 1.5em;
+  color: #EAE8FF;
+}
+.toolbar .kit-status span {
+  margin-right: 0.5em;
+}
+.toolbar .view-options {
+  justify-content: center;
+}
+.toolbar .run-code {
+  justify-content: flex-end;
+  padding-right: 2em;
+}
+.toolbar .run-code button {
+  width: 153px;
+  background-color: #27BCEB;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 4px;
+}
+.circle,
+.online,
+.offline {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 50%;
+}
+.online {
+  background-color: #00E257;
+}
+.offline {
+  background-color: #E2244C;
+}
+.tois-panel {
+  display: flex;
+  width: 386px;
+  flex-direction: column;
+  background-color: #2F2C53;
+  font-family: 'Ubuntu', sans-serif !important;
+  overflow-y: auto;
+}
+.tois-panel .tois-search {
+  height: 76px;
+  display: flex;
+  align-items: center;
+}
+.tois-panel .tois-search form {
+  width: 100%;
+  padding: 1em;
+}
+.tois-panel .search-input {
+  background-color: #2F2C53;
+  color: #EAE8FF;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: inherit;
+}
+.tois-panel .search-input::placeholder {
+  color: #EAE8FF;
+}
+.tois-panel .icon-search {
+  color: #EAE8FF;
+}
+.tois-panel .toi-item {
+  background-color: #3A375C;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 0px 0.8em 0 0.8em;
+}
+.tois-panel .toi-item .tile-icon img {
+  width: 64px;
+}
+.tois-panel .toi-item .tile-content .tile-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #EAE8FF;
+  margin: 0.5em 0 0.5em 0;
+}
+.tois-panel .toi-item .tile-content .tile-subtitle {
+  color: #8A81C3;
+  font-size: 14px;
+}
+.tois-panel .toi-item:hover {
+  background-color: #2F2C53;
+  border: 1px solid #27BCEB;
+}
+.tois-panel .toi-detail {
+  background-color: #3A375C;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 1em 0.8em 0 0.8em;
+}
+.tois-panel .toi-detail .tile-icon img {
+  width: 64px;
+}
+.tois-panel .toi-detail .tile-content .tile-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #EAE8FF;
+  margin: 0.5em 0 0.5em 0;
+}
+.tois-panel .toi-detail .tile-content .tile-subtitle {
+  color: #EAE8FF;
+  font-size: 16px;
+}
+.body {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+.html {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+#app {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+.workspace {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.visual-and-code-editor-container .code-editor {
+  display: block;
+  background-color: #2A2734;
+  height: 100%;
+  flex: 1;
+  color: #FFFFFF;
+}

@@ -1,0 +1,85 @@
+.tois-panel {
+  display: flex;
+  width: 386px;
+  flex-direction: column;
+  background-color: @dark;
+  font-family: 'Ubuntu', sans-serif !important;
+  overflow-y: auto;
+  .tois-search {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    form {
+      width: 100%;
+      padding: 1em;
+    }
+  }
+  .search-input {
+    background-color: @dark;
+    color: @light-text;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: inherit;
+    &::placeholder {
+      color: @light-text;
+    }
+  }
+  .icon-search {
+    color: @light-text;
+  }
+  .toi-item {
+    background-color: @mid-dark;
+    background-color: @mid-dark;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    padding: 0px 0.8em 0 0.8em;
+    .tile-icon {
+      img {
+        width: 64px;
+      }
+    }
+    .tile-content {
+      .tile-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: @light-text;
+        margin: 0.5em 0 0.5em 0;
+      }
+      .tile-subtitle {
+        color: @purple-text;
+        font-size: 14px;
+      }
+    }
+    &:hover {
+      background-color: @dark;
+      border: 1px solid @blue;
+    }
+  }
+  .toi-detail {
+    background-color: @mid-dark;
+    background-color: @mid-dark;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    padding: 1em 0.8em 0 0.8em;
+    .tile-icon {
+      img {
+        width: 64px;
+      }
+    }
+    .tile-content {
+      .tile-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: @light-text;
+        margin: 0.5em 0 0.5em 0;
+      }
+      .tile-subtitle {
+        color: @light-text;
+        font-size: 16px;
+      }
+    }
+  }
+}

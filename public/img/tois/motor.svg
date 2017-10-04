@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="361px" viewBox="0 0 130 361" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Motor2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="108" height="60"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="108" height="60" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="49" y="261" width="33" height="100" rx="7"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="33" height="100" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="0" y="109" width="130" height="178" rx="15"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="130" height="178" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Shield-Light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Motor2" transform="translate(65.000000, 180.500000) rotate(180.000000) translate(-65.000000, -180.500000) ">
+            <path d="M25.5,12.5 L25.5,128.5" id="Line" stroke="#F3C882" stroke-width="7" stroke-linecap="square"></path>
+            <path d="M41.5,12.5 L41.5,128.5" id="Line-Copy" stroke="#F4EC88" stroke-width="7" stroke-linecap="square"></path>
+            <path d="M57.5,12.5 L57.5,128.5" id="Line-Copy-2" stroke="#E1DEFD" stroke-width="7" stroke-linecap="square"></path>
+            <path d="M73.5,12.5 L73.5,128.5" id="Line-Copy-3" stroke="#B4F0A7" stroke-width="7" stroke-linecap="square"></path>
+            <path d="M89.5,12.5 L89.5,128.5" id="Line-Copy-4" stroke="#EEB7BD" stroke-width="7" stroke-linecap="square"></path>
+            <path d="M105.5,12.5 L105.5,128.5" id="Line-Copy-5" stroke="#75848D" stroke-width="7" stroke-linecap="square"></path>
+            <g id="conector-copy-2" transform="translate(65.000000, 30.000000) rotate(180.000000) translate(-65.000000, -30.000000) translate(11.000000, 0.000000)">
+                <use id="Rectangle-10" stroke="#979797" mask="url(#mask-2)" stroke-width="2" fill="#C0F5FC" xlink:href="#path-1"></use>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="14" cy="48" rx="6" ry="6"></ellipse>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="30" cy="48" rx="6" ry="6"></ellipse>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="46" cy="48" rx="6" ry="6"></ellipse>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="62" cy="48" rx="6" ry="6"></ellipse>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="78" cy="48" rx="6" ry="6"></ellipse>
+                <ellipse id="Oval-3" stroke="#75848D" stroke-width="3" fill="#FFFFFF" cx="94" cy="48" rx="6" ry="6"></ellipse>
+            </g>
+            <use id="Rectangle-14-Copy" stroke="#9B9B9B" mask="url(#mask-4)" stroke-width="2" fill="#F1F5F7" xlink:href="#path-3"></use>
+            <use id="Rectangle-16" stroke="#75848D" mask="url(#mask-6)" stroke-width="4" fill="#F1F5F7" xlink:href="#path-5"></use>
+            <rect id="Rectangle-13" fill="#75848D" x="1" y="261" width="128" height="10"></rect>
+        </g>
+    </g>
+</svg>

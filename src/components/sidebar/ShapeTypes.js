@@ -1,0 +1,20 @@
+const ShapeTypes = {
+  analogConnector: window.draw2d.shape.robotois.AnalogConnector,
+  temperature: window.draw2d.shape.robotois.TemperatureSensor,
+  light: window.draw2d.shape.robotois.LightSensor,
+  rotary: window.draw2d.shape.robotois.RotarySensor,
+  // humidity: 'toiItem',
+  distance: window.draw2d.shape.robotois.DistanceSensor,
+  button: window.draw2d.shape.robotois.Button,
+  led: window.draw2d.shape.robotois.Led,
+  ledRGB: window.draw2d.shape.robotois.LedRGB,
+  lcd: window.draw2d.shape.robotois.Lcd,
+  motorsConnector: window.draw2d.shape.robotois.MotorConnector,
+  motor: window.draw2d.shape.robotois.Motor,
+  servosConnector: window.draw2d.shape.robotois.ServoConnector,
+  servo: window.draw2d.shape.robotois.Servo,
+  relay: window.draw2d.shape.robotois.Relay,
+  motion: window.draw2d.shape.robotois.Motion,
+  sound: window.draw2d.shape.robotois.SoundSensor,
+};
+export default ShapeTypes;
