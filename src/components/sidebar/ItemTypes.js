@@ -1,6 +1,6 @@
-const ItemTypes = {
+const ToiTypes = {
   TIMELINEITEM: 'timelineItem',
   TOIITEM: 'toiItem',
   CANVAS: 'canvas',
 };
-export default ItemTypes;
+export default ToiTypes;

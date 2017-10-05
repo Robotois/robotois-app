@@ -13,8 +13,8 @@ export const isSensor =
 export const isDigitalInput = inputModule =>
   digitalInputsMap.findIndex(io => inputModule.includes(io)) !== -1;
 
-export const isLogger = item => loggersMap.findIndex(logger => logger === item) !== -1;
+export const isLogger = toi => loggersMap.findIndex(logger => logger === toi) !== -1;
 
-export const isIoLogger = item => ioLoggersMap.findIndex(logger => logger === item) !== -1;
+export const isIoLogger = toi => ioLoggersMap.findIndex(logger => logger === toi) !== -1;
 
 export const isInput = type => isSensor(type) || isDigitalInput(type);

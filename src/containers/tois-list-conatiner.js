@@ -3,8 +3,8 @@ import ToisList from '../components/sidebar/ToisList';
 import { getVisibleTois } from '../reducers/used-tois';
 import { addUsedToi } from '../actions';
 
-const mapStateToProps = ({ usedTois, form: { task } }) => {
-  const query = task && task.values ? task.values.task : '';
+const mapStateToProps = ({ usedTois, form: { searchForm } }) => {
+  const query = searchForm && searchForm.values ? searchForm.values.query : '';
   return ({
     visibleTois: getVisibleTois(usedTois, query),
   });
