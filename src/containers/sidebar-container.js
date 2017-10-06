@@ -1,18 +1,14 @@
 import { connect } from 'react-redux';
 import Sidebar from '../components/sidebar/sidebar';
-import { changeMenuSelection } from '../actions';
 
-const mapStateToProps = ({ currentSelection }) => ({
+const mapStateToProps = ({ currentSelection, toolbar: { workspace } }) => ({
   currentSelection,
-});
-
-const mapDispatchToProps = dispatch => ({
-  changeSelection: item => () => dispatch(changeMenuSelection(item)),
+  workspace,
 });
 
 const SidebarContainer = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(Sidebar);
 
 export default SidebarContainer;

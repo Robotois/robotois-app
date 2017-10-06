@@ -6,7 +6,7 @@ const SearchForm = () => (
     <div className="has-icon-left mt-2">
       <Field
         className="form-input input-lg search-input"
-        name="task"
+        name="query"
         component="input"
         type="text"
         placeholder="Buscar Componente"
@@ -16,4 +16,4 @@ const SearchForm = () => (
   </form>
 );
 
-export default reduxForm({ form: 'task' })(SearchForm);
+export default reduxForm({ form: 'searchForm' })(SearchForm);

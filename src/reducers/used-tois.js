@@ -6,8 +6,8 @@ const nonAvailable = (used) => {
   // checar si ya se tiene el maximo permitido de los multiples
   const multiTois = Object.keys(multipleTois).reduce(
     (result, key) => {
-      const items = used.filter(toi => toi.type === key);
-      return items.length >= multipleTois[key] ? result.concat(items[0].type) : result;
+      const tois = used.filter(toi => toi.type === key);
+      return tois.length >= multipleTois[key] ? result.concat(tois[0].type) : result;
     },
     [],
   );
@@ -53,9 +53,9 @@ const addUsedToi = (currentUsedTois, newToi) => {
   return newUsedTois;
 };
 
-export const multipleInstances = (currentUsedTois, itemType) => {
+export const multipleInstances = (currentUsedTois, toiType) => {
   const total = currentUsedTois.reduce(
-    (count, toi) => (toi.type === itemType ? count + 1 : count),
+    (count, toi) => (toi.type === toiType ? count + 1 : count),
     0,
   );
 
@@ -76,7 +76,7 @@ export const getInputModules = currentUsedTois => currentUsedTois.reduce(
 
 const usedTois = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_USED_TOI':
+    case 'USED_TOIS_ADD_TOI':
       return addUsedToi(state, action.toi);
     default:
       return state;

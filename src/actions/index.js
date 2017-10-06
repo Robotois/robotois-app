@@ -1,5 +1,5 @@
 export const addUsedToi = toi => ({
-  type: 'ADD_USED_TOI',
+  type: 'USED_TOIS_ADD_TOI',
   toi,
 });
 
@@ -12,7 +12,12 @@ export const removeCurrentSelection = () => ({
   type: 'REMOVE_CURRENT_SELECTION',
 });
 
-export const changeMenuSelection = menuSelection => ({
-  type: 'CHANGE_SELECTION',
-  menuSelection,
+export const changeInputToiSelection = selectedToi => ({
+  type: 'CHANGE_INPUT_TOI_SELECTION',
+  selectedToi,
+});
+
+export const changeInputToi = inputToi => ({
+  type: 'CHANGE_INPUT_TOI',
+  inputToi,
 });

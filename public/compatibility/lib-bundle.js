@@ -1236,7 +1236,7 @@ Robotois = {
 };
 
 addSelection = null;
-currentSelection = '';
+currentSelection = null;
 
 },{"./AbstractComponent":1,"./AnalogConnector":2,"./AnalogInputPort":3,"./AnalogOutputPort":4,"./AnalogSensor":5,"./Button":6,"./DistanceSensor":7,"./Lcd":8,"./Led":9,"./LedRGB":10,"./LightSensor":11,"./Motion":12,"./Motor":13,"./MotorConnector":14,"./MotorInputPort":15,"./MotorOutputPort":16,"./Relay":17,"./RotarySensor":18,"./Servo":19,"./ServoConnector":20,"./Shield":21,"./SoundSensor":22,"./TemperatureSensor":23,"./lib/DragConnectionCreatePolicy":25,"./lib/SelectionMenuPolicy":26,"./lib/draw2d/dependencies/canvg":27}],25:[function(require,module,exports){
 /**

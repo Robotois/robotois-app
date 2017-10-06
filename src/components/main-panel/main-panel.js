@@ -1,12 +1,18 @@
 import React from 'react';
-import Toolbar from './Toolbar';
+// import brace from 'brace';
+// import AceEditor from 'react-ace';
+// import 'brace/mode/javascript';
+// import 'brace/theme/tomorrow';
+import CodeEditorContainer from '../../containers/code-editor-container';
+import ToolbarContainer from '../../containers/toolbar-container';
 import VisualEditor from './VisualEditor';
 
-const MainPanel = () => (
+const MainPanel = ({ workspace }) => (
   <div className="column">
-    <Toolbar />
+    <ToolbarContainer />
     <div className="workspace">
-      <VisualEditor visible />
+      <CodeEditorContainer />
+      <VisualEditor visible={workspace === 'Visual'} />
     </div>
   </div>
 );

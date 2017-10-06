@@ -7,13 +7,13 @@ export const SubmoduleSelect = ({
   selectedOption,
   handleChange
 }) => (
-  <div className="from-group flex">
+  <div className="from-group d-flex">
     <div className="col-3">
       <label className="form-label">{fieldTitle}</label>
     </div>
     <div className="col-9">
       <select
-        className="form-input"
+        className="form-select"
         value={selectedOption}
         onChange={handleChange}
       >

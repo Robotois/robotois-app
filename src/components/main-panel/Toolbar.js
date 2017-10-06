@@ -1,6 +1,32 @@
 import React from 'react';
 
-const Toolbar = () => (
+const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
+
+const Option = ({ workspace, currentWorkspace, changeWorkspace }) => (
+  <button
+    className={`btn ${currentWorkspace === workspace ? 'active' : ''}`}
+    onClick={changeWorkspace(workspace)}
+  >
+    {workspace}
+  </button>
+);
+
+const Options = ({ currentWorkspace, changeWorkspace }) => (
+  <div className="btn-group btn-group-block">
+    {
+      workspaceOptions.map(workspace => (
+        <Option
+          key={workspace}
+          workspace={workspace}
+          currentWorkspace={currentWorkspace}
+          changeWorkspace={changeWorkspace}
+        />
+      ))
+    }
+  </div>
+);
+
+const Toolbar = ({ workspace, changeWorkspace }) => (
   <div className="toolbar">
     <section className="col-4">
       <button className="btn btn-action"><i className="icon icon-apps" /></button>
@@ -10,11 +36,7 @@ const Toolbar = () => (
       </div>
     </section>
     <section className="col-4 view-options">
-      <div className="btn-group btn-group-block">
-        <button className="btn">Visual</button>
-        <button className="btn">Bloques</button>
-        <button className="btn">JavaScript</button>
-      </div>
+      <Options currentWorkspace={workspace} changeWorkspace={changeWorkspace} />
     </section>
     <section className="col-4 run-code">
       <button className="btn btn-lg btn-primary">Ejecutar</button>

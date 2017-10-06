@@ -1,10 +1,23 @@
 import React from 'react';
+import CodeHelperContainer from '../../containers/code-helper-container';
 import ToisListContainer from '../../containers/tois-list-conatiner';
-import ItemDetailContainer from '../../containers/item-detail-container';
+import ToiDetailContainer from '../../containers/toi-detail-container';
 
-const SideBar = ({ currentSelection }) => (
+const renderer = (currentSelection, workspace) => {
+  console.log('currentSelection:', currentSelection);
+  switch (true) {
+    case workspace === 'JavaScript':
+      return <CodeHelperContainer />;
+    case currentSelection !== null:
+      return <ToiDetailContainer />;
+    default:
+      return <ToisListContainer />;
+  }
+};
+
+const SideBar = ({ currentSelection, workspace }) => (
   <div className="column col-3 tois-panel">
-    {currentSelection ? <ItemDetailContainer /> : <ToisListContainer />}
+    {renderer(currentSelection, workspace)}
   </div>
 );
 

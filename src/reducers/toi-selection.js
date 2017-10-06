@@ -1,7 +1,7 @@
 import Enums from '../utils/Enums';
 import ToisDescription from '../api/tois';
 
-export function getCurrentItem(currentSelection, usedTois) {
+export function getCurrentToi(currentSelection, usedTois) {
   if (!currentSelection) {
     return undefined;
   }
@@ -16,16 +16,16 @@ export function getCurrentItem(currentSelection, usedTois) {
       description: 'Esta es la tarjeta robotois y nos sirve para conectar todos nuestros componentes',
     };
   }
-  const toi = usedTois.find(item => item.figureId === currentSelection.figureId);
-  const itemDescription = ToisDescription.find(element => element.type === type);
+  const currentToi = usedTois.find(toi => toi.figureId === currentSelection.figureId);
+  const toiDescription = ToisDescription.find(element => element.type === type);
   return {
-    ...itemDescription,
-    ...toi,
+    ...toiDescription,
+    ...currentToi,
     // isDragging: currentSelection.isDragging,
   };
 }
 
-const currentSelection = (state = '', action) => {
+const currentSelection = (state = null, action) => {
   switch (action.type) {
     case 'ADD_CURRENT_SELECTION':
       return action.currentSelection;
