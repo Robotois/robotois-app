@@ -43,4 +43,4 @@ Robotois = {
 };
 
 addSelection = null;
-currentSelection = '';
+currentSelection = null;

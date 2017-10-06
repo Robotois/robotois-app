@@ -25,7 +25,7 @@ export function getCurrentToi(currentSelection, usedTois) {
   };
 }
 
-const currentSelection = (state = '', action) => {
+const currentSelection = (state = null, action) => {
   switch (action.type) {
     case 'ADD_CURRENT_SELECTION':
       return action.currentSelection;

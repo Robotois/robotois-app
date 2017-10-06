@@ -185,7 +185,7 @@ const removeInstance = (eventList, toiType, instance) => {
   );
   if (index !== -1) {
     eventList.splice(index, 1);
-    return eventList;
+    return [...eventList];
     // Session.set('eventList', eventList);
   }
   return eventList;

@@ -5,7 +5,7 @@ export const SingleInputSlider = ({ title, units, range, value, handleChange }) 
   <div className="form-group">
     <div className="col-4">
       {title}
-      <div className="toast toast-primary inline col-3">
+      <div className="toast toast-primary d-inline col-3">
         {`${value} ${units || ''}`}
       </div>
     </div>

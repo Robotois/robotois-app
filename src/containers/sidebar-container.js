@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import Sidebar from '../components/sidebar/sidebar';
 
-const mapStateToProps = ({ currentSelection }) => ({
+const mapStateToProps = ({ currentSelection, toolbar: { workspace } }) => ({
   currentSelection,
+  workspace,
 });
 
 const SidebarContainer = connect(
