@@ -1,6 +1,9 @@
 import React from 'react';
+import { openApp } from '../../actions/toolbar';
 
 const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
+// const appsAvailable = ['Configuración del Kit', 'Dashboard'];
+const appsAvailable = ['Configuración del Kit'];
 
 const Option = ({ workspace, currentWorkspace, changeWorkspace }) => (
   <button
@@ -26,10 +29,29 @@ const Options = ({ currentWorkspace, changeWorkspace }) => (
   </div>
 );
 
+const AppOption = ({ option }) => (
+  <li className="menu-item">
+    <a href={`#${option}`} onClick={openApp}>{option}</a>
+  </li>
+);
+
+const AppsMenu = () => (
+  <div className="dropdown mx-2">
+    <a href="#AppsMenu" className="btn dropdown-toggle" tabIndex="0">
+      <i className="icon icon-apps" />
+    </a>
+    <ul className="menu">
+      {
+        appsAvailable.map(option => <AppOption key={option} option={option} />)
+      }
+    </ul>
+  </div>
+);
+
 const Toolbar = ({ workspace, changeWorkspace }) => (
   <div className="toolbar">
     <section className="col-4">
-      <button className="btn btn-action"><i className="icon icon-apps" /></button>
+      <AppsMenu />
       <div className="kit-status">
         <span className="online" />
         KIT conectado

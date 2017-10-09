@@ -67,7 +67,7 @@ class ToiDetail extends React.Component {
       addInstanceEvent,
       toiEvents,
     } = this.props;
-    console.log('toiEvents:', toiEvents);
+    // console.log('toiEvents:', toiEvents);
     const instanceStr =
       hasMultiple ? `${currentToi.title} ${currentToi.instance}` : undefined;
     return (
