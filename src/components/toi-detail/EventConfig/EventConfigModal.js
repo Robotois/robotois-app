@@ -12,15 +12,19 @@ export const Modal = (props) => {
   );
 };
 
-export const ModalHeader = ({ handleCloseModal, title }) => (
+export const ModalHeader = ({ handleCloseModal, title, icon }) => (
   <div className="modal-header">
     <button
       className="btn btn-clear float-right"
       onClick={handleCloseModal}
     />
-    <div className="modal-title">
-      <h3>{title}</h3>
+    <div className="modal-title modal-title-robotois">
+        <div className="icon-title">
+          <img src={icon}/>
+        </div>
+        <span className="h5">{title}</span>
     </div>
+    <div className="divider" />
   </div>
 );
 

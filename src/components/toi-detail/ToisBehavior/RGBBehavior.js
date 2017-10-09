@@ -2,12 +2,13 @@ import React from 'react';
 
 import LEDStatusSelect from './led-status';
 import { SubmoduleSelect } from '../../shared/DropdownSelect';
+import BehaviorOptions from './BehaviorOptions';
 
 const RGBDefaultBehavior = {
   action: 'Encender',
   params: {
-    param1: '#a32ce5'
-  }
+    param1: '#a32ce5',
+  },
 };
 
 const optionList = [
@@ -53,15 +54,8 @@ const optionList = [
   },
 ];
 
-const BehaviorOptions = props => (
-  <div>
-    <h4>{props.title}</h4>
-    {props.children}
-  </div>
-);
-
-const RGBPicker = ({ value, changeColor }) => (
-  <div className="form-group">
+const RGBPicker = ({ value, changeColor }) =>
+  (<div className="form-group">
     <div className="col-3">
       <label className="form-label" htmlFor="color-pick">Color</label>
     </div>
@@ -75,8 +69,7 @@ const RGBPicker = ({ value, changeColor }) => (
         onChange={changeColor}
       />
     </div>
-  </div>
-);
+  </div>);
 
 export default class RGBBehavior extends React.Component {
   constructor(props) {
@@ -102,11 +95,9 @@ export default class RGBBehavior extends React.Component {
         behavior.action = 'EstadoBinario';
         this.props.handleChangeBehavior(behavior);
       }
-    } else {
-      if (behavior.action === 'EstadoBinario') {
-        behavior.action = 'Encender';
-        this.props.handleChangeBehavior(behavior);
-      }
+    } else if (behavior.action === 'EstadoBinario') {
+      behavior.action = 'Encender';
+      this.props.handleChangeBehavior(behavior);
     }
   }
 
@@ -131,7 +122,7 @@ export default class RGBBehavior extends React.Component {
     const { inputEvent: { eventType } } = this.props;
     const { params } = behavior;
     return (
-      <BehaviorOptions title="Comportamiento de los LEDs RGB" >
+      <BehaviorOptions title="Comportamiento de los LEDs RGB">
         <SubmoduleSelect
           fieldTitle="Selecciona el LED"
           defaultTitle="Selecciona el LED a configurar"
@@ -140,10 +131,7 @@ export default class RGBBehavior extends React.Component {
           handleChange={this.changeLedNumber}
         />
         <br />
-        <RGBPicker
-          value={params.param1 || '#a32ce5'}
-          changeColor={this.changeColor}
-        />
+        <RGBPicker value={params.param1 || '#a32ce5'} changeColor={this.changeColor} />
         <LEDStatusSelect
           currentAction={behavior.action}
           behaviorChange={this.behaviorChange}

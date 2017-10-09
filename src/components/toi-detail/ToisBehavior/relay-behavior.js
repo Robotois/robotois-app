@@ -1,19 +1,13 @@
 import React from 'react';
 import LEDStatusSelect from './led-status';
+import BehaviorOptions from './BehaviorOptions';
 
 const defaultBehavior = {
   action: 'Encender',
   params: {
     param1: undefined,
-  }
+  },
 };
-
-const BehaviorOptions = props => (
-  <div>
-    <h4>{props.title}</h4>
-    {props.children}
-  </div>
-);
 
 export default class RelayBehavior extends React.Component {
   constructor(props) {
@@ -45,11 +39,9 @@ export default class RelayBehavior extends React.Component {
         behavior.action = 'EstadoBinario';
         this.props.handleChangeBehavior(behavior);
       }
-    } else {
-      if (behavior.action === 'EstadoBinario') {
-        behavior.action = 'Encender';
-        this.props.handleChangeBehavior(behavior);
-      }
+    } else if (behavior.action === 'EstadoBinario') {
+      behavior.action = 'Encender';
+      this.props.handleChangeBehavior(behavior);
     }
   }
 
@@ -59,7 +51,7 @@ export default class RelayBehavior extends React.Component {
     // this.ioLogAvailable(eventType);
 
     return (
-      <BehaviorOptions title="Selecciona el comportamiento del Relevador" >
+      <BehaviorOptions title="Selecciona el comportamiento del Relevador">
         <LEDStatusSelect
           currentAction={behavior.action}
           behaviorChange={this.behaviorChange}

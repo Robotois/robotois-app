@@ -14,9 +14,8 @@ const CodeHelper = ({ eventList, usedTois, generateCode, resetCodeEditor }) => (
     <div className="panel-body h6">
       En esta sección se puede generar el código que corresponde a los eventos configurados
       en el editor visual.
-      También podrás hacer RESET al editor de código.
     </div>
-    <div className="panel-footer h6">
+    <div className="panel-footer text-right">
       <button className="btn btn-link" onClick={resetCodeEditor}>RESET</button>
       <button className="btn btn-primary" onClick={generateCode(eventList, usedTois)}>Generar Código</button>
     </div>

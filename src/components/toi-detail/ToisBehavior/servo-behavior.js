@@ -1,6 +1,7 @@
 import React from 'react';
 // import { SubmoduleSelect } from '../Shared/DropdownSelect';
 import { SingleInputSlider } from '../../shared/Sliders';
+import BehaviorOptions from './BehaviorOptions';
 
 const defaultBehavior = {
   action: 'setAngle',
@@ -8,13 +9,6 @@ const defaultBehavior = {
     param1: 0,
   }
 };
-
-const BehaviorOptions = props => (
-  <div>
-    <h4>{props.title}</h4>
-    {props.children}
-  </div>
-);
 
 export default class ServoBehavior extends React.Component {
   constructor(props) {

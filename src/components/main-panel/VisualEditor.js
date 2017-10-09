@@ -45,7 +45,7 @@ class VisualEditor extends React.Component {
         id="canvas"
         style={{
           border: isOver ? '1px solid #5764C6' : 'none',
-          visibility: visible ? 'visible' : 'hidden',
+          display: visible ? 'block' : 'none',
           width: '100%',
           height: '100%',
         }}

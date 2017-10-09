@@ -1,19 +1,13 @@
 import React from 'react';
 import { SingleInputSlider } from '../../shared/Sliders';
+import BehaviorOptions from './BehaviorOptions';
 
 const defaultBehavior = {
   action: 'motorPWM',
   params: {
     param1: 0,
-  }
+  },
 };
-
-const BehaviorOptions = props => (
-  <div>
-    <h4>{props.title}</h4>
-    {props.children}
-  </div>
-);
 
 export default class MotorBehavior extends React.Component {
   constructor(props) {
@@ -36,7 +30,7 @@ export default class MotorBehavior extends React.Component {
   render() {
     const { behavior: { params } } = this.props;
     return (
-      <BehaviorOptions title="Configura la velocidad del motor" >
+      <BehaviorOptions title="Configura la velocidad del motor">
         <SingleInputSlider
           title={'Velocidad: '}
           units={'%'}

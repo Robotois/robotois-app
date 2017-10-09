@@ -2,34 +2,22 @@ import React from 'react';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-const InputLabel = ({ className, text, value, units }) => (
-  <label className={`${className}`}>
+const InputLabel = ({ className, text, value, units }) =>
+  (<label className={`${className}`}>
     {`${text} `}
-    <div className="toast toast-primary d-inline col-3">
+    <div className="label label-secondary d-inline col-3">
       {`${value} ${units}`}
     </div>
-  </label>
-);
+  </label>);
 
-const RangeLabels = ({ eventParams, units }) => (
-  <div className="columns centered">
-    <InputLabel
-      className="column"
-      text={'Valor Mínimo:'}
-      value={eventParams.min}
-      units={units}
-    />
-    <InputLabel
-      className="column"
-      text={'Valor Máximo'}
-      value={eventParams.max}
-      units={units}
-    />
-  </div>
-);
+const RangeLabels = ({ eventParams, units }) =>
+  (<div className="columns centered">
+    <InputLabel className="column" text={'Valor Mínimo:'} value={eventParams.min} units={units} />
+    <InputLabel className="column" text={'Valor Máximo'} value={eventParams.max} units={units} />
+  </div>);
 
-const RangeInput = ({ units, range, inputEvent, changeEventParams }) => (
-  <div>
+const RangeInput = ({ units, range, inputEvent, changeEventParams }) =>
+  (<div className="sensor-event">
     <div className="form-group">
       <RangeLabels eventParams={inputEvent.eventParams} units={units} />
     </div>
@@ -42,17 +30,12 @@ const RangeInput = ({ units, range, inputEvent, changeEventParams }) => (
         onChange={changeEventParams}
       />
     </div>
-  </div>
-);
+  </div>);
 
-const SingleInput = ({ units, range, inputEvent, changeEventParams }) => (
-  <div className="form-group">
+const SingleInput = ({ units, range, inputEvent, changeEventParams }) =>
+  (<div className="form-group sensor-event">
     <div className="col-3">
-      Valor:
-      <div className="toast toast-primary d-inline col-3">
-        {`${inputEvent.eventParams.valor} ${units}`}
-      </div>
-      {/* <InputLabel text={'Valor:'} value={inputEvent.eventParams.value} units={units} /> */}
+      <InputLabel text={'Valor:'} value={inputEvent.eventParams.valor} units={units} />
     </div>
     <div className="column col-9">
       <Slider
@@ -63,8 +46,7 @@ const SingleInput = ({ units, range, inputEvent, changeEventParams }) => (
       />
     </div>
     <br />
-  </div>
-);
+  </div>);
 
 const InputFields = ({ units, range, inputEvent, changeEventParams }) => {
   if (inputEvent.eventType === 'none') {
@@ -74,19 +56,23 @@ const InputFields = ({ units, range, inputEvent, changeEventParams }) => {
   const { inputField } = inputEvent;
   switch (inputField) {
     case 'Number':
-      return (<SingleInput
-        units={units}
-        range={range}
-        inputEvent={inputEvent}
-        changeEventParams={changeEventParams}
-      />);
+      return (
+        <SingleInput
+          units={units}
+          range={range}
+          inputEvent={inputEvent}
+          changeEventParams={changeEventParams}
+        />
+      );
     case 'NumberRange':
-      return (<RangeInput
-        units={units}
-        range={range}
-        inputEvent={inputEvent}
-        changeEventParams={changeEventParams}
-      />);
+      return (
+        <RangeInput
+          units={units}
+          range={range}
+          inputEvent={inputEvent}
+          changeEventParams={changeEventParams}
+        />
+      );
     default:
       return null;
   }

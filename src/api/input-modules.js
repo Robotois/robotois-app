@@ -1,10 +1,10 @@
-const sensorInputs = (range, logText) => ([
+const sensorInputs = (range, logText) => [
   {
     key: 1,
     eventType: 'log',
     menuText: 'Registrar Estado del Sensor',
     inputField: 'Text',
-    behavior: { params: { param1: `${logText} $\{value}` } }
+    behavior: { params: { param1: `${logText} $\{value}` } },
   },
   {
     key: 2,
@@ -34,7 +34,7 @@ const sensorInputs = (range, logText) => ([
     inputField: 'NumberRange',
     eventParams: { min: Math.round(range.max * 0.2), max: Math.round(range.max * 0.8) },
   },
-]);
+];
 const InputModules = [
   {
     key: 1,
@@ -42,7 +42,7 @@ const InputModules = [
     title: 'Sensor de Temperatura',
     units: '°C',
     range: { min: 0, max: 100 },
-    events: sensorInputs({ min: 0, max: 100 }, 'Temp:')
+    events: sensorInputs({ min: 0, max: 100 }, 'Temp:'),
   },
   {
     key: 2,
@@ -50,7 +50,7 @@ const InputModules = [
     title: 'Sensor de Luz',
     units: 'unidades',
     range: { min: 0, max: 10 },
-    events: sensorInputs({ min: 0, max: 10 }, 'Luz:')
+    events: sensorInputs({ min: 0, max: 10 }, 'Luz:'),
   },
   {
     key: 3,
@@ -58,7 +58,7 @@ const InputModules = [
     title: 'Sensor Rotatorio',
     units: 'unidades',
     range: { min: 0, max: 10 },
-    events: sensorInputs({ min: 0, max: 10 }, 'Posición:')
+    events: sensorInputs({ min: 0, max: 10 }, 'Posición:'),
   },
   {
     key: 6,
@@ -71,9 +71,9 @@ const InputModules = [
         menuText: 'Registrar Estado del Botón',
         behavior: {
           params: {
-            param1: 'Estado: ${status}'
-          }
-        }
+            param1: 'Estado: ${status}',
+          },
+        },
       },
       {
         key: 2,
@@ -98,9 +98,9 @@ const InputModules = [
         menuText: 'Registrar Estado del Sensor de Movimiento',
         behavior: {
           params: {
-            param1: 'Estado: ${status}'
-          }
-        }
+            param1: 'Estado: ${status}',
+          },
+        },
       },
       {
         key: 2,
@@ -120,7 +120,7 @@ const InputModules = [
     title: 'Sensor de Sonido',
     units: 'Unidades',
     range: { min: 0, max: 100 },
-    events: sensorInputs({ min: 0, max: 100 }, 'Nivel:')
+    events: sensorInputs({ min: 0, max: 100 }, 'Nivel:'),
   },
   {
     key: 9,
@@ -129,7 +129,7 @@ const InputModules = [
     units: 'cm',
     range: { min: 0, max: 300 },
     events: sensorInputs({ min: 0, max: 300 }, 'Distancia:'),
-  }
+  },
 ];
 
 export default InputModules;

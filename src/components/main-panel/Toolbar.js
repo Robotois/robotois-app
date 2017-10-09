@@ -2,37 +2,45 @@ import React from 'react';
 
 const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
 
-const Option = ({ workspace, currentWorkspace, changeWorkspace }) => (
-  <button
+const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
+  (<button
     className={`btn ${currentWorkspace === workspace ? 'active' : ''}`}
     onClick={changeWorkspace(workspace)}
   >
     {workspace}
-  </button>
-);
+  </button>);
 
-const Options = ({ currentWorkspace, changeWorkspace }) => (
-  <div className="btn-group btn-group-block">
-    {
-      workspaceOptions.map(workspace => (
-        <Option
-          key={workspace}
-          workspace={workspace}
-          currentWorkspace={currentWorkspace}
-          changeWorkspace={changeWorkspace}
-        />
-      ))
-    }
-  </div>
-);
+const Options = ({ currentWorkspace, changeWorkspace }) =>
+  (<div className="btn-group btn-group-block">
+    {workspaceOptions.map(workspace =>
+      (<Option
+        key={workspace}
+        workspace={workspace}
+        currentWorkspace={currentWorkspace}
+        changeWorkspace={changeWorkspace}
+      />),
+    )}
+  </div>);
 
-const Toolbar = ({ workspace, changeWorkspace }) => (
-  <div className="toolbar">
+const Toolbar = ({ workspace, changeWorkspace }) =>
+  (<div className="toolbar">
     <section className="col-4">
-      <button className="btn btn-action"><i className="icon icon-apps" /></button>
+      <div className="dropdown">
+        <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
+        <ul className="menu">
+          <li className="menu-item">
+            <a href="#menus">Configuración</a>
+          </li>
+          <li className="menu-item">
+            <a href="#menus">Tablero</a>
+          </li>
+          <li className="menu-item">
+            <a href="#menus">Tienda</a>
+          </li>
+        </ul>
+      </div>
       <div className="kit-status">
-        <span className="online" />
-        KIT conectado
+        <span className="online" /> KIT conectado
       </div>
     </section>
     <section className="col-4 view-options">
@@ -41,7 +49,6 @@ const Toolbar = ({ workspace, changeWorkspace }) => (
     <section className="col-4 run-code">
       <button className="btn btn-lg btn-primary">Ejecutar</button>
     </section>
-  </div>
-);
+  </div>);
 
 export default Toolbar;

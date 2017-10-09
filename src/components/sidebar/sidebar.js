@@ -16,7 +16,7 @@ const renderer = (currentSelection, workspace) => {
 };
 
 const SideBar = ({ currentSelection, workspace }) => (
-  <div className="column col-3 tois-panel">
+  <div className="column col-3 side-bar">
     {renderer(currentSelection, workspace)}
   </div>
 );

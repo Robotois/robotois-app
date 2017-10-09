@@ -18,7 +18,7 @@ const store = createStore(
 
 ReactDOM.render((
   <Provider store={store}>
-    <div>
+    <div id="provider">
       <Draw2dContainer />
       <App />
     </div>
