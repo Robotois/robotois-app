@@ -27,8 +27,8 @@ const behaviorMap = {
   motor: MotorBehavior,
 };
 
-const InputEventsDropdown = ({ inputEvent, toiType, events, title, handleChangeInputEvent }) => (
-  <div className="from-group d-flex">
+const InputEventsDropdown = ({ inputEvent, toiType, events, title, handleChangeInputEvent }) =>
+  (<div className="from-group d-flex">
     <div className="col-3">
       <label className="form-label">Evento de Entrada</label>
     </div>
@@ -57,8 +57,7 @@ const InputEventsDropdown = ({ inputEvent, toiType, events, title, handleChangeI
         })}
       </select>
     </div>
-  </div>
-);
+  </div>);
 
 const EventConfigForm = ({
   inputToi,
@@ -69,13 +68,13 @@ const EventConfigForm = ({
   handleChangeInputEvent,
   handleChangeEventParams,
   handleChangeBehavior,
-  handleChangeSubmodule
+  handleChangeSubmodule,
 }) => {
   const BehaviorForm = behaviorMap[toiType];
   // console.log('toiType: ', toiType);
   const InputEventForm = getInputEventForm(inputToi.type);
   return (
-    <div className="col-11 centered">
+    <div className="col-11 centered event-config">
       <form className="form-horizontal">
         <BehaviorForm
           behavior={behavior}
@@ -84,9 +83,7 @@ const EventConfigForm = ({
           handleChangeBehavior={handleChangeBehavior}
           handleChangeSubmodule={handleChangeSubmodule}
         />
-        <br />
-        <div className="divider" />
-        <h4>Configurar Eventos</h4>
+        <h6 className="config-events">Configurar Eventos</h6>
         <InputEventsDropdown
           inputEvent={inputEvent}
           toiType={toiType}
@@ -94,17 +91,14 @@ const EventConfigForm = ({
           title={inputToi.title}
           handleChangeInputEvent={handleChangeInputEvent}
         />
-        <br />
-        {
-          InputEventForm && <InputEventForm
+        {InputEventForm &&
+          <InputEventForm
             units={inputToi.units}
             range={inputToi.range}
             inputEvent={inputEvent}
             handleChangeEventParams={handleChangeEventParams}
-          />
-        }
-        <br />
-        <div className="divider" />
+          />}
+        <div className="divider divider-footer" />
       </form>
     </div>
   );

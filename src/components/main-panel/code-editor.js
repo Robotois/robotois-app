@@ -5,8 +5,8 @@ import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
 
 const CodeEditor = ({ active, code, changeCode }) =>
-  (<div className={`code-editor col-12 ${active ? '' : 'd-hide'}`}>
-    <AceEditor
+  (active
+    ? <AceEditor
       mode="javascript"
       theme={'tomorrow'}
       name="code-editor"
@@ -20,7 +20,6 @@ const CodeEditor = ({ active, code, changeCode }) =>
       // onChange={this.onChangeEditor}
       editorProps={{ $blockScrolling: true }}
     />
-
-  </div>);
+    : null);
 
 export default CodeEditor;
