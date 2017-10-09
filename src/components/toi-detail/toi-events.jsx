@@ -90,7 +90,7 @@ const InputEvents = ({ toiEvent, removeEventCase, instance }) => (
 const ToiEvents = ({ toiEvents, fromToiEvent, instance }) => (
   <div>
     <br />
-    <span className="tile-subtitle">Eventos Configurados</span>
+    <h4 className="tile-subtitle">Eventos Configurados</h4>
     {toiEvents.map((toiEvent, evIndex) => (
       <InputEvents
         toiEvent={toiEvent}

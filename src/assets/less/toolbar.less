@@ -1,7 +1,7 @@
 .toolbar {
-  height: 60px;
   background: @light-dark;
   display: flex;
+  flex: 60px 100%;
   align-items: center;
   font-family: 'Ubuntu', sans-serif !important;
   .col-4 {
@@ -10,18 +10,17 @@
     justify-content: flex-start;
   }
   .btn-action {
-    background-color: @light-dark;;
+    background-color: @light-dark;
     margin-left: 1em;
     .icon-apps {
       color: @purple-text;
-      //color: @blue;
     }
   }
   .kit-status {
     display: flex;
     padding: 1.5em;
     color: @light-text;
-    span{
+    span {
       margin-right: 0.5em;
     }
   }
@@ -40,11 +39,32 @@
       // font-family: 'Ubuntu', sans-serif !important;
     }
   }
+  .btn-group-block {
+    .btn {
+      border: @blue;
+      background: transparent;
+      color: @light-text;
+      border: 1px solid @blue;
+      border: 1px solid @purple-text;
+    }
+    .active {
+     background: @dark-blue;
+     border-color: darken(@dark-blue, 5%);
+     color: @light-color;
+     text-decoration: none;
+     &.loading {
+       &::after {
+         border-bottom-color: @light-color;
+         border-left-color: @light-color;
+       }
+     }
+   }
+  }
 }
 
 .circle {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   display: block;
   border-radius: 50%;
 }

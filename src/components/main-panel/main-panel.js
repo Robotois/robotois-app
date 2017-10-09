@@ -7,14 +7,23 @@ import CodeEditorContainer from '../../containers/code-editor-container';
 import ToolbarContainer from '../../containers/toolbar-container';
 import VisualEditor from './VisualEditor';
 
-const MainPanel = ({ workspace }) => (
-  <div className="column">
+const renderActiveComponent = (type) => {
+  switch (type) {
+    case 'JavaScript':
+      return <CodeEditorContainer />;
+    case 'Visual':
+      return <VisualEditor visible />;
+    default:
+      return <div>Bloques</div>;
+  }
+};
+
+const MainPanel = ({ workspace }) =>
+  (<div className="column center-panel">
     <ToolbarContainer />
     <div className="workspace">
-      <CodeEditorContainer />
-      <VisualEditor visible={workspace === 'Visual'} />
+      {renderActiveComponent(workspace)}
     </div>
-  </div>
-);
+  </div>);
 
 export default MainPanel;

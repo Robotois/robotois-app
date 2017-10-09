@@ -3,7 +3,7 @@ import ToiItem from './ToiItem';
 import SearchForm from './search-form';
 
 const ToisList = ({ visibleTois, addUsedToi }) => (
-  <div>
+  <div className="tois-container">
     <div className="tois-search">
       <SearchForm />
     </div>
