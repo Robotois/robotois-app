@@ -1,12 +1,13 @@
 import React from 'react';
 import { SubmoduleSelect } from '../../shared/DropdownSelect';
 import { SingleInputSlider } from '../../shared/Sliders';
+import BehaviorOptions from './BehaviorOptions';
 
 const defaultBehavior = {
   action: 'setAngle',
   params: {
     param1: 0,
-  }
+  },
 };
 
 const optionList = [
@@ -26,13 +27,6 @@ const optionList = [
     title: 'Configurar Servo 3',
   },
 ];
-
-const BehaviorOptions = props => (
-  <div>
-    <h4>{props.title}</h4>
-    {props.children}
-  </div>
-);
 
 export default class ServoBehavior extends React.Component {
   constructor(props) {
@@ -60,7 +54,7 @@ export default class ServoBehavior extends React.Component {
     const { behavior, submodule } = this.props;
 
     return (
-      <BehaviorOptions title="Configura la posición del Servomotor" >
+      <BehaviorOptions title="Configura la posición del Servomotor">
         <SubmoduleSelect
           fieldTitle="Selecciona el Servo"
           defaultTitle="Selecciona el Servo a configurar"

@@ -6,13 +6,13 @@ import 'spectre.css/dist/spectre-icons.min.css';
 import 'spectre.css/dist/spectre-exp.min.css';
 import '../assets/css/robotois.css';
 import Layout from './layout';
-import MainPanelContainer from '../containers/main-panel-container';
+import MainPanel from '../components/main-panel/main-panel';
 import SidebarContainer from '../containers/sidebar-container';
 
 const App = () => (
   <Layout>
     <SidebarContainer />
-    <MainPanelContainer />
+    <MainPanel />
   </Layout>
 );
 

@@ -1,60 +1,71 @@
 import React from 'react';
-import { openApp } from '../../actions/toolbar';
+// import { openApp } from '../../actions/toolbar';
 
 const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
 // const appsAvailable = ['Configuración del Kit', 'Dashboard'];
-const appsAvailable = ['Configuración del Kit'];
+const appsAvailable = [
+  {
+    title: 'Configuración del Kit',
+    key: 'kitConfig',
+  },
+  {
+    title: 'Tablero',
+    key: 'dashboard',
+  },
+  {
+    title: 'Tienda',
+    key: 'store',
+  },
+];
 
-const Option = ({ workspace, currentWorkspace, changeWorkspace }) => (
-  <button
+const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
+  (<button
     className={`btn ${currentWorkspace === workspace ? 'active' : ''}`}
     onClick={changeWorkspace(workspace)}
   >
     {workspace}
-  </button>
-);
+  </button>);
 
-const Options = ({ currentWorkspace, changeWorkspace }) => (
-  <div className="btn-group btn-group-block">
-    {
-      workspaceOptions.map(workspace => (
-        <Option
-          key={workspace}
-          workspace={workspace}
-          currentWorkspace={currentWorkspace}
-          changeWorkspace={changeWorkspace}
-        />
-      ))
-    }
-  </div>
-);
+const Options = ({ currentWorkspace, changeWorkspace }) =>
+  (<div className="btn-group btn-group-block">
+    {workspaceOptions.map(workspace =>
+      (<Option
+        key={workspace}
+        workspace={workspace}
+        currentWorkspace={currentWorkspace}
+        changeWorkspace={changeWorkspace}
+      />),
+    )}
+  </div>);
 
-const AppOption = ({ option }) => (
+const AppOption = ({ title, changeApp }) => (
   <li className="menu-item">
-    <a href={`#${option}`} onClick={openApp}>{option}</a>
+    <a href={`#${title}`} onClick={changeApp}>{title}</a>
   </li>
 );
 
-const AppsMenu = () => (
-  <div className="dropdown mx-2">
-    <a href="#AppsMenu" className="btn dropdown-toggle" tabIndex="0">
-      <i className="icon icon-apps" />
-    </a>
-    <ul className="menu">
-      {
-        appsAvailable.map(option => <AppOption key={option} option={option} />)
-      }
-    </ul>
+const AppOptions = ({ changeApp }) => (
+  <ul className="menu">
+    {
+      appsAvailable.map(opt =>
+        <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />)
+    }
+  </ul>
+);
+
+const AppMenu = ({ changeApp }) => (
+  <div className="dropdown">
+    <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
+    <AppOptions changeApp={changeApp} />
   </div>
 );
 
-const Toolbar = ({ workspace, changeWorkspace }) => (
-  <div className="toolbar">
+const Toolbar = ({ workspace, changeWorkspace, changeApp }) =>
+  (<div className="toolbar">
     <section className="col-4">
-      <AppsMenu />
+      <AppMenu changeApp={changeApp} />
       <div className="kit-status">
-        <span className="online" />
-        KIT conectado
+        <span className="online" /> KIT conectado
       </div>
     </section>
     <section className="col-4 view-options">
@@ -63,7 +74,6 @@ const Toolbar = ({ workspace, changeWorkspace }) => (
     <section className="col-4 run-code">
       <button className="btn btn-lg btn-primary">Ejecutar</button>
     </section>
-  </div>
-);
+  </div>);
 
 export default Toolbar;

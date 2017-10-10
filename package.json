@@ -19,6 +19,7 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
+    "redux-thunk": "^2.2.0",
     "spectre.css": "^0.4.3",
     "tcp-ping": "^0.1.1"
   },

@@ -7,7 +7,7 @@ import { isLogger } from '../../shared/tois-by-function';
 
 const defaultInputEvent = {
   inputEvent: {
-    eventType: 'none'
+    eventType: 'none',
   },
 };
 
@@ -16,7 +16,7 @@ const defaultBehavior = {
     action: '',
     params: {
       param1: null,
-    }
+    },
   },
 };
 
@@ -97,16 +97,15 @@ export default class EventConfig extends React.Component {
 
   render() {
     const { inputToi, currentToi, handleResetSelected } = this.props;
-    // console.log('EventConfig-inputToi: ', inputToi);
-    // const modalStatus = (inputToi.type === 'none') ? '' : 'active';
     const { inputEvent, behavior, submodule } = this.state;
     const buttonStatus = this.getButtonStatus();
-    // console.log('currentToi: ', currentToi);
+    console.log(inputToi);
     return (
       <Modal modalStatus={'active'}>
         <ModalHeader
           handleCloseModal={handleResetSelected}
           title={inputToi.title}
+          icon={inputToi.image}
         />
         <EventConfigForm
           inputToi={inputToi}
@@ -120,7 +119,7 @@ export default class EventConfig extends React.Component {
           handleChangeSubmodule={this.handleChangeSubmodule}
         />
         <ModalFooter>
-          <button className="btn" onClick={handleResetSelected}>Cerrar</button>
+          <button className="btn btn-link" onClick={handleResetSelected}>Cerrar</button>
           <button
             className={`btn btn-primary ${buttonStatus ? '' : 'disabled'}`}
             onClick={this.handleAddEvent}

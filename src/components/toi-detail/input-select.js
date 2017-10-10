@@ -16,7 +16,6 @@ const InputToisSelect = ({ currentInputTois, selectedToi, changeSelectedToi }) =
     <div className="from-group my-2">
       <select
         className="form-select"
-        id="select-event"
         value={selectedToi}
         onChange={changeSelectedToi}
         style={{ fontSize: '16px' }}

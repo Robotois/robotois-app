@@ -1,11 +1,10 @@
 import React from 'react';
-// import brace from 'brace';
 import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
 
 const CodeEditor = ({ active, code, changeCode }) => (
-  <div className={`col-12 ${active ? '' : 'd-hide'}`}>
+  <div className={`${active ? '' : 'd-hide'}`} style={{ width: '100%', height: '100%' }}>
     <AceEditor
       mode="javascript"
       theme={'tomorrow'}
