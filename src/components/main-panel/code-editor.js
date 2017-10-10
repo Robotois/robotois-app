@@ -1,12 +1,11 @@
 import React from 'react';
-// import brace from 'brace';
 import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
 
-const CodeEditor = ({ active, code, changeCode }) =>
-  (active
-    ? <AceEditor
+const CodeEditor = ({ active, code, changeCode }) => (
+  <div className={`${active ? '' : 'd-hide'}`} style={{ width: '100%', height: '100%' }}>
+    <AceEditor
       mode="javascript"
       theme={'tomorrow'}
       name="code-editor"
@@ -16,10 +15,12 @@ const CodeEditor = ({ active, code, changeCode }) =>
       value={code}
       onChange={changeCode}
       wrapEnabled
+      // value={'console.log("Hello Ace");'}
       // readOnly
       // onChange={this.onChangeEditor}
-      editorProps={{ $blockScrolling: true }}
+      editorProps={{ $blockScrolling: Infinity }}
     />
-    : null);
+  </div>
+);
 
 export default CodeEditor;

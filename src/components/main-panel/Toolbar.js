@@ -1,6 +1,22 @@
 import React from 'react';
+// import { openApp } from '../../actions/toolbar';
 
 const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
+// const appsAvailable = ['Configuración del Kit', 'Dashboard'];
+const appsAvailable = [
+  {
+    title: 'Configuración del Kit',
+    key: 'kitConfig',
+  },
+  {
+    title: 'Tablero',
+    key: 'dashboard',
+  },
+  {
+    title: 'Tienda',
+    key: 'store',
+  },
+];
 
 const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
   (<button
@@ -22,23 +38,32 @@ const Options = ({ currentWorkspace, changeWorkspace }) =>
     )}
   </div>);
 
-const Toolbar = ({ workspace, changeWorkspace }) =>
+const AppOption = ({ title, changeApp }) => (
+  <li className="menu-item">
+    <a href={`#${title}`} onClick={changeApp}>{title}</a>
+  </li>
+);
+
+const AppOptions = ({ changeApp }) => (
+  <ul className="menu">
+    {
+      appsAvailable.map(opt =>
+        <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />)
+    }
+  </ul>
+);
+
+const AppMenu = ({ changeApp }) => (
+  <div className="dropdown">
+    <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
+    <AppOptions changeApp={changeApp} />
+  </div>
+);
+
+const Toolbar = ({ workspace, changeWorkspace, changeApp }) =>
   (<div className="toolbar">
     <section className="col-4">
-      <div className="dropdown">
-        <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
-        <ul className="menu">
-          <li className="menu-item">
-            <a href="#menus">Configuración</a>
-          </li>
-          <li className="menu-item">
-            <a href="#menus">Tablero</a>
-          </li>
-          <li className="menu-item">
-            <a href="#menus">Tienda</a>
-          </li>
-        </ul>
-      </div>
+      <AppMenu changeApp={changeApp} />
       <div className="kit-status">
         <span className="online" /> KIT conectado
       </div>

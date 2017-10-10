@@ -4,7 +4,7 @@ import ToisListContainer from '../../containers/tois-list-conatiner';
 import ToiDetailContainer from '../../containers/toi-detail-container';
 
 const renderer = (currentSelection, workspace) => {
-  console.log('currentSelection:', currentSelection);
+  // console.log('currentSelection:', currentSelection);
   switch (true) {
     case workspace === 'JavaScript':
       return <CodeHelperContainer />;

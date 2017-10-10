@@ -6,6 +6,8 @@ import toiDetail from './toi-detail';
 import eventList from './event-list';
 import toolbar from './toolbar';
 import codeEditor from './code-editor';
+import kitConfig from './kit-config';
+import appMenu from './app-menu';
 
 const allReducers = combineReducers({
   usedTois,
@@ -14,6 +16,8 @@ const allReducers = combineReducers({
   eventList,
   toolbar,
   codeEditor,
+  kitConfig,
+  appMenu,
   form: formReducer,
 });
 

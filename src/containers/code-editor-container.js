@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import CodeEditor from '../components/main-panel/code-editor';
 import { codeEditorChangeCode } from '../actions/code-editor';
 
-const mapStateToProps = ({ codeEditor: { code }, toolbar: { workspace } }) => ({
-  active: workspace === 'JavaScript',
+const mapStateToProps = ({ codeEditor: { code }, toolbar: { workspace }, appMenu: { key } }) => ({
+  active: workspace === 'JavaScript' && key === 'main',
   code,
 });
 
