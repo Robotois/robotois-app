@@ -44,7 +44,7 @@ class WifiModal extends React.Component {
   render() {
     const { selectedWifi, handleConnect, handleClose } = this.props;
     return (
-      <div className={`modal ${selectedWifi ? 'active' : ''}`}>
+      <div className="modal active">
         <div className="modal-overlay" />
         <div className="modal-container col-6">
           <Header ssid={selectedWifi.ssid} handleClose={handleClose} />

@@ -5,7 +5,7 @@ const CodeHelper = ({ eventList, usedTois, generateCode, resetCodeEditor }) => (
     className="panel mx-2"
     style={{
       backgroundColor: 'white',
-      marginTop: '4rem'
+      marginTop: '4rem',
     }}
   >
     <div className="panel-header">

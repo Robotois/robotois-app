@@ -5,6 +5,10 @@ const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
 // const appsAvailable = ['Configuración del Kit', 'Dashboard'];
 const appsAvailable = [
   {
+    title: 'Principal',
+    key: 'main',
+  },
+  {
     title: 'Configuración del Kit',
     key: 'kitConfig',
   },

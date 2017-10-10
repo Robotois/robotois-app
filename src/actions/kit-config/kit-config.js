@@ -4,6 +4,7 @@ import { getConnected } from './discover-kits';
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
 export const KIT_CONFIG_SELECT_KIT = 'KIT_CONFIG_SELECT_KIT';
+export const KIT_CONFIG_RESET_KIT = 'KIT_CONFIG_RESET_KIT';
 export const WIFI_CONFIG_REQUEST_AVAILABLE = 'WIFI_CONFIG_REQUEST_AVAILABLE';
 export const WIFI_CONFIG_RECEIVE_AVAILABLE = 'WIFI_CONFIG_RECEIVE_AVAILABLE';
 export const WIFI_CONFIG_SELECTED_WIFI = 'WIFI_CONFIG_SELECTED_WIFI';
@@ -27,6 +28,10 @@ export const fetchAvailableKits = () => (dispatch) => {
 export const selectKit = selectedKit => ({
   type: KIT_CONFIG_SELECT_KIT,
   selectedKit,
+});
+
+export const resetSelectedKit = () => ({
+  type: KIT_CONFIG_RESET_KIT,
 });
 
 const requestAvailableWifis = () => ({
@@ -70,6 +75,28 @@ export const connectWifi = (hostIp, wifi) => dispatch => axios({
   .then((response) => {
     console.log(response);
     dispatch(resetWifi());
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+export const createAP = hostIp => axios({
+  method: 'get',
+  url: `http://${hostIp}:8082/wifi/start-ap`,
+})
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+export const shutdown = hostIp => axios({
+  method: 'get',
+  url: `http://${hostIp}:8082/shutdown`,
+})
+  .then((response) => {
+    console.log(response);
   })
   .catch((error) => {
     console.log(error);

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/main-panel/Toolbar';
-import { toolbarChangeWorkspace } from '../actions/toolbar';
-import { appMenuChangeApp } from '../actions/app-menu';
+import { toolbarChangeWorkspace, toolbarChangeApp } from '../actions/toolbar';
+// import { appMenuChangeApp } from '../actions/app-menu';
 
 const mapStateToProps = ({ toolbar: { workspace } }) => ({
   workspace,
@@ -9,7 +9,7 @@ const mapStateToProps = ({ toolbar: { workspace } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   changeWorkspace: workspace => () => dispatch(toolbarChangeWorkspace(workspace)),
-  changeApp: opt => () => dispatch(appMenuChangeApp(opt)),
+  changeApp: app => () => dispatch(toolbarChangeApp(app)),
 });
 
 const ToolbarContainer = connect(

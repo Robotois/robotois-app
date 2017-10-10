@@ -28,7 +28,7 @@ class KitsList extends React.Component {
               <p className="tile-subtitle text-gray">Presiona {'"Buscar"'} para recargar la lista</p>
             </div>
             <div className="tile-action">
-              <button className={`btn btn-primary ${isFetching ? 'disabled' : ''}`} onClick={fetchKits}>Buscar</button>
+              <button className={`btn btn-primary ${isFetching ? 'loading' : ''}`} onClick={fetchKits}>Buscar Kits</button>
             </div>
           </div>
         </li>
