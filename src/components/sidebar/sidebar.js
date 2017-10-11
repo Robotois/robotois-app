@@ -3,8 +3,18 @@ import CodeHelperContainer from '../../containers/code-helper-container';
 import ToisListContainer from '../../containers/tois-list-conatiner';
 import ToiDetailContainer from '../../containers/toi-detail-container';
 
-const renderer = (currentSelection, workspace) => {
-  // console.log('currentSelection:', currentSelection);
+import ConfigSidebarContainer from '../../containers/kit-config/config-sidebar-container';
+
+const AppsSidebar = ({ currentApp }) => {
+  switch (currentApp) {
+    case 'kitConfig':
+      return <ConfigSidebarContainer />;
+    default:
+      return false;
+  }
+};
+
+const MainContent = ({ currentSelection, workspace }) => {
   switch (true) {
     case workspace === 'JavaScript':
       return <CodeHelperContainer />;
@@ -15,10 +25,13 @@ const renderer = (currentSelection, workspace) => {
   }
 };
 
-const SideBar = ({ currentSelection, workspace }) => (
+const Sidebar = ({ currentSelection, workspace, currentApp }) => (
   <div className="column col-3 side-bar">
-    {renderer(currentSelection, workspace)}
+    <AppsSidebar currentApp={currentApp} />
+    {
+      currentApp === 'main' && <MainContent currentSelection={currentSelection} workspace={workspace} />
+    }
   </div>
 );
 
-export default SideBar;
+export default Sidebar;

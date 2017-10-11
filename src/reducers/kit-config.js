@@ -2,6 +2,7 @@ import {
   REQUEST_AVAILABLE_KITS,
   RECEIVE_AVAILABLE_KITS,
   KIT_CONFIG_SELECT_KIT,
+  KIT_CONFIG_RESET_KIT,
   WIFI_CONFIG_REQUEST_AVAILABLE,
   WIFI_CONFIG_RECEIVE_AVAILABLE,
   WIFI_CONFIG_SELECTED_WIFI,
@@ -65,6 +66,11 @@ const kitConfigReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedKit: action.selectedKit,
+      };
+    case KIT_CONFIG_RESET_KIT:
+      return {
+        ...state,
+        selectedKit: undefined,
       };
     case WIFI_CONFIG_REQUEST_AVAILABLE:
     case WIFI_CONFIG_RECEIVE_AVAILABLE:

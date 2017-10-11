@@ -1,14 +1,15 @@
 import React from 'react';
 import AvailableWifis from './available-wifis';
 import WifiModal from './wifi-modal';
+import { createAP, shutdown } from '../../../actions/kit-config/kit-config';
 
-const Header = ({ ip, hostname, handleCreateAP, handleShutdown }) => (
+const Header = ({ ip, hostname, isFetching, handleCreateAP, handleShutdown, handleFetchWifis }) => (
   <div className="tile">
     <div className="tile-content">
-      <p className="tile-title h5">Nombre del Kit: <em>{hostname}</em></p>
-      <p className="tile-subtitle text-gray h6">La dirección IP del kit es: {ip}</p>
+      <p className="tile-title h5">Configuración del Kit</p>
     </div>
     <div className="tile-action">
+      <button className={`btn btn-primary m-1 ${isFetching ? 'loading' : ''}`} onClick={handleFetchWifis}>Buscar Redes WiFi</button>
       <button className="btn btn-primary m-1" onClick={handleCreateAP}>Crear Access Point</button>
       <button className="btn btn-link label label-warning m-1" onClick={handleShutdown}>apagar</button>
     </div>
@@ -19,9 +20,16 @@ class App extends React.Component {
   constructor() {
     super();
     this.handleConnect = this.handleConnect.bind(this);
+    this.handleFetchWifis = this.handleFetchWifis.bind(this);
+    this.handleCreateAP = this.handleCreateAP.bind(this);
+    this.handleShutdown = this.handleShutdown.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    this.handleFetchWifis();
+  }
+
+  handleFetchWifis() {
     const { fetchWifis, selectedKit: { ip } } = this.props;
     fetchWifis(ip);
   }
@@ -29,6 +37,16 @@ class App extends React.Component {
   handleConnect() {
     const { selectedWifi, connectWifi, selectedKit: { ip } } = this.props;
     connectWifi(ip, selectedWifi);
+  }
+
+  handleCreateAP() {
+    const { selectedKit: { ip } } = this.props;
+    createAP(ip);
+  }
+
+  handleShutdown() {
+    const { selectedKit: { ip } } = this.props;
+    shutdown(ip);
   }
 
   render() {
@@ -47,8 +65,10 @@ class App extends React.Component {
         <Header
           ip={selectedKit.ip}
           hostname={selectedKit.hostname}
-          // handleCreateAP={this.handleCreateAP}
-          // handleShutdown={this.handleShutdown}
+          isFetching={isFetching}
+          handleFetchWifis={this.handleFetchWifis}
+          handleCreateAP={this.handleCreateAP}
+          handleShutdown={this.handleShutdown}
         />
         <AvailableWifis
           wifis={wifis}
