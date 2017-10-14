@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getConnected } from './discover-kits';
+import { CodeGenerator } from '../../CodeGenerator/CodeGenerator';
+import Enums from '../../utils/Enums';
 
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
@@ -9,6 +11,8 @@ export const WIFI_CONFIG_REQUEST_AVAILABLE = 'WIFI_CONFIG_REQUEST_AVAILABLE';
 export const WIFI_CONFIG_RECEIVE_AVAILABLE = 'WIFI_CONFIG_RECEIVE_AVAILABLE';
 export const WIFI_CONFIG_SELECTED_WIFI = 'WIFI_CONFIG_SELECTED_WIFI';
 export const WIFI_CONFIG_RESET_WIFI = 'WIFI_CONFIG_RESET_WIFI';
+export const KIT_CONFIG_REQUEST_RUN_CODE = 'KIT_CONFIG_REQUEST_RUN_CODE';
+export const KIT_CONFIG_RUN_CODE_RESPONSE = 'KIT_CONFIG_RUN_CODE_RESPONSE';
 
 const requestAvailable = () => ({
   type: REQUEST_AVAILABLE_KITS,
@@ -101,3 +105,131 @@ export const shutdown = hostIp => axios({
   .catch((error) => {
     console.log(error);
   });
+
+const parseHeaders = (usedTois) => {
+  const figures = [];
+  const connections = [];
+  let portNumber;
+
+  window.Robotois.CANVAS.getFigures().data.forEach((figure) => {
+    const parentName = figure.NAME.replace('draw2d.shape.robotois.', '');
+    const parentToi = parentName !== 'Shield' ?
+      usedTois.find(toi => toi.figureId === figure.id) :
+      undefined;
+    if (parentToi) {
+      figures.push({
+        type: parentToi.type,
+        instance: parentToi.instance,
+      });
+    }
+    figure.outputPorts.data.forEach((port) => {
+      port.getConnections().data.forEach((conn) => {
+        const childFigure = conn.targetPort.getParent();
+        const childToi = usedTois.find(toi => toi.figureId === childFigure.id);
+        portNumber = port.name.slice(-1);
+        portNumber *= 1;
+        portNumber += 1;
+        const connection = {
+          type: childToi.type,
+          instance: childToi.instance,
+          parent: {
+            type: parentToi ? parentToi.type : 'shield',
+            instance: parentToi ? parentToi.instance : undefined,
+            port: portNumber,
+          },
+        };
+        connections.push(connection);
+      });
+    });
+  });
+  const validConnections = figures.every((toi) => {
+    const isConnected = connections.findIndex(
+      conn => conn.type === toi.type && conn.instance === toi.instance,
+    ) !== -1;
+    if (!isConnected) {
+      window.msg.error(`Error de conexión del módulo "${Enums[toi.type]}"`);
+    }
+    return isConnected;
+  });
+  return validConnections ? connections : undefined;
+};
+
+export const generateCode = (eventList, usedTois, code) => {
+  if (usedTois.length === 0) {
+    window.msg.info('Agrega algunos Tois');
+    return undefined;
+  }
+
+  if (eventList.length === 0) {
+    window.msg.info('No hay Eventos configurados en los Tois');
+    return undefined;
+  }
+
+  const connections = parseHeaders(usedTois);
+  if (!connections) {
+    window.msg.error('Error al conectar los Tois');
+    return undefined;
+  }
+
+  // console.log('connections: ', connections);
+  const sourceCode = !code ? CodeGenerator(eventList, usedTois, false) : code;
+
+  return {
+    connections,
+    code: sourceCode,
+  };
+};
+
+export const requestRunCode = () => ({
+  type: KIT_CONFIG_REQUEST_RUN_CODE,
+});
+
+export const runCodeResponse = response => ({
+  type: KIT_CONFIG_RUN_CODE_RESPONSE,
+  response,
+});
+
+export const runCode = (hostIp, data) => (dispatch) => {
+  dispatch(requestRunCode());
+  return axios({
+    method: 'post',
+    url: `http://${hostIp}:8082/runner`,
+    data,
+  })
+    .then((response) => {
+      console.log(response);
+      dispatch(runCodeResponse({
+        success: true,
+        message: 'running',
+      }));
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(runCodeResponse({
+        success: false,
+        message: error,
+      }));
+    });
+};
+
+export const stopCode = hostIp => (dispatch) => {
+  dispatch(requestRunCode());
+  return axios({
+    method: 'post',
+    url: `http://${hostIp}:8082/runner/stop`,
+  })
+    .then((response) => {
+      console.log(response);
+      dispatch(runCodeResponse({
+        success: true,
+        message: 'stopped',
+      }));
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(runCodeResponse({
+        success: false,
+        message: error,
+      }));
+    });
+};

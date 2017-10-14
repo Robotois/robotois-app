@@ -1,7 +1,7 @@
 import React from 'react';
-// import { openApp } from '../../actions/toolbar';
+import { generateCode } from '../../actions/kit-config/kit-config';
 
-const workspaceOptions = ['Visual', 'Bloques', 'JavaScript'];
+const workspaceOpts = ['Visual', 'Bloques', 'JavaScript'];
 // const appsAvailable = ['Configuración del Kit', 'Dashboard'];
 const appsAvailable = [
   {
@@ -32,7 +32,7 @@ const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
 
 const Options = ({ currentWorkspace, changeWorkspace }) =>
   (<div className="btn-group btn-group-block">
-    {workspaceOptions.map(workspace =>
+    {workspaceOpts.map(workspace =>
       (<Option
         key={workspace}
         workspace={workspace}
@@ -57,27 +57,105 @@ const AppOptions = ({ changeApp }) => (
   </ul>
 );
 
-const AppMenu = ({ changeApp }) => (
-  <div className="dropdown">
-    <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
-    <AppOptions changeApp={changeApp} />
+const KitStatus = ({ selectedKit }) => (
+  <div className="kit-status">
+    <span className={`${selectedKit ? 'online' : 'offline'}`} />
+    {
+      selectedKit ?
+        <span className="bg-success px-1 rounded text-primary h6"><b>{selectedKit.hostname}</b></span> :
+        <span className="bg-warning px-1 rounded text-primary">KIT desconectado</span>
+    }
   </div>
 );
 
-const Toolbar = ({ workspace, changeWorkspace, changeApp }) =>
-  (<div className="toolbar">
-    <section className="col-4">
-      <AppMenu changeApp={changeApp} />
-      <div className="kit-status">
-        <span className="online" /> KIT conectado
+const AppMenu = ({ changeApp, selectedKit }) => (
+  <section className="col-4">
+    <div className="dropdown">
+      <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
+      <AppOptions changeApp={changeApp} />
+    </div>
+    <KitStatus selectedKit={selectedKit} />
+  </section>
+);
+
+const WorkspaceOptions = ({ workspace, changeWorkspace }) => (
+  <section className="col-4 view-options">
+    <Options currentWorkspace={workspace} changeWorkspace={changeWorkspace} />
+  </section>
+);
+
+const RunButton = ({ selectedKit, handleRunCode, btnText }) => (
+  <section className="col-4 run-code">
+    <button
+      className={`btn btn-lg btn-primary ${!selectedKit ? 'disabled' : ''}`}
+      onClick={handleRunCode}
+    >
+      {btnText}
+    </button>
+  </section>
+);
+
+const AppTitle = ({ currentApp }) => (
+  <section className="col-4 view-options">
+    <h5 className="text-light"><b>{currentApp.title}</b></h5>
+  </section>
+);
+
+class Toolbar extends React.Component {
+  constructor() {
+    super();
+    this.handleRunCode = this.handleRunCode.bind(this);
+  }
+
+  handleRunCode() {
+    const {
+      eventList,
+      usedTois,
+      response,
+      runCode,
+      workspace,
+      code,
+      selectedKit,
+      stopCode,
+    } = this.props;
+    if (response && response.message === 'running') {
+      stopCode(selectedKit.ip);
+    } else {
+      const data = workspace === 'Visual' ?
+        generateCode(eventList, usedTois, undefined) :
+        generateCode(eventList, usedTois, code);
+      // console.log(data);
+      if (data) {
+        runCode(selectedKit.ip, data);
+      }
+    }
+  }
+  render() {
+    const {
+      workspace,
+      selectedKit,
+      changeWorkspace,
+      changeApp,
+      response,
+      currentApp,
+    } = this.props;
+    const btnText = response && response.message === 'running' ?
+      'Detener' : 'Ejecutar';
+    return (
+      <div className="toolbar">
+        <AppMenu changeApp={changeApp} selectedKit={selectedKit} />
+        {
+          currentApp.key !== 'main' && <AppTitle currentApp={currentApp} />
+        }
+        {
+          currentApp.key === 'main' && <WorkspaceOptions workspace={workspace} changeWorkspace={changeWorkspace} />
+        }
+        {
+          currentApp.key === 'main' && <RunButton selectedKit={selectedKit} handleRunCode={this.handleRunCode} btnText={btnText} />
+        }
       </div>
-    </section>
-    <section className="col-4 view-options">
-      <Options currentWorkspace={workspace} changeWorkspace={changeWorkspace} />
-    </section>
-    <section className="col-4 run-code">
-      <button className="btn btn-lg btn-primary">Ejecutar</button>
-    </section>
-  </div>);
+    );
+  }
+}
 
 export default Toolbar;

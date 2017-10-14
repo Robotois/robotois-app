@@ -5,18 +5,22 @@ const tcpp = remote.require('tcp-ping');
 const os = remote.require('os');
 
 const getIP4 = iface => iface.reduce(
-  (str, ipConfig) => (ipConfig.family === 'IPv4' ? str.concat(ipConfig.address) : str),
-  '',
+  (str, ipConfig) => (ipConfig.family === 'IPv4' ? ipConfig.address : str),
+  undefined,
 );
 
-const noDuplicate = (arr, el) => (arr.indexOf(el) === -1 ? arr.concat(el) : arr);
+const noDuplicate = (arr, el) => (el && arr.indexOf(el) === -1 ?
+  arr.concat(el) :
+  arr);
 
-const ipFormatter = ipv4 => ipv4.match(/([0-9]{1,3}.){3}/)[0].concat('x');
+const ipFormatter = ipv4 => (ipv4 ?
+  ipv4.match(/([0-9]{1,3}.){3}/)[0].concat('x') :
+  undefined);
 
 const ipFormats = () => {
   const ifaces = os.networkInterfaces();
   const ips = Object.keys(ifaces).reduce(
-    (arr, ifaceName) => (ifaceName !== 'lo' ?
+    (arr, ifaceName) => (!ifaceName.includes('lo') ?
       noDuplicate(
         arr,
         ipFormatter(getIP4(ifaces[ifaceName])),
