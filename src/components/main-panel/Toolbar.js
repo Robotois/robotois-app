@@ -9,17 +9,17 @@ const appsAvailable = [
     key: 'main',
   },
   {
-    title: 'Configuración del Kit',
+    title: 'Configuración',
     key: 'kitConfig',
   },
   {
     title: 'Tablero',
     key: 'dashboard',
   },
-  {
+  /*  {
     title: 'Tienda',
     key: 'store',
-  },
+  }, */
 ];
 
 const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
@@ -42,27 +42,23 @@ const Options = ({ currentWorkspace, changeWorkspace }) =>
     )}
   </div>);
 
-const AppOption = ({ title, changeApp }) => (
-  <li className="menu-item">
+const AppOption = ({ title, changeApp }) =>
+  (<li className="menu-item">
     <a href={`#${title}`} onClick={changeApp}>{title}</a>
-  </li>
-);
+  </li>);
 
-const AppOptions = ({ changeApp }) => (
-  <ul className="menu">
-    {
-      appsAvailable.map(opt =>
-        <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />)
-    }
-  </ul>
-);
+const AppOptions = ({ changeApp }) =>
+  (<ul className="menu">
+    {appsAvailable.map(opt =>
+      <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />,
+    )}
+  </ul>);
 
-const AppMenu = ({ changeApp }) => (
-  <div className="dropdown">
+const AppMenu = ({ changeApp }) =>
+  (<div className="dropdown">
     <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
     <AppOptions changeApp={changeApp} />
-  </div>
-);
+  </div>);
 
 const Toolbar = ({ workspace, changeWorkspace, changeApp }) =>
   (<div className="toolbar">
