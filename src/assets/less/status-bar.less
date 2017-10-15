@@ -1,0 +1,23 @@
+.status-bar {
+  background: @dark;
+  color: @light-text;
+  font-size: 13px;
+  text-align: right;
+  height: 30px;
+  span {
+    margin-right: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .status-error {
+    color: @red;
+  }
+  .status-ok {
+    color: @green;
+  }
+  i {
+    margin-right: 5px;
+  }
+}

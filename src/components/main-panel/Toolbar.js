@@ -9,17 +9,17 @@ const appsAvailable = [
     key: 'main',
   },
   {
-    title: 'Configuración del Kit',
+    title: 'Configuración',
     key: 'kitConfig',
   },
   {
     title: 'Tablero',
     key: 'dashboard',
   },
-  {
+  /*  {
     title: 'Tienda',
     key: 'store',
-  },
+  }, */
 ];
 
 const Option = ({ workspace, currentWorkspace, changeWorkspace }) =>
@@ -42,64 +42,52 @@ const Options = ({ currentWorkspace, changeWorkspace }) =>
     )}
   </div>);
 
-const AppOption = ({ title, changeApp }) => (
-  <li className="menu-item">
+const AppOption = ({ title, changeApp }) =>
+  (<li className="menu-item">
     <a href={`#${title}`} onClick={changeApp}>{title}</a>
-  </li>
-);
+  </li>);
 
-const AppOptions = ({ changeApp }) => (
-  <ul className="menu">
-    {
-      appsAvailable.map(opt =>
-        <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />)
-    }
-  </ul>
-);
+const AppOptions = ({ changeApp }) =>
+  (<ul className="menu">
+    {appsAvailable.map(opt =>
+      <AppOption key={opt.key} title={opt.title} changeApp={changeApp(opt)} />,
+    )}
+  </ul>);
 
-const KitStatus = ({ selectedKit }) => (
-  <div className="kit-status">
+const KitStatus = ({ selectedKit }) =>
+  (<div className="kit-status">
     <span className={`${selectedKit ? 'online' : 'offline'}`} />
-    {
-      selectedKit ?
-        <span className="bg-success px-1 rounded text-primary h6"><b>{selectedKit.hostname}</b></span> :
-        <span className="bg-warning px-1 rounded text-primary">KIT desconectado</span>
-    }
-  </div>
-);
+    {selectedKit ? <span><b>{selectedKit.hostname}</b></span> : <span>Desconectado</span>}
+  </div>);
 
-const AppMenu = ({ changeApp, selectedKit }) => (
-  <section className="col-4">
+const AppMenu = ({ changeApp, selectedKit }) =>
+  (<section className="col-4">
     <div className="dropdown">
       <button className="btn btn-action dropdown-toggle"><i className="icon icon-apps" /></button>
       <AppOptions changeApp={changeApp} />
     </div>
     <KitStatus selectedKit={selectedKit} />
-  </section>
-);
+  </section>);
 
-const WorkspaceOptions = ({ workspace, changeWorkspace }) => (
-  <section className="col-4 view-options">
+const WorkspaceOptions = ({ workspace, changeWorkspace }) =>
+  (<section className="col-4 view-options">
     <Options currentWorkspace={workspace} changeWorkspace={changeWorkspace} />
-  </section>
-);
+  </section>);
 
-const RunButton = ({ selectedKit, handleRunCode, btnText }) => (
-  <section className="col-4 run-code">
+const RunButton = ({ selectedKit, handleRunCode, btnText }) =>
+  (<section className="col-4 run-code">
     <button
       className={`btn btn-lg btn-primary ${!selectedKit ? 'disabled' : ''}`}
       onClick={handleRunCode}
     >
       {btnText}
     </button>
-  </section>
-);
+  </section>);
 
-const AppTitle = ({ currentApp }) => (
-  <section className="col-4 view-options">
+const AppTitle = ({ currentApp }) =>
+  (<section className="col-4 view-options">
     <h5 className="text-light"><b>{currentApp.title}</b></h5>
-  </section>
-);
+  </section>);
 
 class Toolbar extends React.Component {
   constructor() {
@@ -117,42 +105,36 @@ class Toolbar extends React.Component {
       code,
       selectedKit,
       stopCode,
+      udpateStatus,
     } = this.props;
     if (response && response.message === 'running') {
       stopCode(selectedKit.ip);
     } else {
-      const data = workspace === 'Visual' ?
-        generateCode(eventList, usedTois, undefined) :
-        generateCode(eventList, usedTois, code);
-      // console.log(data);
-      if (data) {
+      const data = workspace === 'Visual'
+        ? generateCode(eventList, usedTois, undefined)
+        : generateCode(eventList, usedTois, code);
+      if (data.success) {
         runCode(selectedKit.ip, data);
+      } else {
+        udpateStatus(false, data.message);
       }
     }
   }
   render() {
-    const {
-      workspace,
-      selectedKit,
-      changeWorkspace,
-      changeApp,
-      response,
-      currentApp,
-    } = this.props;
-    const btnText = response && response.message === 'running' ?
-      'Detener' : 'Ejecutar';
+    const { workspace, selectedKit, changeWorkspace, changeApp, response, currentApp } = this.props;
+    const btnText = response && response.message === 'running' ? 'Detener' : 'Ejecutar';
     return (
       <div className="toolbar">
         <AppMenu changeApp={changeApp} selectedKit={selectedKit} />
-        {
-          currentApp.key !== 'main' && <AppTitle currentApp={currentApp} />
-        }
-        {
-          currentApp.key === 'main' && <WorkspaceOptions workspace={workspace} changeWorkspace={changeWorkspace} />
-        }
-        {
-          currentApp.key === 'main' && <RunButton selectedKit={selectedKit} handleRunCode={this.handleRunCode} btnText={btnText} />
-        }
+        {currentApp.key !== 'main' && <AppTitle currentApp={currentApp} />}
+        {currentApp.key === 'main' &&
+          <WorkspaceOptions workspace={workspace} changeWorkspace={changeWorkspace} />}
+        {currentApp.key === 'main' &&
+          <RunButton
+            selectedKit={selectedKit}
+            handleRunCode={this.handleRunCode}
+            btnText={btnText}
+          />}
       </div>
     );
   }
