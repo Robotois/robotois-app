@@ -22,6 +22,8 @@
     display: flex;
     padding: 1.5em;
     color: @light-text;
+    align-items: center;
+    justify-content: center;
     span {
       margin-right: 0.5em;
     }
@@ -65,17 +67,24 @@
 }
 
 .circle {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   display: block;
   border-radius: 50%;
 }
-
+@keyframes color_red_change {
+	from { background-color: orange; }
+	to { background-color: @red; }
+}
 .online:extend(.circle) {
   background-color: @green;
 }
 .offline:extend(.circle) {
   background-color: @red;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+  animation-name: color_red_change;
 }
 
 .robotois-apps {

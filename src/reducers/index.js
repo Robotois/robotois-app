@@ -7,6 +7,7 @@ import eventList from './event-list';
 import toolbar from './toolbar';
 import codeEditor from './code-editor';
 import kitConfig from './kit-config';
+import status from './status-bar';
 // import appMenu from './app-menu';
 
 const allReducers = combineReducers({
@@ -18,6 +19,7 @@ const allReducers = combineReducers({
   codeEditor,
   kitConfig,
   form: formReducer,
+  status,
 });
 
 export default allReducers;

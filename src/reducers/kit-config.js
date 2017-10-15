@@ -7,17 +7,31 @@ import {
   WIFI_CONFIG_RECEIVE_AVAILABLE,
   WIFI_CONFIG_SELECTED_WIFI,
   WIFI_CONFIG_RESET_WIFI,
+  KIT_CONFIG_REQUEST_RUN_CODE,
 } from '../actions/kit-config/kit-config';
 
 const initialState = {
   selectedKit: undefined,
   isFetching: false,
+  response: undefined,
   kits: [],
   wifiConfig: {
     selectedWifi: undefined,
     isFetching: false,
     wifis: [],
   },
+};
+
+const kitRunnerReduder = (state, action) => {
+  switch (action.type) {
+    case KIT_CONFIG_REQUEST_RUN_CODE:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    default:
+      return state;
+  }
 };
 
 const wifiConfigReducer = (state, action) => {
@@ -80,6 +94,8 @@ const kitConfigReducer = (state = initialState, action) => {
         ...state,
         wifiConfig: wifiConfigReducer(state.wifiConfig, action),
       };
+    case KIT_CONFIG_REQUEST_RUN_CODE:
+      return kitRunnerReduder(state, action);
     default:
       return state;
   }
