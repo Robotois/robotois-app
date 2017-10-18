@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/main-panel/Toolbar';
 import { toolbarChangeWorkspace, toolbarChangeApp } from '../actions/toolbar';
-import udpateStatus from '../actions/status-bar';
+import { udpateStatus } from '../actions/status-bar';
 import { runCode, stopCode } from '../actions/kit-config/kit-config';
 // import { appMenuChangeApp } from '../actions/app-menu';
 

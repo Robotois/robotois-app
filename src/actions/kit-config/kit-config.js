@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getConnected } from './discover-kits';
 import { CodeGenerator } from '../../CodeGenerator/CodeGenerator';
 import Enums from '../../utils/Enums';
-import { STATUS_UPDATE } from '../action-types';
+import { STATUS_UPDATE, udpateStatus } from '../status-bar';
 
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
@@ -213,11 +213,11 @@ export const runCode = (hostIp, data) => (dispatch) => {
   })
     .then((response) => {
       console.log(response);
-      dispatch({ type: STATUS_UPDATE, success: true, message: 'Kit funcionando' });
-    })
-    .catch((error) => {
+      // dispatch({ type: STATUS_UPDATE, success: true, message: 'Kit funcionando' });
+      dispatch(udpateStatus(true, 'Kit funcionando'));
+    }, (error) => {
       console.log(error);
-      dispatch({ type: STATUS_UPDATE, success: false, message: error });
+      dispatch(udpateStatus(false, error));
     });
 };
 
@@ -229,10 +229,9 @@ export const stopCode = hostIp => (dispatch) => {
   })
     .then((response) => {
       console.log(response);
-      dispatch({ type: STATUS_UPDATE, success: true, message: 'Kit detenido' });
-    })
-    .catch((error) => {
+      dispatch(udpateStatus(true, 'Kit detenido'));
+    }, (error) => {
       console.log(error);
-      dispatch({ type: STATUS_UPDATE, success: false, message: error });
+      dispatch(udpateStatus(false, error));
     });
 };

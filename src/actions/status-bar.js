@@ -1,10 +1,9 @@
-import { STATUS_UPDATE } from './action-types';
+export const STATUS_UPDATE = 'STATUS_UPDATE';
 
-const udpateStatus = (success, message) => ({
+export const udpateStatus = (success, message) => ({
   type: STATUS_UPDATE,
   response: {
     success,
     message,
   },
 });
-export default udpateStatus;
