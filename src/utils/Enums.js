@@ -17,21 +17,26 @@ const Enums = {
   Motion: 'motion',
   SoundSensor: 'sound',
 
-  analogConnector: 'Conector para analógicos',
+  analogConnector: 'Conector de Sensores Analógicos',
   temperature: 'Sensor de Temperatura',
   light: 'Sensor de Luz',
-  rotary: 'Sensor rotatorio',
-  distance: 'Sensor de distancia',
+  rotary: 'Sensor Rotatorio',
+  distance: 'Sensor de Distancia',
   lcd: 'Display LCD',
   led: 'Led',
-  ledRGB: 'LedRGB',
+  ledRGB: 'LEDs RGB',
   motor: 'Motor',
   servo: 'Servo',
-  servosConnector: 'Conector para servo motores',
-  motorsConnector: 'Conector para motores',
+  servosConnector: 'Controlador de Servo-motores',
+  motorsConnector: 'Controlador de Motores',
   button: 'Botón',
   relay: 'Relevador',
   motion: 'Sensor de Movimiento',
   sound: 'Sensor de Sonido',
+
+  // Categorias de Topics en MQTT
+  sensors: 'Sensores',
+  digitalOutputs: 'Salidas Digitales',
+  digitalInputs: 'Entradas Digitales',
 };
 export default Enums;

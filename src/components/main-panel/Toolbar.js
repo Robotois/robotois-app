@@ -74,10 +74,10 @@ const WorkspaceOptions = ({ workspace, changeWorkspace }) =>
     <Options currentWorkspace={workspace} changeWorkspace={changeWorkspace} />
   </section>);
 
-const RunButton = ({ selectedKit, handleRunCode, btnText }) =>
+const RunButton = ({ online, handleRunCode, btnText }) =>
   (<section className="col-4 run-code">
     <button
-      className={`btn btn-lg btn-primary ${!selectedKit ? 'disabled' : ''}`}
+      className={`btn btn-lg btn-primary ${!online ? 'disabled' : ''}`}
       onClick={handleRunCode}
     >
       {btnText}
@@ -99,15 +99,15 @@ class Toolbar extends React.Component {
     const {
       eventList,
       usedTois,
-      response,
+      runner,
       runCode,
       workspace,
       code,
       selectedKit,
       stopCode,
-      udpateStatus,
+      updateMessage,
     } = this.props;
-    if (response && response.message === 'running') {
+    if (runner) {
       stopCode(selectedKit.ip);
     } else {
       const data = workspace === 'Visual'
@@ -116,13 +116,13 @@ class Toolbar extends React.Component {
       if (data.success) {
         runCode(selectedKit.ip, data);
       } else {
-        udpateStatus(false, data.message);
+        updateMessage(data.message);
       }
     }
   }
   render() {
-    const { workspace, selectedKit, changeWorkspace, changeApp, response, currentApp } = this.props;
-    const btnText = response && response.message === 'running' ? 'Detener' : 'Ejecutar';
+    const { workspace, selectedKit, changeWorkspace, changeApp, online, runner, currentApp } = this.props;
+    const btnText = runner ? 'Detener' : 'Ejecutar';
     return (
       <div className="toolbar">
         <AppMenu changeApp={changeApp} selectedKit={selectedKit} />
@@ -131,7 +131,7 @@ class Toolbar extends React.Component {
           <WorkspaceOptions workspace={workspace} changeWorkspace={changeWorkspace} />}
         {currentApp.key === 'main' &&
           <RunButton
-            selectedKit={selectedKit}
+            online={online}
             handleRunCode={this.handleRunCode}
             btnText={btnText}
           />}

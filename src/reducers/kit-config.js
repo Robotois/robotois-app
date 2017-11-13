@@ -10,10 +10,16 @@ import {
   KIT_CONFIG_REQUEST_RUN_CODE,
 } from '../actions/kit-config/kit-config';
 
+const devKit = {
+  ip: '192.168.1.72',
+  available: true,
+  hostname: 'robotois',
+};
+
 const initialState = {
   selectedKit: undefined,
   isFetching: false,
-  response: undefined,
+  // response: undefined,
   kits: [],
   wifiConfig: {
     selectedWifi: undefined,

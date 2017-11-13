@@ -47,7 +47,7 @@ const toiEventCode = (outputModule, toiEvent) => {
 };
 
 const digitalInputCode = (outputModule, toiEvent) => {
-  const listenerHeader = `${toiEvent.inputModule}.on('state', (value, status) => {\n`;
+  const listenerHeader = `${toiEvent.inputModule}.on('change', (value, status) => {\n`;
   return listenerHeader.concat(
     toiEventCode(outputModule, toiEvent),
     '});\n'

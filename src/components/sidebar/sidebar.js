@@ -4,11 +4,14 @@ import ToisListContainer from '../../containers/tois-list-conatiner';
 import ToiDetailContainer from '../../containers/toi-detail-container';
 
 import ConfigSidebarContainer from '../../containers/kit-config/config-sidebar-container';
+import DashboardSidebarContainer from '../../containers/dashboard/dashboard-sidebar-container';
 
 const AppsSidebar = ({ currentApp }) => {
   switch (currentApp) {
     case 'kitConfig':
       return <ConfigSidebarContainer />;
+    case 'dashboard':
+      return <DashboardSidebarContainer />;
     default:
       return false;
   }

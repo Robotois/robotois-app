@@ -91,7 +91,7 @@ export default class EventConfig extends React.Component {
   handleAddEvent() {
     const { inputToi, currentToi, addInstanceEvent } = this.props;
     const { inputEvent, behavior, submodule } = this.state;
-    const eventCase = { ...inputEvent, behavior };
+    const eventCase = { ...inputEvent, behavior: { action: behavior.action, params: { ...behavior.params } } };
     addInstanceEvent(currentToi, inputToi, eventCase, submodule);
   }
 
@@ -99,7 +99,7 @@ export default class EventConfig extends React.Component {
     const { inputToi, currentToi, handleResetSelected } = this.props;
     const { inputEvent, behavior, submodule } = this.state;
     const buttonStatus = this.getButtonStatus();
-    console.log(inputToi);
+    // console.log(inputToi);
     return (
       <Modal modalStatus={'active'}>
         <ModalHeader
