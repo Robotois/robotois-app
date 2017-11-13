@@ -1,10 +1,9 @@
 import {
   EVENT_LIST_ADD_INSTANCE_EVENT,
-  // EVENT_LIST_GET_INSTANCE,
   EVENT_LIST_REMOVE_EVENT_CASE,
   EVENT_LIST_UPDATE_INSTANCE,
   EVENT_LIST_DELETE_INSTANCE,
-} from '../actions/action-types';
+} from '../actions/event-list';
 import { isInput, isEventListener } from '../components/shared/tois-by-function';
 
 const noLoggers = eventType => (eventType !== 'log' && eventType !== 'ioLog');
@@ -46,7 +45,7 @@ const onlyDifferent = (event, eventCase) => {
  * @return {Object}             El toiEvent que coincide con los parametros de busqueda,
  *                                 si es que existe
  */
-const gettoiEvent = (toiEvents, inputModule, submodule) => {
+const getToiEvent = (toiEvents, inputModule, submodule) => {
   if (submodule) {
     return toiEvents.find(ev =>
       (ev.inputModule.type === inputModule.type &&
@@ -66,16 +65,20 @@ const gettoiEvent = (toiEvents, inputModule, submodule) => {
  * @param  {Object} eventCase   La configuracion del evento que se va a agregar
  * @return {Object}             El nuevo toiEvent
  */
-const buildtoiEvent = (toiEvent, inputModule, eventCase, submodule) => {
+const buildToiEvent = (toiEvent, inputModule, eventCase, submodule) => {
   if (toiEvent && noLoggers(eventCase.eventType)) {
     // Si el currentToi va a comportarse como logger, entonces este no puede escuchar
     // otros eventos, por ello se busca si hay un eventCase como logger y se elimina.
     // Se filtran los eventos que sean diferentes para evitar colsion.
+    console.log('toiEvent:', toiEvent);
     const noLogEvents = toiEvent.events.filter(event =>
       noLoggers(event.eventType) && onlyDifferent(event, eventCase));
     noLogEvents.push(eventCase);
-    toiEvent.events = noLogEvents;
-    return toiEvent;
+    // toiEvent.events = noLogEvents;
+    return {
+      ...toiEvent,
+      events: noLogEvents,
+    };
   }
   /*
   Cuanto el toiEvent no existe en la lista de eventos del currentToi, o el currentToi
@@ -102,6 +105,7 @@ const buildtoiEvent = (toiEvent, inputModule, eventCase, submodule) => {
 const pushtoiEvents = (toiEvents, toiEvent) => {
   const { submodule } = toiEvent;
   if (submodule && submodule !== 'todos') {
+    // console.log('toiEvents:', toiEvents);
     // Eliminar los toiEvents que tengan 'todos'
     const noAlltoiEvents = toiEvents.filter(toiEv => toiEv.submodule !== 'todos');
     const subExist = noAlltoiEvents.findIndex(toiEv => toiEv.submodule === submodule);
@@ -116,8 +120,8 @@ const pushtoiEvents = (toiEvents, toiEvent) => {
 };
 
 const addEventCase = (toiEvents, inputModule, eventCase, submodule) => {
-  let newtoiEvents = null;
-  let toiEvent = null;
+  // let newtoiEvents = null;
+  // let toiEvent = null;
   /*
   Si la lista toiEvents existe para el currentToi (modulo de salida seleccionado:
   LED, LCD, LEDs RGB), entonces se modifica el toiEvent actual para que se contenga
@@ -125,21 +129,22 @@ const addEventCase = (toiEvents, inputModule, eventCase, submodule) => {
    */
   if (toiEvents && toiEvents.length !== 0) {
     // obtener el toi Event actual
-    const prevtoiEvent = gettoiEvent(toiEvents, inputModule, submodule);
+    const prevtoiEvent = getToiEvent(toiEvents, inputModule, submodule);
     // se actualiza el toiEvent actual para incluir el evento que se quiere agregar
-    toiEvent = buildtoiEvent(prevtoiEvent, inputModule, eventCase, submodule);
+    const toiEvent = buildToiEvent(prevtoiEvent, inputModule, eventCase, submodule);
     // se obtiene la nueva version del toiEvent y se agrega a la lista toiEvents
-    newtoiEvents = pushtoiEvents(toiEvents, toiEvent);
-  } else {
-    toiEvent = buildtoiEvent(null, inputModule, eventCase, submodule);
-    newtoiEvents = [toiEvent];
+
+    // console.log('toiEvents:', toiEvents);
+    return pushtoiEvents(toiEvents, toiEvent);
   }
-  return newtoiEvents;
+
+  const toiEvent = buildToiEvent(null, inputModule, eventCase, submodule);
+  return [toiEvent];
 };
 
 const replaceInstance = (eventList, newInstance) => {
   const index = eventList.findIndex(
-    toi => toi.type === newInstance.type && toi.instance === newInstance.instance
+    toi => toi.type === newInstance.type && toi.instance === newInstance.instance,
   );
   let newEventList;
   if (index !== -1) {
@@ -147,23 +152,16 @@ const replaceInstance = (eventList, newInstance) => {
   } else {
     newEventList = eventList.concat(newInstance);
   }
-  console.log('newEventList', newEventList);
-  // eventList[currentToi.type] = newtoiEvents;
   return newEventList;
-  // Session.set('eventList', newEventList);
-  // console.log(eventList);
 };
 
 const removeEventCases = (eventList, toiType, instance) => {
-  // const eventList = Session.get('eventList') || [];
   const newEventList = eventList.reduce(
     (result, toi) => {
       const { toiEvents } = toi;
-      // console.log('toiEvents: ', toiEvents);
       const newtoiEvents = toiEvents.filter(
-        ev => (ev.inputModule.type === toiType ? ev.inputModule.instance !== instance : true)
+        ev => (ev.inputModule.type === toiType ? ev.inputModule.instance !== instance : true),
       );
-      // console.log('newtoiEvents: ', newtoiEvents);
       return newtoiEvents.length > 0 ? result.concat({
         type: toi.type,
         toiEvents: newtoiEvents,
@@ -173,20 +171,17 @@ const removeEventCases = (eventList, toiType, instance) => {
     },
     [],
   );
-  console.log('newEventList', newEventList);
+  // console.log('newEventList', newEventList);
   return newEventList;
-  // Session.set('eventList', newEventList);
 };
 
 const removeInstance = (eventList, toiType, instance) => {
-  // const eventList = Session.get('eventList') || [];
   const index = eventList.findIndex(
     toi => toi.type === toiType && toi.instance === instance
   );
   if (index !== -1) {
     eventList.splice(index, 1);
     return [...eventList];
-    // Session.set('eventList', eventList);
   }
   return eventList;
 };
@@ -202,10 +197,8 @@ export const deleteInstance = (eventList, toiType, instance) => {
 };
 
 const updateEventCases = (eventList, figureId, instance) => {
-  // const eventList = Session.get('eventList') || [];
   const newEventList = eventList.map((toi) => {
     const { toiEvents } = toi;
-    // console.log('toiEvents: ', toiEvents);
     const newtoiEvents = toiEvents.map(
       ev => (
         ev.inputModule.figureId === figureId ?
@@ -219,7 +212,6 @@ const updateEventCases = (eventList, figureId, instance) => {
           ev
       ),
     );
-    // console.log('newtoiEvents: ', newtoiEvents);
     return {
       type: toi.type,
       toiEvents: newtoiEvents,
@@ -227,13 +219,11 @@ const updateEventCases = (eventList, figureId, instance) => {
       figureId: toi.figureId,
     };
   });
-  console.log('newEventList', newEventList);
+  // console.log('newEventList', newEventList);
   return newEventList;
-  // Session.set('eventList', newEventList);
 };
 
 const updateEventToi = (eventList, figureId, instance) => {
-  // const eventList = Session.get('eventList') || [];
   const newEventList = eventList.map(
     toi => (
       toi.figureId === figureId ?
@@ -244,9 +234,8 @@ const updateEventToi = (eventList, figureId, instance) => {
         toi
     ),
   );
-  console.log('newEventList', newEventList);
+  // console.log('newEventList', newEventList);
   return newEventList;
-  // Session.set('eventList', newEventList);
 };
 
 export const updateInstace = (eventList, toiType, figureId, instance) => {
@@ -260,7 +249,6 @@ export const updateInstace = (eventList, toiType, figureId, instance) => {
 };
 
 export function removeEventCase(eventList, currentToi, index, caseIndex) {
-  // const eventList = Session.get('eventList') || [];
   const toiIndex = eventList.findIndex(
     toi => toi.type === currentToi.type && toi.instance === currentToi.instance,
   );
@@ -272,7 +260,6 @@ export function removeEventCase(eventList, currentToi, index, caseIndex) {
   if (toiEvents[index].events.length === 0) {
     toiEvents.splice(index, 1);
   }
-  // console.log('removeEventCase: ', toiEvents);
   if (toiEvents.length === 0) {
     return removeInstance(eventList, currentToi.type, currentToi.instance);
   }
@@ -288,7 +275,6 @@ export function removeEventCase(eventList, currentToi, index, caseIndex) {
 }
 
 export function getInstance(eventList, toiType, instance) {
-  // const eventList = Session.get('eventList') || [];
   return eventList.find(
     toi => toi.type === toiType && toi.instance === instance,
   );

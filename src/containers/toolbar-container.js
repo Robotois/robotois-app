@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/main-panel/Toolbar';
 import { toolbarChangeWorkspace, toolbarChangeApp } from '../actions/toolbar';
-import { udpateStatus } from '../actions/status-bar';
+import { updateMessage } from '../actions/status-bar';
 import { runCode, stopCode } from '../actions/kit-config/kit-config';
-// import { appMenuChangeApp } from '../actions/app-menu';
 
 const mapStateToProps = ({
   toolbar: { workspace, currentApp },
-  kitConfig: { selectedKit, response },
+  kitConfig: { selectedKit },
   codeEditor: { code },
   eventList,
   usedTois,
+  statusBar: { online, runner },
 }) => ({
   workspace,
   selectedKit,
   eventList,
   usedTois,
-  response,
+  online,
+  runner,
   code,
   currentApp,
 });
@@ -26,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   changeApp: app => () => dispatch(toolbarChangeApp(app)),
   runCode: (hostIp, data) => dispatch(runCode(hostIp, data)),
   stopCode: hostIp => dispatch(stopCode(hostIp)),
-  udpateStatus: (success, message) => dispatch(udpateStatus(success, message)),
+  updateMessage: message => dispatch(updateMessage(message)),
 });
 
 const ToolbarContainer = connect(mapStateToProps, mapDispatchToProps)(Toolbar);

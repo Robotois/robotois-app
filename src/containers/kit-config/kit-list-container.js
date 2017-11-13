@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAvailableKits, selectKit } from '../../actions/kit-config/kit-config';
+import { fetchAvailableKits, kitSelection } from '../../actions/kit-config/kit-config';
 import KitList from '../../apps/kit-config/kit-list';
 
 const mapStateToProps = ({ kitConfig: { isFetching, kits } }) => ({
@@ -9,7 +9,7 @@ const mapStateToProps = ({ kitConfig: { isFetching, kits } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchKits: () => dispatch(fetchAvailableKits()),
-  selectKit: kit => () => dispatch(selectKit(kit)),
+  selectKit: kit => () => dispatch(kitSelection(kit)),
 });
 
 const KitListContainer = connect(

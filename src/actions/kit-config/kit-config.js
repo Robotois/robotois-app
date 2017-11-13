@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getConnected } from './discover-kits';
 import { CodeGenerator } from '../../CodeGenerator/CodeGenerator';
 import Enums from '../../utils/Enums';
-import { STATUS_UPDATE, udpateStatus } from '../status-bar';
+import { updateStatus } from '../status-bar';
 
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
@@ -28,14 +28,40 @@ export const fetchAvailableKits = () => (dispatch) => {
   return getConnected().then(connected => dispatch(receiveAvailable(connected)));
 };
 
-export const selectKit = selectedKit => ({
+const selectKit = selectedKit => ({
   type: KIT_CONFIG_SELECT_KIT,
   selectedKit,
 });
 
-export const resetSelectedKit = () => ({
+export const kitSelection = selectedKit => (dispatch) => {
+  dispatch(selectKit(selectedKit));
+  return Promise.resolve().then(() => {
+    dispatch(updateStatus(true, 'Kit Conectado', false));
+  }).then(() =>
+    axios({
+      method: 'get',
+      url: `http://${selectedKit.ip}:8082/runner/status`,
+    })
+      .then((response) => {
+        console.log(response);
+        dispatch(updateStatus(true, response.data.message, response.data.runner));
+      }, (error) => {
+        console.log(error);
+        dispatch(updateStatus(false, 'Kit Desconectado', false));
+      }),
+  );
+};
+
+const resetSelection = () => ({
   type: KIT_CONFIG_RESET_KIT,
 });
+
+export const resetSelectedKit = () => (dispatch) => {
+  dispatch(resetSelection());
+  return Promise.resolve().then(() => {
+    dispatch(updateStatus(false, 'Kit Desconectado', false));
+  });
+};
 
 const requestAvailableWifis = () => ({
   type: WIFI_CONFIG_REQUEST_AVAILABLE,
@@ -214,10 +240,10 @@ export const runCode = (hostIp, data) => (dispatch) => {
     .then((response) => {
       console.log(response);
       // dispatch({ type: STATUS_UPDATE, success: true, message: 'Kit funcionando' });
-      dispatch(udpateStatus(true, 'Kit funcionando'));
+      dispatch(updateStatus(true, response.data.message, response.data.runner));
     }, (error) => {
       console.log(error);
-      dispatch(udpateStatus(false, error));
+      dispatch(updateStatus(false, error, false));
     });
 };
 
@@ -229,9 +255,21 @@ export const stopCode = hostIp => (dispatch) => {
   })
     .then((response) => {
       console.log(response);
-      dispatch(udpateStatus(true, 'Kit detenido'));
+      dispatch(updateStatus(true, response.data.message, response.data.runner));
     }, (error) => {
       console.log(error);
-      dispatch(udpateStatus(false, error));
+      dispatch(updateStatus(false, 'Kit Desconectado', false));
     });
 };
+
+export const kitStatus = hostIp => dispatch => axios({
+  method: 'get',
+  url: `http://${hostIp}:8082/runner/status`,
+})
+  .then((response) => {
+    console.log(response);
+    dispatch(updateStatus(true, response.message, response.runner));
+  }, (error) => {
+    console.log(error);
+    dispatch(updateStatus(false, 'Kit Desconectado', false));
+  });
