@@ -31,6 +31,7 @@ const appMenuReducer = (state, action) => {
 };
 
 const toolbarReducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case TOOLBAR_CHANGE_WORKSPACE:
       return {

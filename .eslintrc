@@ -15,5 +15,6 @@
       "Robotois": true,
       "document": true,
       "window": true,
+      "Blockly": true,
     },
 }
