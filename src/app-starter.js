@@ -19,15 +19,13 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow();
   mainWindow.maximize();
-  mainWindow.focus();
+  // mainWindow.focus();
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
     pathname: path.join(__dirname, '/dist/index.html'),
     protocol: 'file:',
     slashes: true,
   });
-  // and load the index.html of the app.
-  mainWindow.loadURL(startUrl);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -38,6 +36,9 @@ function createWindow() {
   });
 
   const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+
+  // and load the index.html of the app.
+  mainWindow.loadURL(startUrl);
 
   installExtension(REACT_DEVELOPER_TOOLS)
     .then(name => console.log(`Added Extension:  ${name}`))
