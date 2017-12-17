@@ -201,12 +201,12 @@ export const generateCode = (eventList, usedTois, code) => {
     };
   }
 
-  if (eventList.length === 0) {
-    return {
-      success: false,
-      message: 'No hay Eventos configurados en los Tois',
-    };
-  }
+  // if (eventList.length === 0) {
+  //   return {
+  //     success: false,
+  //     message: 'No hay Eventos configurados en los Tois',
+  //   };
+  // }
 
   const connections = parseHeaders(usedTois);
   if (!connections.success) {

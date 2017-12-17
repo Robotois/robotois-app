@@ -2,6 +2,7 @@ import React from 'react';
 import InputToisSelect from './input-select';
 import ToiEvents from './toi-events';
 import EventConfig from './EventConfig/EventConfig';
+import DeleteButton from './DeleteButton';
 
 const ToiImg = ({ isShield, src }) =>
   (<img
@@ -11,7 +12,7 @@ const ToiImg = ({ isShield, src }) =>
     style={{ width: isShield ? '90%' : 64, marginRight: isShield ? 0 : '2em' }}
   />);
 
-const ToiDescription = ({ toi, isShield, hasMultiple, children }) =>
+const ToiDescription = ({ toi, isShield, hasMultiple, children, deleteToi, deleteInstance }) =>
   (<div className="card">
     <div className="card-header">
       <div className="card-title h5">{`${toi.title} ${hasMultiple ? toi.instance : ''}`}</div>
@@ -30,6 +31,12 @@ const ToiDescription = ({ toi, isShield, hasMultiple, children }) =>
       {toi.description}
     </div>
     <div className="card-footer">
+      { !isShield && <DeleteButton
+        deleteToi={deleteToi}
+        type={toi.type}
+        instance={toi.instance}
+        deleteInstance={deleteInstance}
+      />}
       {children}
     </div>
   </div>);
@@ -72,6 +79,9 @@ class ToiDetail extends React.Component {
       inputToi,
       addInstanceEvent,
       toiEvents,
+      deleteToi,
+      usedTois,
+      deleteInstance
     } = this.props;
     // console.log('toiEvents:', toiEvents);
     const instanceStr = hasMultiple ? `${currentToi.title} ${currentToi.instance}` : undefined;
@@ -83,6 +93,8 @@ class ToiDetail extends React.Component {
               toi={currentToi}
               isShield={currentToi.type === 'shield'}
               hasMultiple={hasMultiple}
+              deleteToi={deleteToi(usedTois)}
+              deleteInstance={deleteInstance}
             >
               {currentInputTois &&
                 <InputToisSelect

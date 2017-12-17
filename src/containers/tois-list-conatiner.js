@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ToisList from '../components/sidebar/ToisList';
 import { getVisibleTois } from '../reducers/used-tois';
-import { addUsedToi } from '../actions';
+import { addUsedToi } from '../actions/used-tois-actions';
 
 const mapStateToProps = ({ usedTois, form: { searchForm } }) => {
   const query = searchForm && searchForm.values ? searchForm.values.query : '';

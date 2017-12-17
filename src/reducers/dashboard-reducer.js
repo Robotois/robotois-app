@@ -7,7 +7,7 @@ import {
   SELECT_TOPIC,
   getTopicInfo,
 } from '../actions/dashboard-actions';
-import { isSensor, isDigitalOutput } from '../components/shared/tois-by-function';
+import { isSensor, isDigitalOutput, isDigitalInput } from '../components/shared/tois-by-function';
 
 const ioStatus = ['off', 'on'];
 
@@ -18,6 +18,8 @@ const formatData = (data, toiType) => {
       return Number(data);
     case isDigitalOutput(toiType):
       return data !== 'blink' ? ioStatus[parseInt(data, 10)] : 'blink';
+    case isDigitalInput(toiType):
+      return ioStatus[parseInt(data, 10)];
     default:
       return undefined;
   }
@@ -37,7 +39,7 @@ const mergeData = (data, value) => {
   return newData;
 };
 
-const mergeTimestamps = momentData => mergeData(momentData, moment().format('LTS'));
+const mergeTimestamps = momentData => mergeData(momentData, moment().format('HH:mm:ss'));
 
 const mergeTopicData = (topics, topic, data) => {
   const index = topics.findIndex(to => to.topic === topic);
