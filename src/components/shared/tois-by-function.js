@@ -21,3 +21,5 @@ export const isIoLogger = toi => ioLoggersMap.findIndex(logger => logger === toi
 export const isInput = type => isSensor(type) || isDigitalInput(type);
 
 export const isDigitalOutput = toi => digitalOutputMap.findIndex(io => io === toi) !== -1;
+
+export const isIo = toi => isDigitalOutput(toi) || isDigitalInput(toi);

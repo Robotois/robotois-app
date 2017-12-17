@@ -2,6 +2,8 @@ import Tois from '../api/tois';
 import InputModules from '../api/input-modules';
 import multipleTois from '../api/multiple-tois';
 
+import { USED_TOIS_ADD_TOI, USED_TOIS_UPDATE } from '../actions/used-tois-actions';
+
 const nonAvailable = (used) => {
   // checar si ya se tiene el maximo permitido de los multiples
   const multiTois = Object.keys(multipleTois).reduce(
@@ -74,10 +76,31 @@ export const getInputModules = currentUsedTois => currentUsedTois.reduce(
   [],
 );
 
+export const deleteUsedToi = (currentUsedTois, figureId, itemType, updateInstace) => {
+  const remainingTois = currentUsedTois.filter(toi => toi.figureId !== figureId);
+  const otherType = remainingTois.filter(toi => toi.type !== itemType);
+  const sameType = remainingTois.filter(toi => toi.type === itemType);
+  sameType.sort((a, b) => a.instance - b.instance);
+  const newOrder = sameType.reduce(
+    (result, toi, index) => {
+      updateInstace(toi.type, toi.figureId, index + 1);
+      return result.concat({
+        ...toi,
+        instance: index + 1,
+      });
+    },
+    [],
+  );
+  const newUsedTois = newOrder.concat(otherType);
+  return newUsedTois;
+};
+
 const usedTois = (state = [], action) => {
   switch (action.type) {
-    case 'USED_TOIS_ADD_TOI':
+    case USED_TOIS_ADD_TOI:
       return addUsedToi(state, action.toi);
+    case USED_TOIS_UPDATE:
+      return [...action.usedTois];
     default:
       return state;
   }

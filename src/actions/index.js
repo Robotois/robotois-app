@@ -1,8 +1,3 @@
-export const addUsedToi = toi => ({
-  type: 'USED_TOIS_ADD_TOI',
-  toi,
-});
-
 export const addCurrentSelection = currentSelection => ({
   type: 'ADD_CURRENT_SELECTION',
   currentSelection,

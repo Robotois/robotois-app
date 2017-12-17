@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import ToiDetail from '../components/toi-detail/toi-detail';
 import { getCurrentToi } from '../reducers/toi-selection';
-import { getInputModules, multipleInstances } from '../reducers/used-tois';
+import { getInputModules, multipleInstances, deleteUsedToi } from '../reducers/used-tois';
+import { updateUsedTois } from '../actions/used-tois-actions';
 import { isEventListener } from '../components/shared/tois-by-function';
 import { changeInputToiSelection, changeInputToi } from '../actions';
-import { addInstanceEvent, removeEventCase } from '../actions/event-list';
+import { addInstanceEvent, removeEventCase, deleteInstance, updateInstace } from '../actions/event-list';
 import { getInstance } from '../reducers/event-list';
 
 const getToiEvents = (usedTois, eventList, toiType, toiInstance) => {
@@ -39,17 +40,26 @@ const mapStateToProps = ({
     selectedToi,
     inputToi,
     toiEvents,
+    usedTois,
   });
 };
 
-const mapDispatchToProps = dispatch => ({
-  changeSelectedToi: toi => dispatch(changeInputToiSelection(toi)),
-  changeInputToi: toi => dispatch(changeInputToi(toi)),
-  addInstanceEvent: (currentToi, inputToi, eventCase, subToi) =>
-    dispatch(addInstanceEvent(currentToi, inputToi, eventCase, subToi)),
-  removeEventCase: (currentToi, index, caseIndex) =>
-    dispatch(removeEventCase(currentToi, index, caseIndex)),
-});
+const mapDispatchToProps = (dispatch) => {
+  const updtInstance = (toiType, figureId, instance) =>
+    dispatch(updateInstace(toiType, figureId, instance));
+  return {
+    changeSelectedToi: toi => dispatch(changeInputToiSelection(toi)),
+    changeInputToi: toi => dispatch(changeInputToi(toi)),
+    addInstanceEvent: (currentToi, inputToi, eventCase, subToi) =>
+      dispatch(addInstanceEvent(currentToi, inputToi, eventCase, subToi)),
+    removeEventCase: (currentToi, index, caseIndex) =>
+      dispatch(removeEventCase(currentToi, index, caseIndex)),
+    // updateInstace: updtInstance,
+    deleteInstance: (toiType, instance) => dispatch(deleteInstance(toiType, instance)),
+    deleteToi: usedTois => (figureId, itemType) =>
+      dispatch(updateUsedTois(deleteUsedToi(usedTois, figureId, itemType, updtInstance))),
+  };
+};
 
 const ToiDetailContainer = connect(
   mapStateToProps,

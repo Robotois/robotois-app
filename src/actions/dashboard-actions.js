@@ -42,8 +42,8 @@ const processMessage = (topic, message, dispatch) => {
       topics = message.toString().split(';');
       topics.pop();
       allTopics = topics;
-      dispatch(receiveAvailableTopics(allTopics));
       subscribeAll(allTopics);
+      dispatch(receiveAvailableTopics(allTopics));
       break;
     default:
       dispatch(receiveTopicData(topic, message.toString()));
