@@ -3,6 +3,7 @@ import CodeEditorContainer from '../../containers/code-editor-container';
 import VisualEditor from './VisualEditor';
 import KitConfigContainer from '../../containers/kit-config/kit-config-container';
 import DashboardContainer from '../../containers/dashboard/dashboard-container';
+import BlocklyEditorContainer from '../../containers/Blockly';
 
 const AppsWorkspace = ({ currentApp }) => {
   switch (currentApp) {
@@ -20,6 +21,7 @@ const Workspace = ({ workspace, currentApp }) => (
     <AppsWorkspace currentApp={currentApp} />
     <CodeEditorContainer />
     <VisualEditor visible={workspace === 'Visual' && currentApp === 'main'} />
+    <BlocklyEditorContainer />
   </div>
 );
 
