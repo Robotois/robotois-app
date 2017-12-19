@@ -52,9 +52,11 @@ export default class BlocklyEditor extends React.Component {
   };
 
   initializeBlockly = () => {
+    const Blockly = window.Blockly;
+    const xml = '<xml><block type="programa" deletable="false" movable="false"></block></xml>';
     this.blocklyArea = document.getElementById('blocklyArea');
     this.blocklyDiv = document.getElementById('blocklyDiv');
-    this.workspacePlayground = window.Blockly.inject(this.blocklyDiv, {
+    this.workspacePlayground = Blockly.inject(this.blocklyDiv, {
       toolbox,
       collapse: true,
       comments: true,
@@ -77,7 +79,10 @@ export default class BlocklyEditor extends React.Component {
       },
     });
     window.addEventListener('resize', this.onResize, false);
-    window.BlocklyEditor = this;
+    // inject initial block
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), this.workspacePlayground);
+    // disable any block not connected to the root block
+    this.workspacePlayground.addChangeListener(Blockly.Events.disableOrphans);
   };
 
   forceLayout = () => {

@@ -2,7 +2,6 @@ export const toolbox = `<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" s
     <category name="Sensores" colour="#5b5ba5">
       <block type="distance"></block>
       <block type="temperature"></block>
-      <block type="programa"></block>
     </category>
     <category name="Actuadores" colour="#6d5ba5">
       <block type="led">
