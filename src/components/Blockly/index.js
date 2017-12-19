@@ -1,16 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const toolbox = [
-  '<xml>',
-  '  <block type="controls_if"></block>',
-  '  <block type="controls_whileUntil"></block>',
-  '</xml>',
-].join('');
+import { toolbox } from './toolbox';
+import Dialog from './Dialog';
 
 export default class BlocklyEditor extends React.Component {
+  state = {
+    showPrompt: false,
+    promptValue: '',
+    title: '',
+    callback: () => {},
+  };
+
   componentDidMount() {
     this.initializeBlockly();
+    const me = this;
+    window.Blockly.prompt = (message, defaultValue, callback) => {
+      me.setState({
+        showPrompt: true,
+        promptValue: defaultValue,
+        title: message,
+        callback,
+      });
+    };
   }
 
   componentWillReceiveProps(newProps) {
@@ -21,7 +32,6 @@ export default class BlocklyEditor extends React.Component {
       setTimeout(this.forceLayout, 0);
     }
   }
-
 
   onResize = () => {
     // Compute the absolute coordinates and dimensions of blocklyArea.
@@ -47,6 +57,25 @@ export default class BlocklyEditor extends React.Component {
     this.blocklyDiv = document.getElementById('blocklyDiv');
     this.workspacePlayground = window.Blockly.inject(this.blocklyDiv, {
       toolbox,
+      collapse: true,
+      comments: true,
+      disable: true,
+      maxBlocks: Infinity,
+      trashcan: true,
+      horizontalLayout: false,
+      toolboxPosition: 'start',
+      css: true,
+      media: 'https://blockly-demo.appspot.com/static/media/',
+      rtl: false,
+      scrollbars: true,
+      sounds: true,
+      oneBasedIndex: true,
+      grid: {
+        spacing: 20,
+        length: 1,
+        colour: '#888',
+        snap: false,
+      },
     });
     window.addEventListener('resize', this.onResize, false);
     window.BlocklyEditor = this;
@@ -55,10 +84,15 @@ export default class BlocklyEditor extends React.Component {
   forceLayout = () => {
     this.onResize();
     window.Blockly.svgResize(this.workspacePlayground);
-  }
+  };
+
+  handleClosePrompt = () => {
+    this.setState(showPrompt => ({ showPrompt: !showPrompt }));
+  };
 
   render() {
     const { active } = this.props;
+    const { showPrompt, title, promptValue, callback } = this.state;
     return (
       <div
         id="blocklyArea"
@@ -68,11 +102,18 @@ export default class BlocklyEditor extends React.Component {
           display: active ? 'block' : 'none',
         }}
       >
+        {showPrompt ? (
+          <Dialog
+            handleClose={this.handleClosePrompt}
+            title={title}
+            value={promptValue}
+            callback={callback}
+          />
+        ) : null}
         <div
           id="blocklyDiv"
           style={{
             position: 'absolute',
-            border: '1px solid red',
           }}
         />
       </div>
