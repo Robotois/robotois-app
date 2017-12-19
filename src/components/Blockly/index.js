@@ -13,9 +13,8 @@ export default class BlocklyEditor extends React.Component {
 
   componentDidMount() {
     this.initializeBlockly();
-    const me = this;
     window.Blockly.prompt = (message, defaultValue, callback) => {
-      me.setState({
+      this.setState({
         showPrompt: true,
         promptValue: defaultValue,
         title: message,
