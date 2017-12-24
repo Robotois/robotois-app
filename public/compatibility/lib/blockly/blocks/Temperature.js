@@ -12,9 +12,9 @@ Blockly.Blocks.temperature = {
   },
 };
 
-Blockly.JavaScript.temperature = function (block) {
+Blockly.JavaScript.temperature = function generateCode(block) {
   // TODO: Assemble JavaScript into code variable.
-  const code = '...';
+  const code = 'temperature[0]';
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };

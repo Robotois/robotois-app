@@ -83,6 +83,8 @@ export default class BlocklyEditor extends React.Component {
     Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), this.workspacePlayground);
     // disable any block not connected to the root block
     this.workspacePlayground.addChangeListener(Blockly.Events.disableOrphans);
+    window.Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    window.workspacePlayground = this.workspacePlayground;
   };
 
   forceLayout = () => {

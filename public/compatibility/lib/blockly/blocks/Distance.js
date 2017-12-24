@@ -12,9 +12,9 @@ Blockly.Blocks.distance = {
   },
 };
 
-Blockly.JavaScript.distance = function (block) {
+Blockly.JavaScript.distance = function generateCode(block) {
   // TODO: Assemble JavaScript into code variable.
-  const code = '...';
+  const code = 'distance[0]';
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };

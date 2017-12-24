@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/main-panel/Toolbar';
 import { toolbarChangeWorkspace, toolbarChangeApp } from '../actions/toolbar';
+import { codeEditorAppendCode } from '../actions/code-editor';
 import { updateMessage } from '../actions/status-bar';
 import { runCode, stopCode } from '../actions/kit-config/kit-config';
 
@@ -28,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
   runCode: (hostIp, data) => dispatch(runCode(hostIp, data)),
   stopCode: hostIp => dispatch(stopCode(hostIp)),
   updateMessage: message => dispatch(updateMessage(message)),
+  generateBlocklyCode: blocklyCode => dispatch(codeEditorAppendCode(blocklyCode)),
 });
 
 const ToolbarContainer = connect(mapStateToProps, mapDispatchToProps)(Toolbar);

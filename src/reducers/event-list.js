@@ -177,7 +177,7 @@ const removeEventCases = (eventList, toiType, instance) => {
 
 const removeInstance = (eventList, toiType, instance) => {
   const index = eventList.findIndex(
-    toi => toi.type === toiType && toi.instance === instance
+    toi => toi.type === toiType && toi.instance === instance,
   );
   if (index !== -1) {
     eventList.splice(index, 1);
