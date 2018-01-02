@@ -22,9 +22,9 @@ Blockly.Blocks.led = {
   },
 };
 
-Blockly.JavaScript.led = function (block) {
+Blockly.JavaScript.led = function generateCode(block) {
   const dropdownAction = block.getFieldValue('ACTION');
   // TODO: Assemble JavaScript into code variable.
-  const code = '...;\n';
+  const code = `led.${dropdownAction}();\n`;
   return code;
 };

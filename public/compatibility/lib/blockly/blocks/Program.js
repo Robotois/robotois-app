@@ -1,16 +1,16 @@
 Blockly.Blocks.programa = {
   init() {
     this.appendDummyInput().appendField('Inicio');
-    this.appendStatementInput('NAME').setCheck(null);
+    this.appendStatementInput('Program').setCheck(null);
     this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('');
   },
 };
 
-Blockly.JavaScript.programa = function (block) {
-  const statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+Blockly.JavaScript.programa = function generateCode(block) {
+  const statementsName = Blockly.JavaScript.statementToCode(block, 'Program');
   // TODO: Assemble JavaScript into code variable.
-  const code = '...;\n';
-  return code;
+  // const code = '...;\n';
+  return statementsName;
 };
