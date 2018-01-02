@@ -7,7 +7,8 @@
     "react"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": [1, { "forbid": ["array", "object"], checkContextTypes: 1, checkChildContextTypes: 1 }],
   },
   "globals": {
       "draw2d": true,

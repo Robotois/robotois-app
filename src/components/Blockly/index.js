@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toolbox } from './toolbox';
+import { toolbox, updateToolbox } from './toolbox';
 import Dialog from './Dialog';
 
 export default class BlocklyEditor extends React.Component {
+  static propTypes = {
+    active: PropTypes.bool.isRequired,
+    usedTois: PropTypes.array.isRequired,
+  };
+
   state = {
     showPrompt: false,
     promptValue: '',
@@ -24,11 +29,17 @@ export default class BlocklyEditor extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { active } = this.props;
+    const { active, usedTois } = this.props;
     const isActive = newProps.active;
+
     if (isActive !== active && isActive) {
       // give some blockly some time to render
       setTimeout(this.forceLayout, 0);
+    }
+
+    if (usedTois.length) {
+      console.log(updateToolbox(usedTois));
+      this.workspacePlayground.updateToolbox(updateToolbox(usedTois));
     }
   }
 
@@ -57,7 +68,7 @@ export default class BlocklyEditor extends React.Component {
     this.blocklyArea = document.getElementById('blocklyArea');
     this.blocklyDiv = document.getElementById('blocklyDiv');
     this.workspacePlayground = Blockly.inject(this.blocklyDiv, {
-      toolbox,
+      toolbox: toolbox.join(''),
       collapse: true,
       comments: true,
       disable: true,
@@ -126,7 +137,3 @@ export default class BlocklyEditor extends React.Component {
     );
   }
 }
-
-BlocklyEditor.propTypes = {
-  active: PropTypes.bool.isRequired,
-};

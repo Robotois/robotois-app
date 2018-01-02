@@ -3,8 +3,10 @@ import BlocklyEditor from '../../components/Blockly';
 
 const mapStateToProps = ({
   toolbar: { workspace, currentApp: { key } },
+  usedTois,
 }) => ({
   active: workspace === 'Bloques' && key === 'main',
+  usedTois,
 });
 
 

@@ -1,14 +1,15 @@
-export const toolbox = `<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-    <category name="Sensores" colour="#5b5ba5">
+export const toolbox = [
+  '<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">',
+  /* `<category name="Sensores" colour="#5b5ba5">
       <block type="distance"></block>
       <block type="temperature"></block>
-    </category>
-    <category name="Actuadores" colour="#6d5ba5">
+    </category>`,
+  `<category name="Actuadores" colour="#6d5ba5">
       <block type="led">
         <field name="ACTION">turnOn</field>
       </block>
-    </category>
-    <sep></sep>
+    </category>`, */
+  `<sep></sep>
     <category name="Eventos" colour="#5ba580">
       <block type="medicion"></block>
     </category>
@@ -370,7 +371,53 @@ export const toolbox = `<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" s
     <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
     <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
     <sep></sep>
-  </xml>`;
+  </xml>`,
+];
+
+const actuadoresXML = {
+  led: `<block type="led">
+          <field name="ACTION">turnOn</field>
+        </block>`,
+};
+/* `<category name="Sensores" colour="#5b5ba5">
+    <block type="distance"></block>
+    <block type="temperature"></block>
+  </category>`,
+`<category name="Actuadores" colour="#6d5ba5">
+    <block type="led">
+      <field name="ACTION">turnOn</field>
+    </block>
+  </category>`, */
+
+function createSensorsString(name, color, blocks) {
+  return [
+    `<category name="${name}" colour="${color}">`,
+    blocks.map(s => `<block type="${s.type}"></block>`).join(''),
+    '</category>',
+  ].join('');
+}
+
+function createActuatorsString(name, color, blocks) {
+  return [
+    `<category name="${name}" colour="${color}">`,
+    blocks.map(s => actuadoresXML[s.type]).join(''),
+    '</category>',
+  ].join('');
+}
+
+export function updateToolbox(usedTois) {
+  const sensores = usedTois.filter(s => s.hasEvents);
+  const actuadores = usedTois.filter(s => !s.hasEvents);
+  const toolboxCopy = [...toolbox];
+
+  if (actuadores.length) {
+    toolboxCopy.splice(1, 0, createActuatorsString('Actuadores', '#6d5ba5', actuadores));
+  }
+  if (sensores.length) {
+    toolboxCopy.splice(1, 0, createSensorsString('Sensores', '#5b5ba5', sensores));
+  }
+  return toolboxCopy.join('');
+}
 
 export const workspace = `
   <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">

@@ -31,9 +31,9 @@ const MainContent = ({ currentSelection, workspace }) => {
 const Sidebar = ({ currentSelection, workspace, currentApp }) => (
   <div className="column col-3 side-bar">
     <AppsSidebar currentApp={currentApp} />
-    {
-      currentApp === 'main' && <MainContent currentSelection={currentSelection} workspace={workspace} />
-    }
+    {currentApp === 'main' && (
+      <MainContent currentSelection={currentSelection} workspace={workspace} />
+    )}
   </div>
 );
 
