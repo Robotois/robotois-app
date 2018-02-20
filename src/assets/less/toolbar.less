@@ -11,11 +11,9 @@
   }
   .btn-action {
     background-color: @light-dark;
-    // background-color: @blue;
     margin-left: 1em;
     .icon-apps {
       color: @purple-text;
-      color: @blue;
     }
   }
   .kit-status {
@@ -35,25 +33,26 @@
     justify-content: flex-end;
     padding-right: 2em;
     button {
-      width: 153px;
-      background-color: @blue;
-      font-weight: bold;
-      font-size: 18px;
       border-radius: 4px;
-      // font-family: 'Ubuntu', sans-serif !important;
+    }
+    .btn-primary {
+      background-color: @blue;
+      width: 180px;
+      font-weight: bold;
+    }
+    .btn-secondary {
+      margin-right: 5px;
     }
   }
   .btn-group-block {
     .btn {
-      border: @blue;
-      background: transparent;
-      color: @light-text;
-      border: 1px solid @blue;
-      border: 1px solid @purple-text;
+      background: #353558;
+      color: #9999B9;
+      border: 1px solid @purple-button-border;
     }
     .active {
-     background: @dark-blue;
-     border-color: darken(@dark-blue, 5%);
+     background: @purple-button;
+     border-color: @purple-button-border;
      color: @light-color;
      text-decoration: none;
      &.loading {

@@ -53,7 +53,7 @@ class AvailableTopics extends React.Component {
         className="panel mx-2"
         style={{
           backgroundColor: 'white',
-          marginTop: '3rem',
+          marginTop: '3.6rem',
         }}
       >
         <div className="panel-header">
@@ -70,6 +70,7 @@ class AvailableTopics extends React.Component {
               <span>No hay Tois que mostrar</span>
           }
         </div>
+        <br />
       </div>
     );
   }

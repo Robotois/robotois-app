@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import 'spectre.css/dist/spectre.min.css';
@@ -10,11 +11,18 @@ import Layout from './layout';
 import MainPanel from '../components/main-panel/main-panel';
 import SidebarContainer from '../containers/sidebar-container';
 
-const App = () => (
+const mapStateToProps = ({ toolbar: { workspace, currentApp: { key } } }) => ({
+  left: workspace === 'Visual',
+});
+
+const App = ({ left }) => (
   <Layout>
-    <SidebarContainer />
+    {left ? <SidebarContainer /> : null}
     <MainPanel />
+    {left ? null : <SidebarContainer />}
   </Layout>
 );
 
-export default DragDropContext(HTML5Backend)(App);
+const AppContainer = connect(mapStateToProps, null)(App);
+
+export default DragDropContext(HTML5Backend)(AppContainer);
