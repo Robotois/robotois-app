@@ -378,6 +378,34 @@ const actuadoresXML = {
   led: `<block type="led">
           <field name="ACTION">turnOn</field>
         </block>`,
+  lcd: `<block type="lcd">
+          <field name="TEXT">Texto a mostrar</field>
+        </block>`,
+  ledRGB: `<block type="ledrgb">
+    <field name="ACTION1">turnOn</field>
+    <field name="L1">#ff99ff</field>
+    <field name="ACTION2">turnOn</field>
+    <field name="L2">#9999ff</field>
+    <field name="ACTION3">turnOn</field>
+    <field name="L3">#33ffff</field>
+    <field name="ACTION4">turnOn</field>
+    <field name="L4">#ff6666</field>
+    <field name="ACTION5">turnOn</field>
+    <field name="L5">#ccffff</field>
+    <field name="ACTION6">turnOn</field>
+    <field name="L6">#66ff99</field>
+    <field name="ACTION7">turnOn</field>
+    <field name="L7">#ffff66</field>
+  </block>`,
+  servo: `<block type="servo">
+            <field name="ANGLE">90</field>
+          </block>`,
+  motor: `<block type="motor">
+            <field name="VALUE">0</field>
+          </block>`,
+  relay: `<block type="relay">
+            <field name="ACTION">turnOn</field>
+          </block>`
 };
 /* `<category name="Sensores" colour="#5b5ba5">
     <block type="distance"></block>
@@ -397,7 +425,7 @@ function createSensorsString(name, color, blocks) {
   ].join('');
 }
 
-function createActuatorsString(name, color, blocks) {
+function createActorsString(name, color, blocks) {
   return [
     `<category name="${name}" colour="${color}">`,
     blocks.map(s => actuadoresXML[s.type]).join(''),
@@ -410,11 +438,21 @@ export function updateToolbox(usedTois) {
   const actuadores = usedTois.filter(s => !s.hasEvents);
   const toolboxCopy = [...toolbox];
 
+  console.log(actuadores);
+
   if (actuadores.length) {
-    toolboxCopy.splice(1, 0, createActuatorsString('Actuadores', '#6d5ba5', actuadores));
+    toolboxCopy.splice(
+      1,
+      0,
+      createActorsString('Actuadores', '#6d5ba5', actuadores)
+    );
   }
   if (sensores.length) {
-    toolboxCopy.splice(1, 0, createSensorsString('Sensores', '#5b5ba5', sensores));
+    toolboxCopy.splice(
+      1,
+      0,
+      createSensorsString('Sensores', '#5b5ba5', sensores)
+    );
   }
   return toolboxCopy.join('');
 }
