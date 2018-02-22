@@ -1,7 +1,7 @@
 import React from 'react';
 import { generateCode } from '../../actions/kit-config/kit-config';
 
-const workspaceOpts = ['Visual', 'Bloques', 'JavaScript'];
+const workspaceOpts = ['Visual', 'Bloques', 'Javascript'];
 // const appsAvailable = ['Configuración del Kit', 'Dashboard'];
 const appsAvailable = [
   {
@@ -165,7 +165,6 @@ class Toolbar extends React.Component {
       window.workspacePlayground
     );
     const blocklyCode = this.cleanGlobalVars(code);
-
     if (blocklyCode) {
       this.props.generateBlocklyCode(this.cleanGlobalVars(code));
     } else {

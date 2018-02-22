@@ -8,7 +8,7 @@ const mapStateToProps = ({
   currentSelection,
   workspace,
   currentApp: key,
-  hide: ['Bloques', 'JavaScript'].includes(workspace),
+  hide: ['Bloques', 'Javascript'].includes(workspace),
 });
 
 const SidebarContainer = connect(mapStateToProps, null)(Sidebar);

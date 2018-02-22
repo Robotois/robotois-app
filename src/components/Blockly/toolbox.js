@@ -382,19 +382,19 @@ const actuadoresXML = {
           <field name="TEXT">Texto a mostrar</field>
         </block>`,
   ledRGB: `<block type="ledrgb">
-    <field name="ACTION1">turnOn</field>
+    <field name="ACTION1">turnOff</field>
     <field name="L1">#ff99ff</field>
-    <field name="ACTION2">turnOn</field>
+    <field name="ACTION2">turnOff</field>
     <field name="L2">#9999ff</field>
-    <field name="ACTION3">turnOn</field>
+    <field name="ACTION3">turnOff</field>
     <field name="L3">#33ffff</field>
-    <field name="ACTION4">turnOn</field>
+    <field name="ACTION4">turnOff</field>
     <field name="L4">#ff6666</field>
-    <field name="ACTION5">turnOn</field>
+    <field name="ACTION5">turnOff</field>
     <field name="L5">#ccffff</field>
-    <field name="ACTION6">turnOn</field>
+    <field name="ACTION6">turnOff</field>
     <field name="L6">#66ff99</field>
-    <field name="ACTION7">turnOn</field>
+    <field name="ACTION7">turnOff</field>
     <field name="L7">#ffff66</field>
   </block>`,
   servo: `<block type="servo">
@@ -437,9 +437,7 @@ export function updateToolbox(usedTois) {
   const sensores = usedTois.filter(s => s.hasEvents);
   const actuadores = usedTois.filter(s => !s.hasEvents);
   const toolboxCopy = [...toolbox];
-
-  console.log(actuadores);
-
+  
   if (actuadores.length) {
     toolboxCopy.splice(
       1,

@@ -19,7 +19,7 @@ const AppsSidebar = ({ currentApp }) => {
 
 const MainContent = ({ currentSelection, workspace }) => {
   switch (true) {
-    case workspace === 'JavaScript':
+    case workspace === 'Javascript':
       return <CodeHelperContainer />;
     case currentSelection !== null:
       return <ToiDetailContainer />;

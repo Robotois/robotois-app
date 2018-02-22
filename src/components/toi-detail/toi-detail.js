@@ -4,42 +4,61 @@ import ToiEvents from './toi-events';
 import EventConfig from './EventConfig/EventConfig';
 import DeleteButton from './DeleteButton';
 
-const ToiImg = ({ isShield, src }) =>
-  (<img
+const ToiImg = ({ isShield, src }) => (
+  <img
     src={src}
     alt="Imagen del Componente"
     className="img-responsive"
     style={{ width: isShield ? '90%' : 64, marginRight: isShield ? 0 : '2em' }}
-  />);
+  />
+);
 
-const ToiDescription = ({ toi, isShield, hasMultiple, children, deleteToi, deleteInstance }) =>
-  (<div className="card">
+const ToiDescription = ({
+  toi,
+  isShield,
+  hasMultiple,
+  children,
+  deleteToi,
+  deleteInstance,
+}) => (
+  <div className="card">
     <div className="card-header">
-      <div className="card-title h5">{`${toi.title} ${hasMultiple ? toi.instance : ''}`}</div>
+      <div className="card-title h5">{`${toi.title} ${hasMultiple
+        ? toi.instance
+        : ''}`}</div>
       <div className="card-subtitle text-gray">Componente de tipo actuador</div>
       <div className="card-image">
-        {isShield
-          ? <ToiImg
+        {isShield ? (
+          <ToiImg
             isShield={isShield}
             src="img/tois/shield-robotois.svg"
             className="img-responsive"
           />
-          : <ToiImg isShield={isShield} src={toi.image} className="img-responsive" />}
+        ) : (
+          <ToiImg
+            isShield={isShield}
+            src={toi.image}
+            className="img-responsive"
+          />
+        )}
       </div>
     </div>
-    <div className="card-body">
-      {toi.description}
-    </div>
+    <div className="card-body">{toi.description}</div>
     <div className="card-footer">
-      { !isShield && <DeleteButton
-        deleteToi={deleteToi}
-        type={toi.type}
-        instance={toi.instance}
-        deleteInstance={deleteInstance}
-      />}
       {children}
+      {!isShield && (
+        <div className="delete-button-container">
+          <DeleteButton
+            deleteToi={deleteToi}
+            type={toi.type}
+            instance={toi.instance}
+            deleteInstance={deleteInstance}
+          />
+        </div>
+      )}
     </div>
-  </div>);
+  </div>
+);
 
 class ToiDetail extends React.Component {
   constructor(props) {
@@ -54,7 +73,7 @@ class ToiDetail extends React.Component {
     changeSelectedToi(ev.target.value);
     if (ev.target.value !== 'none') {
       const inputToi = currentInputTois.find(
-        module => `${module.type}.i${module.instance}` === ev.target.value,
+        module => `${module.type}.i${module.instance}` === ev.target.value
       );
       changeInputToi(inputToi);
     }
@@ -81,14 +100,16 @@ class ToiDetail extends React.Component {
       toiEvents,
       deleteToi,
       usedTois,
-      deleteInstance
+      deleteInstance,
     } = this.props;
     // console.log('toiEvents:', toiEvents);
-    const instanceStr = hasMultiple ? `${currentToi.title} ${currentToi.instance}` : undefined;
+    const instanceStr = hasMultiple
+      ? `${currentToi.title} ${currentToi.instance}`
+      : undefined;
     return (
       <div className="toi-detail">
         <div className="tile-content">
-          {currentToi &&
+          {currentToi && (
             <ToiDescription
               toi={currentToi}
               isShield={currentToi.type === 'shield'}
@@ -96,26 +117,30 @@ class ToiDetail extends React.Component {
               deleteToi={deleteToi(usedTois)}
               deleteInstance={deleteInstance}
             >
-              {currentInputTois &&
+              {currentInputTois && (
                 <InputToisSelect
                   currentInputTois={currentInputTois}
                   selectedToi={selectedToi}
                   changeSelectedToi={this.handleChangeInputToi}
-                />}
-              {toiEvents &&
+                />
+              )}
+              {toiEvents && (
                 <ToiEvents
                   instanceStr={instanceStr}
                   toiEvents={toiEvents}
                   fromToiEvent={this.fromToiEvent}
-                />}
-            </ToiDescription>}
-          {selectedToi !== 'none' &&
+                />
+              )}
+            </ToiDescription>
+          )}
+          {selectedToi !== 'none' && (
             <EventConfig
               inputToi={inputToi}
               currentToi={currentToi}
               handleResetSelected={this.handleResetSelected}
               addInstanceEvent={addInstanceEvent}
-            />}
+            />
+          )}
         </div>
       </div>
     );
