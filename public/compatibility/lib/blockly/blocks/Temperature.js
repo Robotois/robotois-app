@@ -3,7 +3,12 @@ Blockly.Blocks.temperature = {
     this.appendDummyInput()
       .appendField('Sensor de Temperatura')
       .appendField(
-        new Blockly.FieldImage('http://robotois.com/static/media/logo.b650e89d.svg', 15, 15, '*'),
+        new Blockly.FieldImage(
+          'http://robotois.com/static/media/logo.b650e89d.svg',
+          15,
+          15,
+          '*'
+        )
       );
     this.setOutput(true, 'Sensor');
     this.setColour(240);

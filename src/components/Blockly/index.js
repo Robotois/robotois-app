@@ -38,7 +38,6 @@ export default class BlocklyEditor extends React.Component {
     }
 
     if (usedTois.length) {
-      console.log(updateToolbox(usedTois));
       this.workspacePlayground.updateToolbox(updateToolbox(usedTois));
     }
   }

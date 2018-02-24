@@ -1,7 +1,7 @@
-Blockly.Blocks.distance = {
-  init() {
+Blockly.Blocks.light = {
+  init: function() {
     this.appendDummyInput()
-      .appendField('Sensor de Distancia')
+      .appendField('Sensor de Luz')
       .appendField(
         new Blockly.FieldImage(
           'http://robotois.com/static/media/logo.b650e89d.svg',
@@ -12,14 +12,14 @@ Blockly.Blocks.distance = {
       );
     this.setOutput(true, 'Sensor');
     this.setColour(240);
-    this.setTooltip('Sensor de distancia');
-    this.setHelpUrl('');
+    this.setTooltip('Sensor de Luz');
+    this.setHelpUrl('www.robotois.com');
   },
 };
 
-Blockly.JavaScript.distance = function generateCode(block) {
+Blockly.JavaScript.light = function generateCode(block) {
   // TODO: Assemble JavaScript into code variable.
-  const code = 'distance[0]';
+  const code = 'light[0]';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };

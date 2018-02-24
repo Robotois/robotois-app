@@ -66,7 +66,7 @@ const ConfigSidebar = ({ selectedKit, resetSelectedKit, appReset }) => (
     className="panel mx-2"
     style={{
       backgroundColor: 'white',
-      marginTop: '3rem',
+      marginTop: '3.6rem',
     }}
   >
     {

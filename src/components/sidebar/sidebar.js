@@ -19,7 +19,7 @@ const AppsSidebar = ({ currentApp }) => {
 
 const MainContent = ({ currentSelection, workspace }) => {
   switch (true) {
-    case workspace === 'JavaScript':
+    case workspace === 'Javascript':
       return <CodeHelperContainer />;
     case currentSelection !== null:
       return <ToiDetailContainer />;
@@ -28,13 +28,18 @@ const MainContent = ({ currentSelection, workspace }) => {
   }
 };
 
-const Sidebar = ({ currentSelection, workspace, currentApp }) => (
-  <div className="column col-3 side-bar">
-    <AppsSidebar currentApp={currentApp} />
-    {currentApp === 'main' && (
-      <MainContent currentSelection={currentSelection} workspace={workspace} />
-    )}
-  </div>
-);
+const Sidebar = ({ currentSelection, workspace, currentApp, hide }) => {
+  return hide ? null : (
+    <div className="column col-3 side-bar">
+      <AppsSidebar currentApp={currentApp} />
+      {currentApp === 'main' && (
+        <MainContent
+          currentSelection={currentSelection}
+          workspace={workspace}
+        />
+      )}
+    </div>
+  );
+};
 
 export default Sidebar;

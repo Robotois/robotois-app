@@ -9,7 +9,7 @@ const codeEditorReducer = (state = initialState, action) => {
     case CODE_EDITOR_APPEND_CODE:
       return {
         ...state,
-        code: state.code.concat('\n', action.code),
+        code: `// En este editor puedes modificar tu código \n ${action.code}`, // state.code.concat('\n', action.code),
       };
     case CODE_EDITOR_CHANGE_CODE:
       return {

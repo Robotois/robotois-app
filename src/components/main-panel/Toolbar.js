@@ -1,7 +1,7 @@
 import React from 'react';
 import { generateCode } from '../../actions/kit-config/kit-config';
 
-const workspaceOpts = ['Visual', 'Bloques', 'JavaScript'];
+const workspaceOpts = ['Visual', 'Bloques', 'Javascript'];
 // const appsAvailable = ['Configuración del Kit', 'Dashboard'];
 const appsAvailable = [
   {
@@ -91,8 +91,19 @@ const WorkspaceOptions = ({ workspace, changeWorkspace }) => (
   </section>
 );
 
-const RunButton = ({ online, handleRunCode, btnText }) => (
+const ActionsButtons = ({
+  online,
+  handleRunCode,
+  btnText,
+  handleGenerateCode,
+}) => (
   <section className="col-4 run-code">
+    <button
+      className={`btn btn-lg btn-secondary ${!online ? 'disabled' : ''}`}
+      onClick={handleGenerateCode}
+    >
+      Ver Código
+    </button>
     <button
       className={`btn btn-lg btn-primary ${!online ? 'disabled' : ''}`}
       onClick={handleRunCode}
@@ -100,12 +111,6 @@ const RunButton = ({ online, handleRunCode, btnText }) => (
       {btnText}
     </button>
   </section>
-);
-
-const GenerateCodeButton = ({ handleGenerateCode }) => (
-  <button className="btn btn-sm btn-default" onClick={handleGenerateCode}>
-    Generar Código
-  </button>
 );
 
 const AppTitle = ({ currentApp }) => (
@@ -145,17 +150,26 @@ class Toolbar extends React.Component {
     }
   };
 
-  cleanGlobalVars = (code) => {
+  cleanGlobalVars = code => {
     let temp = code;
-    window.blocklyVars.forEach((v) => {
+    const blocklyVars = window.blocklyVars || [];
+    blocklyVars.forEach(v => {
       temp = temp.replace(`var ${v};`, '');
     });
     return temp.trim();
   };
 
   handleGenerateCode = () => {
-    const code = window.Blockly.JavaScript.workspaceToCode(window.workspacePlayground);
-    this.props.generateBlocklyCode(this.cleanGlobalVars(code));
+    const { eventList, usedTois } = this.props;
+    const code = window.Blockly.JavaScript.workspaceToCode(
+      window.workspacePlayground
+    );
+    const blocklyCode = this.cleanGlobalVars(code);
+    if (blocklyCode) {
+      this.props.generateBlocklyCode(this.cleanGlobalVars(code));
+    } else {
+      this.props.generateCode(eventList, usedTois)();
+    }
   };
 
   render() {
@@ -176,11 +190,18 @@ class Toolbar extends React.Component {
         <AppMenu changeApp={changeApp} selectedKit={selectedKit} />
         {appKey !== 'main' && <AppTitle currentApp={currentApp} />}
         {appKey === 'main' && (
-          <WorkspaceOptions workspace={workspace} changeWorkspace={changeWorkspace} />
+          <WorkspaceOptions
+            workspace={workspace}
+            changeWorkspace={changeWorkspace}
+          />
         )}
-        {appKey === 'main' && <GenerateCodeButton handleGenerateCode={this.handleGenerateCode} />}
         {appKey === 'main' && (
-          <RunButton online={online} handleRunCode={this.handleRunCode} btnText={btnText} />
+          <ActionsButtons
+            online={true}
+            handleRunCode={this.handleRunCode}
+            handleGenerateCode={this.handleGenerateCode}
+            btnText={btnText}
+          />
         )}
       </div>
     );

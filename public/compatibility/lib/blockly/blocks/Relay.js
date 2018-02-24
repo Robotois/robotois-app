@@ -1,8 +1,8 @@
-Blockly.Blocks.led = {
+Blockly.Blocks.relay = {
   init: function() {
     this.appendDummyInput()
       .setAlign(Blockly.ALIGN_CENTRE)
-      .appendField('LED')
+      .appendField('Relevador')
       .appendField(
         new Blockly.FieldImage(
           'http://robotois.com/static/media/logo.b650e89d.svg',
@@ -25,13 +25,14 @@ Blockly.Blocks.led = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(240);
-    this.setTooltip('Led');
-    this.setHelpUrl('');
+    this.setTooltip('Relevador');
+    this.setHelpUrl('www.robotois.com');
   },
 };
 
-Blockly.JavaScript.led = function generateCode(block) {
+Blockly.JavaScript.relay = function(block) {
   const dropdownAction = block.getFieldValue('ACTION');
-  const code = `led[0].${dropdownAction}();\n`;
+  const code = `relay[0].${dropdownAction}();\n`;
+
   return code;
 };

@@ -6,7 +6,7 @@ const mapStateToProps = ({
   codeEditor: { code },
   toolbar: { workspace, currentApp: { key } },
 }) => ({
-  active: workspace === 'JavaScript' && key === 'main',
+  active: workspace === 'Javascript' && key === 'main',
   code,
 });
 

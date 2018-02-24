@@ -22,12 +22,12 @@ Blockly.JavaScript.medicion = function generateCode(block) {
   const valueSensor = Blockly.JavaScript.valueToCode(
     block,
     'sensor',
-    Blockly.JavaScript.ORDER_ATOMIC,
+    Blockly.JavaScript.ORDER_ATOMIC
   );
   const valueValor = Blockly.JavaScript.valueToCode(
     block,
     'valor',
-    Blockly.JavaScript.ORDER_ATOMIC,
+    Blockly.JavaScript.ORDER_ATOMIC
   );
   const statementsName = Blockly.JavaScript.statementToCode(block, 'PROGRAMA');
 
@@ -35,5 +35,5 @@ Blockly.JavaScript.medicion = function generateCode(block) {
   window.blocklyVars = window.blocklyVars || [];
   window.blocklyVars.push(valueValor);
 
-  return `${valueSensor}.on('medicion', (${valueValor}) => {\n${statementsName}});`;
+  return `${valueSensor}.on('medicion', (${valueValor}) => {\n${statementsName}});\n`;
 };
