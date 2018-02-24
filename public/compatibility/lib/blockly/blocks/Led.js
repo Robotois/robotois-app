@@ -32,7 +32,6 @@ Blockly.Blocks.led = {
 
 Blockly.JavaScript.led = function generateCode(block) {
   const dropdownAction = block.getFieldValue('ACTION');
-  // TODO: Assemble JavaScript into code variable.
   const code = `led[0].${dropdownAction}();\n`;
   return code;
 };

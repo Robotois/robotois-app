@@ -31,8 +31,8 @@ Blockly.Blocks.relay = {
 };
 
 Blockly.JavaScript.relay = function(block) {
-  var dropdownAction = block.getFieldValue('ACTION');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  const dropdownAction = block.getFieldValue('ACTION');
+  const code = `relay[0].${dropdownAction}();\n`;
+
   return code;
 };

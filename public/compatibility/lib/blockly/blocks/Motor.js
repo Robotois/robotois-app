@@ -25,8 +25,8 @@ Blockly.Blocks.motor = {
 };
 
 Blockly.JavaScript.motor = function(block) {
-  var number_name = block.getFieldValue('VALUE');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  const value = block.getFieldValue('VALUE');
+  const code = `motor[0].motorPWM(${value});\n`;
+
   return code;
 };

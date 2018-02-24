@@ -25,7 +25,7 @@ Blockly.Blocks.lcd = {
 
 Blockly.JavaScript.lcd = function generateCode(block) {
   const value = block.getFieldValue('ACTION');
-  // TODO: Assemble JavaScript into code variable.
+
   const code = `lcd[0].message(${value});\n`;
   return code;
 };

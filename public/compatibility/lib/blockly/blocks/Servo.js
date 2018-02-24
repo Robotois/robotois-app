@@ -14,7 +14,8 @@ Blockly.Blocks.servo = {
     this.appendDummyInput()
       .setAlign(Blockly.ALIGN_RIGHT)
       .appendField('Girar:')
-      .appendField(new Blockly.FieldAngle(90), 'ANGLE');
+      .appendField(new Blockly.FieldNumber(0, -90, 90, 1), 'ANGLE')
+      .appendField('º');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(240);
@@ -24,8 +25,7 @@ Blockly.Blocks.servo = {
 };
 
 Blockly.JavaScript.servo = function(block) {
-  var angle_angle = block.getFieldValue('ANGLE');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var angle = block.getFieldValue('ANGLE');
+  const code = `servo[0].setAngle(${angle});\n`;
   return code;
 };
