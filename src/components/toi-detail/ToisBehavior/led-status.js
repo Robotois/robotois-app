@@ -19,7 +19,8 @@ const LEDStatusSelect = ({ currentAction, behaviorChange, inputEventType }) => (
     <div className="col-3">
       <label className="form-label">Acción</label>
     </div>
-    <div className="col-9">
+    <div className="col-1" />
+    <div className="col-8">
       <RadioButton
         disabled={inputEventType === 'ioLog'}
         action="Encender"

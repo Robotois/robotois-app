@@ -59,7 +59,8 @@ const RGBPicker = ({ value, changeColor }) =>
     <div className="col-3">
       <label className="form-label" htmlFor="color-pick">Color</label>
     </div>
-    <div className="col-9">
+    <div className="col-1" />
+    <div className="col-8">
       <input
         className="form-input"
         id="color-pick"

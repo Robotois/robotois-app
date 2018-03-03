@@ -36,17 +36,20 @@ const HelpPopOver = () =>
 const BehaviorForm = props =>
   (<div>
     <div className="flex">
-      <h4>{props.title}</h4><HelpPopOver />
+      <h4>{props.title}</h4>
+      <br/>
     </div>
     {props.children}
   </div>);
 
 const TextField = ({ value, changeText }) =>
   (<div className="form-group">
-    <div className="col-3">
+    <div className="col-3 with-help-pop-over">
       <label className="form-label">Texto a mostrar</label>
+      <HelpPopOver />
     </div>
-    <div className="col-9">
+    <div className="col-1" />
+    <div className="col-8">
       <textarea
         className="form-input"
         style={{ fontFamily: 'consolas', fontSize: '18px' }}
