@@ -3,7 +3,7 @@ import React from 'react';
 export const defaultBehavior = {
   action: 'message',
   params: {
-    param1: 'Hola Mundo',
+    param1: 'Hola Robotois',
   },
 };
 
