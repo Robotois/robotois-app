@@ -37,7 +37,8 @@ const SingleInput = ({ units, range, inputEvent, changeEventParams }) =>
     <div className="col-3">
       <InputLabel text={'Valor:'} value={inputEvent.eventParams.valor} units={units} />
     </div>
-    <div className="column col-9">
+    <div className="col-1" />
+    <div className="col-8">
       <Slider
         value={inputEvent.eventParams.valor}
         min={range.min}

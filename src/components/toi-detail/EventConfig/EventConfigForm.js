@@ -30,9 +30,10 @@ const behaviorMap = {
 const InputEventsDropdown = ({ inputEvent, toiType, events, title, handleChangeInputEvent }) =>
   (<div className="from-group d-flex">
     <div className="col-3">
-      <label className="form-label">Evento de Entrada</label>
+      <label className="form-label form-label-with-combo">Evento de Entrada</label>
     </div>
-    <div className="col-9">
+    <div className="col-1" />
+    <div className="col-8">
       <select
         className="form-select"
         value={inputEvent.eventType}
