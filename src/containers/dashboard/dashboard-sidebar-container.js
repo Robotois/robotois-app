@@ -7,16 +7,14 @@ import {
 } from '../../actions/dashboard-actions';
 
 const mapStateToProps = ({
-  kitConfig: { selectedKit },
   dashboard: { topics, isFetching },
 }) => ({
-  hostIp: selectedKit ? selectedKit.ip : undefined,
   categories: buildTopicCategories(topics),
   isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTopics: hostIp => dispatch(fetchAvailableTopics(hostIp)),
+  fetchTopics: () => dispatch(fetchAvailableTopics()),
   selectTopic: topic => () => dispatch(selectTopic(topic)),
 });
 

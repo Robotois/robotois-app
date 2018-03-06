@@ -40,13 +40,25 @@ const TopicCategory = ({ category, selectTopic }) => (
   </div>
 );
 
+const TopicCategories = ({ categories, selectTopic }) => (
+  <div>
+    {categories.length !== 0 ?
+      categories.map(category => (<TopicCategory
+        key={category.title}
+        category={category}
+        selectTopic={selectTopic}
+      />)) :
+      <span>No hay Tois que mostrar</span>}
+  </div>
+);
+
 class AvailableTopics extends React.Component {
   componentWillMount() {
-    this.props.fetchTopics(this.props.hostIp);
+    this.props.fetchTopics();
   }
 
   render() {
-    const { categories, selectTopic } = this.props;
+    const { categories, selectTopic, isFetching } = this.props;
     // console.log('categories:', categories);
     return (
       <div
@@ -54,6 +66,7 @@ class AvailableTopics extends React.Component {
         style={{
           backgroundColor: 'white',
           marginTop: '3.6rem',
+          minHeight: 150,
         }}
       >
         <div className="panel-header">
@@ -61,13 +74,9 @@ class AvailableTopics extends React.Component {
         </div>
         <div className="panel-body">
           {
-            categories.length !== 0 ?
-              categories.map(category => (<TopicCategory
-                key={category.title}
-                category={category}
-                selectTopic={selectTopic}
-              />)) :
-              <span>No hay Tois que mostrar</span>
+            isFetching ?
+              <div className="loading loading-lg" /> :
+              <TopicCategories categories={categories} isFetching={isFetching} />
           }
         </div>
         <br />

@@ -1,21 +1,14 @@
 {
   "extends": "airbnb",
-  "parser": "babel-eslint",
-  "plugins": [
-    "import",
-    "jsx-a11y",
-    "react"
-  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/forbid-prop-types": [1, { "forbid": ["array", "object"], checkContextTypes: 1, checkChildContextTypes: 1 }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
   "globals": {
-      "draw2d": true,
-      "$": true,
-      "Robotois": true,
-      "document": true,
-      "window": true,
-      "Blockly": true,
-    },
+    "draw2d": true,
+    "$": true,
+    "Robotois": true,
+    "document": true,
+    "window": true,
+    "Blockly": true,
+  }
 }

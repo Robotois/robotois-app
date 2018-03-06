@@ -3,7 +3,7 @@ import React from 'react';
 const Kit = ({ info, selectKit }) => (
   <div>
     <li className="menu-item">
-      <a className="h6" href={`#${selectKit}`} onClick={selectKit}>
+      <a href={`#${info.ip}`} className="h6" onClick={selectKit}>
         <i className="icon icon-link" /> {info.hostname}
       </a>
       <p className="text-gray h7">ip: {info.ip}</p>
