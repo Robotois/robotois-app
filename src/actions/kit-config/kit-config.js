@@ -3,6 +3,7 @@ import { getConnected } from './discover-kits';
 import { CodeGenerator } from '../../CodeGenerator/CodeGenerator';
 import Enums from '../../utils/Enums';
 import { updateStatus } from '../status-bar';
+import { connectMqttClient } from '../dashboard-actions';
 
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
@@ -36,30 +37,27 @@ const selectKit = selectedKit => ({
 export const kitSelection = selectedKit => (dispatch) => {
   dispatch(selectKit(selectedKit));
   return Promise.resolve().then(() => {
-    dispatch(updateStatus(true, 'Kit Conectado', false));
-  }).then(() =>
-    axios({
-      method: 'get',
-      url: `http://${selectedKit.ip}:8082/runner/status`,
-    })
-      .then((response) => {
-        console.log(response);
-        dispatch(updateStatus(true, response.data.message, response.data.runner));
-      }, (error) => {
-        console.log(error);
-        dispatch(updateStatus(false, 'Kit Desconectado', false));
-      }),
-  );
+    dispatch(updateStatus(true, '[Super Toi] Conectado', false));
+  }).then(() => axios({
+    method: 'get',
+    url: `http://${selectedKit.ip}:8082/runner/status`,
+  }).then((response) => {
+    dispatch(connectMqttClient(selectedKit.ip));
+    dispatch(updateStatus(true, response.data.message, response.data.runner));
+  }, (error) => {
+    console.error(error);
+    dispatch(updateStatus(false, '[Super Toi] Desconectado', false));
+  }));
 };
 
 const resetSelection = () => ({
   type: KIT_CONFIG_RESET_KIT,
 });
 
-export const resetSelectedKit = () => (dispatch) => {
+export const resetSelectedKit = message => (dispatch) => {
   dispatch(resetSelection());
   return Promise.resolve().then(() => {
-    dispatch(updateStatus(false, 'Kit Desconectado', false));
+    dispatch(updateStatus(false, !message ? '[Super Toi] Desconectado' : message, false));
   });
 };
 

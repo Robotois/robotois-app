@@ -10,19 +10,6 @@ const mapStateToProps = ({ dashboard: { topics } }) => ({
   selected: getSelected(topics),
 });
 
-// {
-//   const selected = getSelected(topics);
-//   if (selected) {
-//     const info = getTopicInfo(selected.topic);
-//     const title = `${info[1]} ${info[2]}`;
-//     return {
-//       data: buildChartData(selected.data),
-//       title,
-//     };
-//   }
-//   return {};
-// };
-
 const DashboardContainer = connect(
   mapStateToProps,
   null,

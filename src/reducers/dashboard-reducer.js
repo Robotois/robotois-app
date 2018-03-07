@@ -5,6 +5,7 @@ import {
   RECEIVE_AVAILABLE_TOPICS,
   RECEIVE_TOPIC_DATA,
   SELECT_TOPIC,
+  END_LOADING,
   getTopicInfo,
 } from '../actions/dashboard-actions';
 import { isSensor, isDigitalOutput, isDigitalInput } from '../components/shared/tois-by-function';
@@ -93,6 +94,11 @@ const dashboardReducer = (state = initialState, action) => {
     case SELECT_TOPIC:
       return {
         topics: selectTopic(state.topics, action.topic, action.data),
+        isFetching: false,
+      };
+    case END_LOADING:
+      return {
+        ...state,
         isFetching: false,
       };
     default:
