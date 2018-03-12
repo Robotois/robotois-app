@@ -3,6 +3,7 @@ import { getTopicInfo } from '../../actions/dashboard-actions';
 import { isSensor, isIo } from '../../components/shared/tois-by-function';
 import Enums from '../../utils/Enums';
 import SensorChart from './components/sensor-chart';
+import { getChartProps, colors } from '../../api/tois';
 
 const ioMap = {
   0: 'Inactivo',
@@ -13,26 +14,26 @@ const DiditalIo = ({ topic, data }) => {
   const topicInfo = getTopicInfo(topic);
   const length = data.length;
   const lastState = length > 0 ? data[length - 1].toUpperCase() : 'OFF';
-  const color = lastState === 'OFF' ? '#EF8A8A' : '#5f93F9';
+  const color = lastState === 'OFF' ? colors.purpleText : colors.green;
   return (
-    <div className="card">
-      <div className="card-header">
-        <div className="card-title h5">Estado Digital de: {`${Enums[topicInfo[1]]} ${topicInfo[2]}`}</div>
-        <div className="card-subtitle text-gray">Se registra el estado actual del Toi</div>
-      </div>
-      <div className="card-body">
-        <figure
-          className="avatar avatar-xl"
-          data-initial={lastState}
-          style={{ backgroundColor: color }}
-        />
+    <div className="column col-3 col-lg-6 my-1">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title h5">Estado Digital de: {`${Enums[topicInfo[1]]} ${topicInfo[2]}`}</div>
+        </div>
+        <div className="card-body text-center">
+          <figure
+            className="avatar avatar-xl"
+            data-initial={lastState}
+            style={{ backgroundColor: color }}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-const getTopicComponent = (topic) => {
-  const toiType = getTopicInfo(topic)[1];
+const getTopicComponent = (toiType) => {
   switch (true) {
     case isSensor(toiType):
       return SensorChart;
@@ -43,19 +44,25 @@ const getTopicComponent = (topic) => {
   }
 };
 
-const RenderTopic = ({ topic }) => {
-  const TopicComponent = getTopicComponent(topic.topic);
-  return (
-    <div className="column col-5 col-xs-12 m-1">
-      {TopicComponent && <TopicComponent {...topic} />}
-    </div>
-  );
+const RenderTopic = (props) => {
+  const topicInfo = getTopicInfo(props.topic);
+  const TopicComponent = getTopicComponent(topicInfo[1]);
+  return (<TopicComponent
+    {...props}
+    topicInfo={topicInfo}
+    chartProps={getChartProps(topicInfo[1])}
+  />);
 };
 
-const Dashboard = ({ selected }) => {
+const Dashboard = ({ selected, requestTopic }) => {
   return (
-    <div className="columns">
-      {selected.map(topic => <RenderTopic key={topic.topic} topic={topic} />)}
+    <div className="columns m-1">
+      {selected.map(topic => (
+        <RenderTopic
+          key={topic.topic}
+          {...topic}
+          requestTopic={requestTopic}
+        />))}
     </div>
   );
 };

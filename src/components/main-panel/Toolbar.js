@@ -131,11 +131,12 @@ class Toolbar extends React.Component {
       workspace,
       code,
       selectedKit,
-      stopCode,
       updateMessage,
+      stopCode,
+      topicList,
     } = this.props;
     if (runner) {
-      stopCode(selectedKit.ip);
+      stopCode(selectedKit.ip, topicList);
     } else {
       const data =
         workspace === 'Visual'
@@ -197,7 +198,7 @@ class Toolbar extends React.Component {
         )}
         {appKey === 'main' && (
           <ActionsButtons
-            online={true}
+            online={online}
             handleRunCode={this.handleRunCode}
             handleGenerateCode={this.handleGenerateCode}
             btnText={btnText}

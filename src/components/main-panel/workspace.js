@@ -17,7 +17,7 @@ const AppsWorkspace = ({ currentApp }) => {
 };
 
 const Workspace = ({ workspace, currentApp }) => (
-  <div className="workspace">
+  <div className={`workspace ${currentApp === 'dashboard' ? 'workspace-dark' : ''}`}>
     <AppsWorkspace currentApp={currentApp} />
     <CodeEditorContainer />
     <VisualEditor visible={workspace === 'Visual' && currentApp === 'main'} />

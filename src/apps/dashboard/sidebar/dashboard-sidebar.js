@@ -59,7 +59,6 @@ class AvailableTopics extends React.Component {
 
   render() {
     const { categories, selectTopic, isFetching } = this.props;
-    // console.log('categories:', categories);
     return (
       <div
         className="panel mx-2"
@@ -76,7 +75,11 @@ class AvailableTopics extends React.Component {
           {
             isFetching ?
               <div className="loading loading-lg" /> :
-              <TopicCategories categories={categories} isFetching={isFetching} />
+              <TopicCategories
+                categories={categories}
+                isFetching={isFetching}
+                selectTopic={selectTopic}
+              />
           }
         </div>
         <br />

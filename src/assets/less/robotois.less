@@ -20,6 +20,10 @@ BG LIST #3A375C;
 @purple-button-border: #171826;
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+@weight-semibold: 600;
+@weight-medium: 500;
+@weight-normal: 400;
+
 body, html {
   height: 100%;
   font-family: 'Ubuntu', sans-serif !important;
@@ -48,6 +52,24 @@ body, html {
 .workspace {
   width: 100%;
   flex: 1;
+  overflow-y: auto;
+}
+
+.workspace-dark {
+  background-color: @mid-dark;
+}
+
+.dark-bg {
+  background-color: #474B7E;
+  color: @light-text;
+}
+
+.is-bold {
+  font-weight: @weight-semibold;
+}
+
+.is-medium {
+  font-weight: @weight-medium;
 }
 
 .code-editor{

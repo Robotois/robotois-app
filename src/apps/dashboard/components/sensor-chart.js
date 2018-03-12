@@ -1,45 +1,43 @@
 import React from 'react';
 import Chart from 'chart.js';
-import { getTopicInfo } from '../../../actions/dashboard-actions';
 import Enums from '../../../utils/Enums';
 
-const ChartLayout = props => (
+const ChartLayout = ({ chartTitle, children, chartProps, value }) => (
   <div className="card">
-    <div className="card-header">
-      <div className="card-title h5">{props.chartTitle}</div>
+    <div className="card-header" style={{ paddingTop: 5 }}>
+      <div className="card-title h5 is-bold">{chartTitle} : <span className="dark-bg is-medium rounded">{chartProps.toText(value)}</span></div>
     </div>
-    <div className="card-image">
-      {props.children}
-    </div>
-    <div className="card-body">
-      Este sensor detecta la posición de la perilla.
+    <div className="card-image" style={{ paddingTop: 5 }}>
+      {children}
     </div>
   </div>
 );
 
 class SensorChart extends React.Component {
+  componentWillMount() {
+    const { data, topic, requestTopic } = this.props;
+    if (data.length === 0) {
+      // console.log('requestTopic:', topic);
+      requestTopic(topic);
+    }
+    // console.log('Chart.js:', Chart.defaults.global);
+    // Chart.defaults.global.defaultFontColor = '#EAE8FF';
+    // Chart.defaults.global.defaultColor = '#EAE8FF';
+  }
+
   componentDidMount() {
-    const { timestamps, data, topic } = this.props;
+    const { timestamps, data, topic, chartProps } = this.props;
     // console.log('data:', data);
 
     this.ctx = document.getElementById(topic);
-    const chartColors = {
-      red: 'rgb(255, 99, 132)',
-      orange: 'rgb(255, 159, 64)',
-      yellow: 'rgb(255, 205, 86)',
-      green: 'rgb(75, 192, 192)',
-      blue: 'rgb(54, 162, 235)',
-      purple: 'rgb(153, 102, 255)',
-      grey: 'rgb(201, 203, 207)',
-    };
     const config = {
       type: 'line',
       data: {
         labels: timestamps,
         datasets: [{
           label: 'Medición',
-          backgroundColor: chartColors.red,
-          borderColor: chartColors.red,
+          backgroundColor: chartProps.chartColor,
+          borderColor: chartProps.chartColor,
           data,
           fill: false,
         }],
@@ -59,13 +57,6 @@ class SensorChart extends React.Component {
           intersect: true,
         },
         scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Línea de Tiempo',
-            },
-          }],
           yAxes: [{
             display: true,
             scaleLabel: {
@@ -75,7 +66,7 @@ class SensorChart extends React.Component {
           }],
         },
         animation: {
-          duration: 250,
+          duration: 100,
         },
       },
     };
@@ -90,12 +81,19 @@ class SensorChart extends React.Component {
   }
 
   render() {
-    const { topic } = this.props;
-    const topicInfo = getTopicInfo(topic);
+    const { topic, topicInfo, chartProps, data } = this.props;
+    const value = data.length > 0 ? data[data.length - 1] : undefined;
+    // const topicInfo = getTopicInfo(topic);
     return (
-      <ChartLayout chartTitle={`${Enums[topicInfo[1]]} ${topicInfo[2]}`}>
-        <canvas id={`${topic}`} width="400" height="200" />
-      </ChartLayout>
+      <div className="column col-6 col-lg-6 my-1">
+        <ChartLayout
+          chartTitle={`${Enums[topicInfo[1]]} - ${topicInfo[2]}`}
+          chartProps={chartProps}
+          value={value}
+        >
+          <canvas id={`${topic}`} height="150" />
+        </ChartLayout>
+      </div>
     );
   }
 }
