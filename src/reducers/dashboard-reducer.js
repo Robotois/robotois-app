@@ -44,6 +44,9 @@ const mergeTimestamps = momentData => mergeData(momentData, moment().format('HH:
 
 const mergeTopicData = (topics, topic, data) => {
   const index = topics.findIndex(to => to.topic === topic);
+  if (index === -1) {
+    return [...topics];
+  }
   const prevTopic = topics[index];
   const topicInfo = getTopicInfo(topic);
   const newTopic = {
@@ -57,12 +60,20 @@ const mergeTopicData = (topics, topic, data) => {
   return [...topics];
 };
 
-const buildTopicsData = topics => topics.map(topic => ({
-  topic,
-  data: [],
-  timestamps: [],
-  selected: false,
-}));
+const buildTopicsData = (topics, prevTopics) => {
+  return topics.reduce(
+    (result, topic) => (
+      result.findIndex(prevTopic => prevTopic.topic === topic) === -1 ?
+        result.concat({
+          topic,
+          data: [],
+          timestamps: [],
+          selected: false,
+        }) :
+        result),
+    prevTopics,
+  );
+};
 
 const selectTopic = (topics, topic) => {
   const index = topics.findIndex(to => to.topic === topic);
@@ -78,12 +89,12 @@ const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_AVAILABLE_TOPICS:
       return {
-        ...initialState,
+        ...state,
         isFetching: true,
       };
     case RECEIVE_AVAILABLE_TOPICS:
       return {
-        topics: action.topics ? buildTopicsData(action.topics) : [],
+        topics: action.topics ? buildTopicsData(action.topics, state.topics) : [],
         isFetching: false,
       };
     case RECEIVE_TOPIC_DATA:

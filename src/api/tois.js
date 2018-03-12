@@ -1,3 +1,12 @@
+export const colors = {
+  blue: '#27BCEB',
+  green: '#00E257',
+  red: '#E2244C',
+  purple: '#5755d9',
+  dark: '#3A375C',
+  purpleText: '#8A81C3',
+};
+
 const toisData = [
   // eslint-disable-line
   {
@@ -15,7 +24,9 @@ const toisData = [
     type: 'temperature',
     hasEvents: true,
     description:
-      'Este sensor es de tipo analógico, permite convertir la temperatura ambiental en cantidades numéricas. Este sensor se conecta al conector de sensores analógicos.'
+      'Este sensor es de tipo analógico, permite convertir la temperatura ambiental en cantidades numéricas. Este sensor se conecta al conector de sensores analógicos.',
+    chartColor: colors.red,
+    toText: value => (value !== undefined ? `${value} °C` : '-'),
   },
   {
     image: 'img/tois/light-sensor.svg',
@@ -24,7 +35,9 @@ const toisData = [
     type: 'light',
     hasEvents: true,
     description:
-      'Este sensor es de tipo analógico, permite convertir la intensidad de luz a cantidades numéricas. Este sensor se conecta al conector de sensores analógicos.'
+      'Este sensor es de tipo analógico, permite convertir la intensidad de luz a cantidades numéricas. Este sensor se conecta al conector de sensores analógicos.',
+    chartColor: colors.blue,
+    toText: value => (value !== undefined ? `Intensidad ${value}` : '-'),
   },
   {
     image: 'img/tois/rotary-sensor.svg',
@@ -33,7 +46,9 @@ const toisData = [
     type: 'rotary',
     hasEvents: true,
     description:
-      'Este sensor es de tipo analógico, permite convertir la posición en la que se encuentra el eje o perilla en una cantidad numérica. Este sensor se conecta al conector de sensores analógicos.'
+      'Este sensor es de tipo analógico, permite convertir la posición en la que se encuentra el eje o perilla en una cantidad numérica. Este sensor se conecta al conector de sensores analógicos.',
+    chartColor: colors.purple,
+    toText: value => (value !== undefined ? `Posición ${value}` : '-'),
   },
   {
     image: 'img/tois/distance-sensor.svg',
@@ -42,7 +57,9 @@ const toisData = [
     type: 'distance',
     hasEvents: true,
     description:
-      'Este componente permite detectar la distancia que hay entre el componente y algún objeto sólido que esté enfrente. Un uso común es medir la distancia entre objetos y hacer un robot que evite colisiones.'
+      'Este componente permite detectar la distancia que hay entre el componente y algún objeto sólido que esté enfrente. Un uso común es medir la distancia entre objetos y hacer un robot que evite colisiones.',
+    chartColor: colors.green,
+    toText: value => (value !== undefined ? `${value} cm` : '-'),
   },
   {
     image: 'img/tois/button.svg',
@@ -59,7 +76,7 @@ const toisData = [
     listIndex: 6,
     type: 'led',
     description:
-      'Un LED es un componente de salida muy simple, el cual puede tener dos posibles estados: Encendido y Apagado. El LED se utiliza para indicar visualmente el estado de algún evento o proceso.'
+      'Un LED es un componente de salida muy simple, el cual puede tener dos posibles estados: Encendido y Apagado. El LED se utiliza para indicar visualmente el estado de algún evento o proceso.',
   },
   {
     image: 'img/tois/led-rgb.svg',
@@ -134,16 +151,19 @@ const toisData = [
     type: 'sound',
     hasEvents: true,
     description:
-      'El sensor de Sonido es un sensor analógico, el cual permite obtener la intensidad de sonido a la cual esta expuesto.'
+      'El sensor de Sonido es un sensor analógico, el cual permite obtener la intensidad de sonido a la cual esta expuesto.',
+    chartColor: colors.dark,
+    toText: value => (value !== undefined ? `Intensidad ${value}` : '-'),
   },
-  // {
-  //   image: 'img/tois/sound-sensor.svg',
-  //   title: 'Sensor de Líneas',
-  //   listIndex: 16,
-  //   type: 'sound',
-  //   hasEvents: true,
-  //   description: 'El sensor es con componente compuesto por varios sensores de linea que nos ayuda a construir el roboto seguidor de línea',
-  // },
 ];
 
 export default toisData;
+
+export const getChartProps = (toiType) => {
+  const toiItem = toisData.find(toi => toi.type === toiType);
+  return !toiItem ? {} : {
+    chartColor: toiItem.chartColor,
+    description: toiItem.description,
+    toText: toiItem.toText,
+  };
+};

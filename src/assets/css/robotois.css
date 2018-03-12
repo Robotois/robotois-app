@@ -2,12 +2,7 @@
 SELECTED TOI #2F2C53;
 BG LIST #3A375C;
 */
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Ubuntu Regular'), local('Ubuntu-Regular'), url(https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf) format('truetype');
-}
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 body,
 html {
   height: 100%;
@@ -35,6 +30,20 @@ html {
 .workspace {
   width: 100%;
   flex: 1;
+  overflow-y: auto;
+}
+.workspace-dark {
+  background-color: #3A375C;
+}
+.dark-bg {
+  background-color: #474B7E;
+  color: #EAE8FF;
+}
+.is-bold {
+  font-weight: 600;
+}
+.is-medium {
+  font-weight: 500;
 }
 .code-editor {
   width: 100%;

@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-less": "lessc src/assets/css/robotois.less  src/assets/css/robotois.css",
+    "build-less": "lessc src/assets/less/robotois.less  src/assets/css/robotois.css",
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   },

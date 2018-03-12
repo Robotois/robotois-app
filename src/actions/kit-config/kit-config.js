@@ -3,7 +3,11 @@ import { getConnected } from './discover-kits';
 import { CodeGenerator } from '../../CodeGenerator/CodeGenerator';
 import Enums from '../../utils/Enums';
 import { updateStatus } from '../status-bar';
-import { connectMqttClient } from '../dashboard-actions';
+import {
+  connectMqttClient,
+  unsubscribe,
+  disconnectMqttClient,
+} from '../dashboard-actions';
 
 export const RECEIVE_AVAILABLE_KITS = 'RECEIVE_AVAILABLE_KITS';
 export const REQUEST_AVAILABLE_KITS = 'REQUEST_AVAILABLE_KITS';
@@ -34,31 +38,33 @@ const selectKit = selectedKit => ({
   selectedKit,
 });
 
+const resetSelection = () => ({
+  type: KIT_CONFIG_RESET_KIT,
+});
+
+export const resetSelectedKit = message => (dispatch) => {
+  dispatch(disconnectMqttClient());
+  dispatch(resetSelection());
+  return Promise.resolve().then(() => {
+    dispatch(updateStatus(false, !message ? '[Super Toi] Desconectado' : message, false));
+  });
+};
+
 export const kitSelection = selectedKit => (dispatch) => {
-  dispatch(selectKit(selectedKit));
   return Promise.resolve().then(() => {
     dispatch(updateStatus(true, '[Super Toi] Conectado', false));
   }).then(() => axios({
     method: 'get',
     url: `http://${selectedKit.ip}:8082/runner/status`,
   }).then((response) => {
+    dispatch(selectKit(selectedKit));
     dispatch(connectMqttClient(selectedKit.ip));
     dispatch(updateStatus(true, response.data.message, response.data.runner));
   }, (error) => {
     console.error(error);
+    dispatch(resetSelectedKit());
     dispatch(updateStatus(false, '[Super Toi] Desconectado', false));
   }));
-};
-
-const resetSelection = () => ({
-  type: KIT_CONFIG_RESET_KIT,
-});
-
-export const resetSelectedKit = message => (dispatch) => {
-  dispatch(resetSelection());
-  return Promise.resolve().then(() => {
-    dispatch(updateStatus(false, !message ? '[Super Toi] Desconectado' : message, false));
-  });
 };
 
 const requestAvailableWifis = () => ({
@@ -82,7 +88,7 @@ export const fetchAvailableWifis = hostIp => (dispatch) => {
       dispatch(receiveAvailableWifis(networks));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -103,11 +109,11 @@ export const connectWifi = (hostIp, wifi) => dispatch =>
     data: { ...wifi },
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       dispatch(resetWifi());
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 
 export const createAP = hostIp =>
@@ -116,10 +122,10 @@ export const createAP = hostIp =>
     url: `http://${hostIp}:8082/wifi/start-ap`,
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 
 export const shutdown = hostIp =>
@@ -128,10 +134,10 @@ export const shutdown = hostIp =>
     url: `http://${hostIp}:8082/shutdown`,
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 
 const parseHeaders = (usedTois) => {
@@ -236,17 +242,18 @@ export const runCode = (hostIp, data) => (dispatch) => {
     data,
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       // dispatch({ type: STATUS_UPDATE, success: true, message: 'Kit funcionando' });
       dispatch(updateStatus(true, response.data.message, response.data.runner));
     }, (error) => {
-      console.log(error);
-      dispatch(updateStatus(false, error, false));
+      // console.log(error);
+      dispatch(updateStatus(false, error.message, false));
     });
 };
 
-export const stopCode = hostIp => (dispatch) => {
+export const stopCode = (hostIp, topicList) => (dispatch) => {
   dispatch(requestRunCode());
+  dispatch(unsubscribe(topicList));
   return axios({
     method: 'post',
     url: `http://${hostIp}:8082/runner/stop`,
