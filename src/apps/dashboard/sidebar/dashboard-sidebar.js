@@ -24,17 +24,15 @@ const ToiDetail = ({ toi, selectTopic }) => (
 const TopicCategory = ({ category, selectTopic }) => (
   <div>
     <ul className="menu">
-      <li className="menu-item h5">
-        {category.title}
-      </li>
+      <li className="menu-item h5">{category.title}</li>
       <li className="divider" />
-      {
-        category.tois.map(toi => (<ToiDetail
+      {category.tois.map(toi => (
+        <ToiDetail
           key={toi.topic}
           toi={toi}
           selectTopic={selectTopic(toi.topic)}
-        />))
-      }
+        />
+      ))}
     </ul>
     <br />
   </div>
@@ -42,13 +40,17 @@ const TopicCategory = ({ category, selectTopic }) => (
 
 const TopicCategories = ({ categories, selectTopic }) => (
   <div>
-    {categories.length !== 0 ?
-      categories.map(category => (<TopicCategory
-        key={category.title}
-        category={category}
-        selectTopic={selectTopic}
-      />)) :
-      <span>No hay Tois que mostrar</span>}
+    {categories.length !== 0 ? (
+      categories.map(category => (
+        <TopicCategory
+          key={category.title}
+          category={category}
+          selectTopic={selectTopic}
+        />
+      ))
+    ) : (
+      <span>No hay Tois que mostrar</span>
+    )}
   </div>
 );
 
@@ -60,27 +62,20 @@ class AvailableTopics extends React.Component {
   render() {
     const { categories, selectTopic, isFetching } = this.props;
     return (
-      <div
-        className="panel mx-2"
-        style={{
-          backgroundColor: 'white',
-          marginTop: '3.6rem',
-          minHeight: 150,
-        }}
-      >
+      <div className="panel mx-2 dashboard-sidebar">
         <div className="panel-header">
           <div className="panel-title h4">Tois Activos</div>
         </div>
         <div className="panel-body">
-          {
-            isFetching ?
-              <div className="loading loading-lg" /> :
-              <TopicCategories
-                categories={categories}
-                isFetching={isFetching}
-                selectTopic={selectTopic}
-              />
-          }
+          {isFetching ? (
+            <div className="loading loading-lg" />
+          ) : (
+            <TopicCategories
+              categories={categories}
+              isFetching={isFetching}
+              selectTopic={selectTopic}
+            />
+          )}
         </div>
         <br />
       </div>

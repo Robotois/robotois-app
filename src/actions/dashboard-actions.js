@@ -42,53 +42,56 @@ export const selectTopic = topic => ({
   topic,
 });
 
-const connectClient = (hostIp, dispatch) => new Promise((resolve, reject) => {
-  mqttClient = mqtt.connect({ host: hostIp, port: 1884 });
-  mqttClient.on('connect', () => {
-    resolve(`MQTT Client Connected to: ${hostIp}`);
-  });
-
-  setTimeout(() => {
-    if (!mqttClient.connected) {
-      dispatch(resetSelectedKit());
-      mqttClient.end();
-      reject(new Error(`[Super Toi] La IP "${hostIp}" no se encontró`));
-    }
-  }, 1500);
-
-  mqttClient.on('offline', () => {
-    dispatch(resetSelectedKit('[Super Toi] Desconectado'));
-  });
-  mqttClient.on('error', () => {
-    dispatch(resetSelectedKit('[Super Toi] Error de Comunicación'));
-  });
-});
-
-const initializeClient = (hostIp, dispatch) => new Promise((resolve) => {
-  allTopics = [];
-  if (mqttClient && mqttClient.connected) {
-    mqttClient.end(true, () => {
-      mqttClient = undefined;
-      resolve(connectClient(hostIp, dispatch));
+const connectClient = (hostIp, dispatch) =>
+  new Promise((resolve, reject) => {
+    mqttClient = mqtt.connect({ host: hostIp, port: 1884 });
+    mqttClient.on('connect', () => {
+      resolve(`MQTT Client Connected to: ${hostIp}`);
     });
-    return;
-  }
-  mqttClient = undefined;
-  resolve(connectClient(hostIp, dispatch));
-});
 
-export const connectMqttClient = hostIp => dispatch => initializeClient(hostIp, dispatch)
-  .then(message => console.log(message))
-  .catch(err => dispatch(updateStatus(false, err.message, false)));
+    setTimeout(() => {
+      if (!mqttClient.connected) {
+        dispatch(resetSelectedKit());
+        mqttClient.end();
+        reject(new Error(`[Super Toi] La IP "${hostIp}" no se encontró`));
+      }
+    }, 1500);
 
-export const unsubscribe = topicList => (dispatch) => {
+    mqttClient.on('offline', () => {
+      dispatch(resetSelectedKit('[Super Toi] Desconectado'));
+    });
+    mqttClient.on('error', () => {
+      dispatch(resetSelectedKit('[Super Toi] Error de Comunicación'));
+    });
+  });
+
+const initializeClient = (hostIp, dispatch) =>
+  new Promise(resolve => {
+    allTopics = [];
+    if (mqttClient && mqttClient.connected) {
+      mqttClient.end(true, () => {
+        mqttClient = undefined;
+        resolve(connectClient(hostIp, dispatch));
+      });
+      return;
+    }
+    mqttClient = undefined;
+    resolve(connectClient(hostIp, dispatch));
+  });
+
+export const connectMqttClient = hostIp => dispatch =>
+  initializeClient(hostIp, dispatch)
+    .then(message => console.log(message))
+    .catch(err => dispatch(updateStatus(false, err.message, false)));
+
+export const unsubscribe = topicList => dispatch => {
   if (topicList.length !== 0) {
     mqttClient.unsubscribe(topicList);
   }
   dispatch(resetAvailableTopics());
 };
 
-export const disconnectMqttClient = () => (dispatch) => {
+export const disconnectMqttClient = () => dispatch => {
   if (mqttClient) {
     mqttClient.end();
     mqttClient = undefined;
@@ -118,29 +121,31 @@ const processMessage = (topic, message, dispatch) => {
   }
 };
 
-const requestAllTopics = dispatch => new Promise((resolve, reject) => {
-  if (mqttClient && mqttClient.connected) {
-    mqttClient.subscribe('allTopics');
-    if (mqttClient.listeners('message').length === 0) {
-      mqttClient.on('message', (topic, message) => processMessage(topic, message, dispatch));
-    }
-    mqttClient.publish('requestTopic', 'all');
-    setTimeout(() => {
+const requestAllTopics = dispatch =>
+  new Promise((resolve, reject) => {
+    if (mqttClient && mqttClient.connected) {
+      mqttClient.subscribe('allTopics');
+      if (mqttClient.listeners('message').length === 0) {
+        mqttClient.on('message', (topic, message) =>
+          processMessage(topic, message, dispatch),
+        );
+      }
+      mqttClient.publish('requestTopic', 'all');
+      setTimeout(() => {
+        dispatch(endLoading());
+        resolve(true);
+      }, 1500);
+    } else {
       dispatch(endLoading());
-      resolve(true);
-    }, 1500);
-  } else {
-    dispatch(endLoading());
-    reject(new Error('[Super Toi] Error de Comunicación'));
-  }
-});
+      reject(new Error('[Super Toi] Error de Comunicación'));
+    }
+  });
 
-export const fetchAvailableTopics = () => (dispatch) => {
+export const fetchAvailableTopics = () => dispatch => {
   dispatch(requestAvailableTopics());
-  return requestAllTopics(dispatch)
-    .catch((err) => {
-      dispatch(updateStatus(false, err.message, false));
-    });
+  return requestAllTopics(dispatch).catch(err => {
+    dispatch(updateStatus(false, err.message, false));
+  });
 };
 
 /*
@@ -148,7 +153,7 @@ Build Topic Categories that will be rendered at the Dashboard Sidebar.
 If there is a topic that has no data yet, it will request that the MQTT broker
 forces to update the Toi state.
  */
-export const getTopicInfo = (topic) => {
+export const getTopicInfo = topic => {
   const re = /([a-zA-Z]+)\/([a-zA-Z]+)([0-9]+)/g;
   const result = re.exec(topic);
   return result.slice(1, 4);
@@ -162,14 +167,14 @@ const addToi = (category, toiInfo) => {
   return newCategory;
 };
 
-export const requestTopic = (topic) => {
+export const requestTopic = topic => {
   if (mqttClient && mqttClient.connected) {
     mqttClient.publish('requestTopic', topic);
   }
 };
 
-export const buildTopicCategories = topics => topics.reduce(
-  (result, topic) => {
+export const buildTopicCategories = topics =>
+  topics.reduce((result, topic) => {
     const topicInfo = getTopicInfo(topic.topic);
     const category = Enums[topicInfo[0]];
     const toiInfo = {
@@ -180,12 +185,12 @@ export const buildTopicCategories = topics => topics.reduce(
     };
     const index = result.findIndex(cat => cat.title === category);
 
-    return index !== -1 ?
-      result.slice(0, index).concat(addToi(result[index], toiInfo), result.slice(index + 1)) :
-      result.concat({
-        title: category,
-        tois: [toiInfo],
-      });
-  },
-  [],
-);
+    return index !== -1
+      ? result
+          .slice(0, index)
+          .concat(addToi(result[index], toiInfo), result.slice(index + 1))
+      : result.concat({
+          title: category,
+          tois: [toiInfo],
+        });
+  }, []);

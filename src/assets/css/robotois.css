@@ -2,7 +2,12 @@
 SELECTED TOI #2F2C53;
 BG LIST #3A375C;
 */
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Regular'), local('Ubuntu-Regular'), url(https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf) format('truetype');
+}
 body,
 html {
   height: 100%;
@@ -36,7 +41,7 @@ html {
   background-color: #3A375C;
 }
 .dark-bg {
-  background-color: #474B7E;
+  background-color: #474b7e;
   color: #EAE8FF;
 }
 .is-bold {
@@ -311,4 +316,27 @@ html {
 .delete-button-container {
   display: flex;
   justify-content: flex-end;
+}
+.dashboard {
+  background-color: #010036;
+  width: 100%;
+  height: 100%;
+  padding: 0.8em;
+}
+.dashboard .card {
+  background: #2B2A4D;
+  color: #EAE8FF;
+  border-color: #010036;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+.dashboard .card .card-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.dashboard-sidebar {
+  background-color: white;
+  margin-top: 3.6rem;
+  min-height: 150px;
 }
