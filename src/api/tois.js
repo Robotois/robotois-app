@@ -1,10 +1,12 @@
 export const colors = {
-  blue: '#27BCEB',
-  green: '#00E257',
+  blue: '#1968FF',
+  green: '#00F5A9',
   red: '#E2244C',
   purple: '#5755d9',
   dark: '#3A375C',
   purpleText: '#8A81C3',
+  lightText: '#EAE8FF',
+  dashboardText: '#8A9CAD',
 };
 
 const toisData = [
@@ -15,7 +17,7 @@ const toisData = [
     listIndex: 0,
     type: 'analogConnector',
     description:
-      'Este componente se ocupa como puerto y permite obtener mediciones de diferentes tipos de sensores analógicos, tal como los sensores de temperatura, intensidad de luz, sonido y rotatorio.'
+      'Este componente se ocupa como puerto y permite obtener mediciones de diferentes tipos de sensores analógicos, tal como los sensores de temperatura, intensidad de luz, sonido y rotatorio.',
   },
   {
     image: 'img/tois/temperature-sensor.svg',
@@ -68,7 +70,7 @@ const toisData = [
     type: 'button',
     hasEvents: true,
     description:
-      'El botón puede tener dos posibles estados, Encendido y Apagado. El estado Encendido se presenta cuando se presiona el botón y el estado Apagado es cuando no está presionado.'
+      'El botón puede tener dos posibles estados, Encendido y Apagado. El estado Encendido se presenta cuando se presiona el botón y el estado Apagado es cuando no está presionado.',
   },
   {
     image: 'img/tois/led.svg',
@@ -85,7 +87,7 @@ const toisData = [
     type: 'ledRGB',
     description:
       'Los LEDs RGB son dispositivos de salida que permiten mostrar de manera visual un color específico. Cada LED tiene dos estados Encendido y Apagado.',
-    submodules: 7
+    submodules: 7,
   },
   {
     image: 'img/tois/display.svg',
@@ -93,7 +95,7 @@ const toisData = [
     listIndex: 8,
     type: 'lcd',
     description:
-      'El display LCD es un dispositivo de salida para mostrar información de manera visual, que puede ser un mensaje, un valor numérico o símbolos.'
+      'El display LCD es un dispositivo de salida para mostrar información de manera visual, que puede ser un mensaje, un valor numérico o símbolos.',
   },
   {
     image: 'img/tois/motors-connector.svg',
@@ -101,7 +103,7 @@ const toisData = [
     listIndex: 9,
     type: 'motorsConnector',
     description:
-      'El conector  de motores se utiliza para controlar hasta dos motores, las acciones de cada motor como velocidad y dirección se controlan con ayuda de este conector.'
+      'El conector  de motores se utiliza para controlar hasta dos motores, las acciones de cada motor como velocidad y dirección se controlan con ayuda de este conector.',
   },
   {
     image: 'img/tois/servos-connector.svg',
@@ -109,7 +111,7 @@ const toisData = [
     listIndex: 10,
     type: 'servosConnector',
     description:
-      'El conector de servomotores se utiliza para controlar hasta tres servomotores, la posición del eje de un servomotor se controla con la ayuda de este conector.'
+      'El conector de servomotores se utiliza para controlar hasta tres servomotores, la posición del eje de un servomotor se controla con la ayuda de este conector.',
   },
   {
     image: 'img/tois/servo-motor.svg',
@@ -117,7 +119,7 @@ const toisData = [
     listIndex: 11,
     type: 'servo',
     description:
-      'Este componente permite controlar el grado de rotación de sus ejes. Este componente se conecta al conector de servomotores.'
+      'Este componente permite controlar el grado de rotación de sus ejes. Este componente se conecta al conector de servomotores.',
   },
   {
     image: 'img/tois/motor.svg',
@@ -125,7 +127,7 @@ const toisData = [
     listIndex: 12,
     type: 'motor',
     description:
-      'Este componente cuenta con los siguientes parámetros: iniciar movimiento, detener, velocidad y dirección de giro. Este componente se conecta al conector de motores.'
+      'Este componente cuenta con los siguientes parámetros: iniciar movimiento, detener, velocidad y dirección de giro. Este componente se conecta al conector de motores.',
   },
   {
     image: 'img/tois/relay.svg',
@@ -133,7 +135,7 @@ const toisData = [
     listIndex: 13,
     type: 'relay',
     description:
-      'Este componente es un interruptor que permite Activar y Desactivar algun dispositivo analógico, tal como una Lámpara o algun dispositivo que se conecte al toma corriente.'
+      'Este componente es un interruptor que permite Activar y Desactivar algun dispositivo analógico, tal como una Lámpara o algun dispositivo que se conecte al toma corriente.',
   },
   {
     image: 'img/tois/motion-sensor.svg',
@@ -142,7 +144,7 @@ const toisData = [
     type: 'motion',
     hasEvents: true,
     description:
-      'Este sensor permite detectar movimiento de personas a una distancia de 3m aproximadamente. El sensor tiene dos posibles estados, Activado y Desactivado.'
+      'Este sensor permite detectar movimiento de personas a una distancia de 3m aproximadamente. El sensor tiene dos posibles estados, Activado y Desactivado.',
   },
   {
     image: 'img/tois/sound-sensor.svg',
@@ -159,11 +161,13 @@ const toisData = [
 
 export default toisData;
 
-export const getChartProps = (toiType) => {
+export const getChartProps = toiType => {
   const toiItem = toisData.find(toi => toi.type === toiType);
-  return !toiItem ? {} : {
-    chartColor: toiItem.chartColor,
-    description: toiItem.description,
-    toText: toiItem.toText,
-  };
+  return !toiItem
+    ? {}
+    : {
+        chartColor: toiItem.chartColor,
+        description: toiItem.description,
+        toText: toiItem.toText,
+      };
 };
