@@ -2,20 +2,22 @@ import { connect } from 'react-redux';
 import DashboardSidebar from '../../apps/dashboard/sidebar/dashboard-sidebar';
 import {
   fetchAvailableTopics,
-  buildTopicCategories,
-  selectTopic,
+  // buildTopicCategories,
+  selectToi,
 } from '../../actions/dashboard-actions';
+import { buildTopicCategories, getCategories } from './transformer'
 
 const mapStateToProps = ({
-  dashboard: { topics, isFetching },
+  dashboard: { topics, isFetching, toiState, showTois },
 }) => ({
-  categories: buildTopicCategories(topics),
+  // categories: buildTopicCategories(topics),
   isFetching,
+  categories: getCategories(toiState, showTois)
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchTopics: () => dispatch(fetchAvailableTopics()),
-  selectTopic: topic => () => dispatch(selectTopic(topic)),
+  selectToi: toi => () => dispatch(selectToi(toi)),
 });
 
 const DashboardSidebarContainer = connect(

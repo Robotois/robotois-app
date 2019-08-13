@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ToiDetail = ({ toi, selectTopic }) => (
-  <li className={`menu-item ${toi.selected ? 'bg-secondary' : ''}`}>
+const ToiDetail = ({ selected, title, instance, selectToi }) => (
+  <li className={`menu-item ${selected ? 'bg-secondary' : ''}`}>
     <div className="tile tile-centered">
       <div className="tile-icon">
         <div className="example-tile-icon">
@@ -9,11 +9,10 @@ const ToiDetail = ({ toi, selectTopic }) => (
         </div>
       </div>
       <div className="tile-content">
-        <div className="tile-title h6">{`${toi.title} ${toi.instance}`}</div>
-        <div className="tile-subtitle text-gray">{toi.topic}</div>
+        <div className="tile-title h6">{`${title} ${instance}`}</div>
       </div>
       <div className="tile-action">
-        <button className="btn btn-link" onClick={selectTopic}>
+        <button className="btn btn-link" onClick={selectToi}>
           <i className="icon icon-search" />
         </button>
       </div>
@@ -21,16 +20,18 @@ const ToiDetail = ({ toi, selectTopic }) => (
   </li>
 );
 
-const TopicCategory = ({ category, selectTopic }) => (
+const TopicCategory = ({ category, selectToi }) => (
   <div>
     <ul className="menu">
       <li className="menu-item h5">{category.title}</li>
       <li className="divider" />
       {category.tois.map(toi => (
         <ToiDetail
-          key={toi.topic}
-          toi={toi}
-          selectTopic={selectTopic(toi.topic)}
+          key={`${toi.title}-${toi.instance}`}
+          title={toi.title}
+          instance={toi.instance}
+          selected={toi.selected}
+          selectToi={selectToi(toi.id)}
         />
       ))}
     </ul>
@@ -38,18 +39,18 @@ const TopicCategory = ({ category, selectTopic }) => (
   </div>
 );
 
-const TopicCategories = ({ categories, selectTopic }) => (
+const TopicCategories = ({ categories, selectToi }) => (
   <div>
     {categories.length !== 0 ? (
       categories.map(category => (
         <TopicCategory
           key={category.title}
           category={category}
-          selectTopic={selectTopic}
+          selectToi={selectToi}
         />
       ))
     ) : (
-      <span>No hay Tois que mostrar</span>
+      <span>No hay información que mostrar</span>
     )}
   </div>
 );
@@ -60,7 +61,8 @@ class AvailableTopics extends React.Component {
   }
 
   render() {
-    const { categories, selectTopic, isFetching } = this.props;
+    const { categories, selectToi, isFetching } = this.props;
+    // console.log('categories:', categories);
     return (
       <div className="panel mx-2 dashboard-sidebar">
         <div className="panel-header">
@@ -73,7 +75,7 @@ class AvailableTopics extends React.Component {
             <TopicCategories
               categories={categories}
               isFetching={isFetching}
-              selectTopic={selectTopic}
+              selectToi={selectToi}
             />
           )}
         </div>

@@ -4,6 +4,7 @@ const loggersMap = ['lcd'];
 const ioLoggersMap = ['led', 'ledRGB', 'relay', 'lcd'];
 const digitalOutputMap = ['led', 'relay'];
 const digitalInputsMap = ['button', 'motion'];
+const mechanicalMap = ['motor', 'servo'];
 
 export const isEventListener = moduleName =>
   eventListenersMap.findIndex(sens => sens === moduleName) !== -1;
@@ -23,3 +24,5 @@ export const isInput = type => isSensor(type) || isDigitalInput(type);
 export const isDigitalOutput = toi => digitalOutputMap.findIndex(io => io === toi) !== -1;
 
 export const isIo = toi => isDigitalOutput(toi) || isDigitalInput(toi);
+
+export const isMechanical = toi => mechanicalMap.findIndex(mech => mech === toi) !== -1;

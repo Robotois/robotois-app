@@ -38,5 +38,7 @@ const Enums = {
   sensors: 'Sensores',
   digitalOutputs: 'Salidas Digitales',
   digitalInputs: 'Entradas Digitales',
+  motors: 'Motores',
+  servos: 'Servomotores',
 };
 export default Enums;

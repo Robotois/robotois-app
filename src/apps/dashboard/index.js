@@ -1,54 +1,55 @@
 import React from 'react';
-import { getTopicInfo } from '../../actions/dashboard-actions';
-import { isSensor, isIo } from '../../components/shared/tois-by-function';
-import Enums from '../../utils/Enums';
-import SensorChart from './components/sensor-chart';
-import { getChartProps, colors } from '../../api/tois';
+// import { getTopicInfo } from '../../actions/dashboard-actions';
+import { getToiInfo } from '../../containers/dashboard/transformer';
+import { isSensor, isIo, isMechanical } from '../../components/shared/tois-by-function';
+import { getChartProps } from '../../api/tois';
 
-const DiditalIo = ({ topic, data }) => {
-  const topicInfo = getTopicInfo(topic);
-  const length = data.length;
-  const lastState = length > 0 ? data[length - 1].toUpperCase() : 'OFF';
-  const color = lastState === 'OFF' ? colors.purpleText : colors.green;
+import EmptyState from './components/EmptyState';
+import SensorChart from './components/sensor-chart';
+import DigitalIo from './components/DigitalIo';
+import MotorsChart from './components/MotorsChart';
+
+const Motors = ({ data, topicInfo }) => {
+  const { length } = data;
+  const lastState = length > 0 ? data[length - 1] : 0;
   return (
-    <div className="column col-3 col-lg-6 my-1 dashboard-item">
-      <div className="card">
-        <div className="card-header">
-          <div className="card-title h5">
-            {`${Enums[topicInfo[1]]} #${topicInfo[2]}`}
-          </div>
-        </div>
-        <div className="card-body text-center">
-          <figure
-            className="avatar avatar-xl"
-            data-initial={lastState}
-            style={{ backgroundColor: color }}
-          />
-        </div>
+    <div className="bar">
+      <div
+        className="bar-item"
+        role="progressbar"
+        style={{ width: `${lastState}%` }}
+        aria-valuenow={lastState}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        {lastState}
       </div>
     </div>
   );
 };
 
-const getTopicComponent = toiType => {
+const getTopicComponent = (toiType) => {
   switch (true) {
     case isSensor(toiType):
       return SensorChart;
     case isIo(toiType):
-      return DiditalIo;
+      return DigitalIo;
+    case isMechanical(toiType):
+      return MotorsChart;
     default:
       return false;
   }
 };
 
-const RenderTopic = props => {
-  const topicInfo = getTopicInfo(props.topic);
-  const TopicComponent = getTopicComponent(topicInfo[1]);
-  return (
+const RenderToi = ({ id, ...rest }) => {
+  const toiInfo = getToiInfo(id);
+  const TopicComponent = getTopicComponent(toiInfo[0]);
+  return TopicComponent && (
     <TopicComponent
-      {...props}
-      topicInfo={topicInfo}
-      chartProps={getChartProps(topicInfo[1])}
+      id={id}
+      {...rest}
+      toiInfo={toiInfo}
+      chartProps={getChartProps(toiInfo[0])}
     />
   );
 };
@@ -67,28 +68,12 @@ const topics = [
   },
 ];*/
 
-const EmptyState = ({ topic, data }) => {
-  return (
-    <div className="column col-6 my-1 dashboard-item">
-      <div className="card">
-        <div className="card-header">
-          <div className="card-title h5">
-            OOPS!
-          </div>
-        </div>
-        <div className="card-body">
-          Intenta conectar algun TOI para visualizar su estado
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Dashboard = ({ selected, requestTopic }) => {
+  console.log(selected)
   return (
     <div className="columns m-0 dashboard">
-      {selected.length ? selected.map(topic => (
-        <RenderTopic key={topic.topic} {...topic} requestTopic={requestTopic} />
+      {selected.length ? selected.map(toi => (
+        <RenderToi key={toi.id} {...toi} requestTopic={requestTopic} />
       )) : <EmptyState />}
     </div>
   );

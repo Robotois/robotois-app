@@ -16,13 +16,54 @@ const AppsWorkspace = ({ currentApp }) => {
   }
 };
 
-const Workspace = ({ workspace, currentApp }) => (
-  <div className={`workspace ${currentApp === 'dashboard' ? 'workspace-dark' : ''}`}>
-    <AppsWorkspace currentApp={currentApp} />
-    <CodeEditorContainer />
-    <VisualEditor visible={workspace === 'Visual' && currentApp === 'main'} />
-    <BlocklyEditorContainer />
-  </div>
-);
+class Workspace extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      height: 0,
+      width: 0,
+    };
+    this.handleRedimension = this.handleRedimension.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.handleRedimension);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleRedimension);
+  }
+
+  handleRedimension() {
+    const { clientHeight, clientWidth } = this.myElement;
+    this.setState({
+      height: clientHeight,
+      width: clientWidth,
+    });
+  }
+
+  render() {
+    const { workspace, currentApp } = this.props;
+    const { width, height } = this.state;
+    return (
+      <div
+        className={`workspace ${currentApp === 'dashboard' ? 'workspace-dark' : ''}`}
+        ref={(el) => { this.myElement = el; }}
+        style={{
+          overflow: 'scroll',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <AppsWorkspace currentApp={currentApp} />
+        <CodeEditorContainer />
+        <VisualEditor
+          visible={workspace === 'Visual' && currentApp === 'main'}
+          width={width}
+          height={height}
+        />
+        <BlocklyEditorContainer />
+      </div>
+    );
+  }
+}
 
 export default Workspace;

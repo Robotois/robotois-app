@@ -16,6 +16,8 @@
 .env.test.local
 .env.production.local
 .eslintrc
+*.tar.gz
+*.zip
 
 npm-debug.log*
 yarn-debug.log*

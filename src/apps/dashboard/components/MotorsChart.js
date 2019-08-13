@@ -19,19 +19,25 @@ const ChartLayout = ({ chartTitle, children, chartProps, value }) => (
   </div>
 );
 
-class SensorChart extends React.Component {
+class MotorsChart extends React.Component {
   componentWillMount() {
-    // const { data, topic, requestTopic } = this.props;
-    // if (data.length === 0) {
-    //   requestTopic(topic);
-    // }
+    const { data, topic, requestTopic } = this.props;
+    if (data.length === 0) {
+      requestTopic(topic);
+    }
   }
 
   componentDidMount() {
-    const { values, timestamps, id, chartProps } = this.props;
-    this.ctx = document.getElementById(id);
+    const {
+      timestamps,
+      data,
+      topic,
+      chartProps
+    } = this.props;
+
+    this.ctx = document.getElementById(topic);
     const config = {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: timestamps,
         datasets: [
@@ -39,8 +45,8 @@ class SensorChart extends React.Component {
             label: 'Medición',
             backgroundColor: chartProps.chartColor,
             borderColor: chartProps.chartColor,
-            data: values,
-            fill: false,
+            data,
+            // fill: false,
           },
         ],
       },
@@ -101,8 +107,8 @@ class SensorChart extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    const { timestamps, values } = props;
-    this.myChart.data.datasets[0].data = values;
+    const { timestamps, data } = props;
+    this.myChart.data.datasets[0].data = data;
     this.myChart.data.labels = timestamps;
     this.myChart.update();
   }
@@ -112,21 +118,21 @@ class SensorChart extends React.Component {
   }
 
   render() {
-    const { id, toiInfo, chartProps, values } = this.props;
-    const lastValue = values.length > 0 ? values[values.length - 1] : undefined;
+    const { topic, topicInfo, chartProps, data } = this.props;
+    const value = data.length > 0 ? data[data.length - 1] : undefined;
     // const topicInfo = getTopicInfo(topic);
     return (
       <div className="column col-6 col-lg-6 my-1">
         <ChartLayout
-          chartTitle={`${Enums[toiInfo[0]]} #${toiInfo[1]}`}
+          chartTitle={`${Enums[topicInfo[1]]} #${topicInfo[2]}`}
           chartProps={chartProps}
-          value={lastValue}
+          value={value}
         >
-          <canvas id={id} height="150" />
+          <canvas id={`${topic}`} height="150" />
         </ChartLayout>
       </div>
     );
   }
 }
 
-export default SensorChart;
+export default MotorsChart;

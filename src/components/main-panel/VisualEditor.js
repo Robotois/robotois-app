@@ -37,20 +37,31 @@ class VisualEditor extends React.Component {
     canvas.add(shield, (canvas.getWidth() / 2) - 213, (canvas.getHeight() / 2) - 75);
     window.Robotois.CANVAS = canvas;
     window.Robotois.canvasDOMRef = document.getElementById('canvas');
+    // canvas.setDimension(1680, 1050);
+    // setTimeout(() => canvas.setDimension(1680, 1050), 500);
   }
+
+  componentWillReceiveProps({ width, height }) {
+    console.log('receivedProps:', width, height);
+    if (width !== undefined && height !== undefined) {
+      window.Robotois.CANVAS.setDimension(width, height);
+    }
+  }
+
   render() {
-    const { connectDropTarget, isOver, visible } = this.props;
-    return connectDropTarget(
+    const { connectDropTarget, isOver, visible, height, width } = this.props;
+    // console.log('dimensions:', height, width);
+    return connectDropTarget((
       <div
         id="canvas"
         style={{
-          border: isOver ? '1px solid #5764C6' : 'none',
+          border: isOver ? '2px solid #5764C6' : 'none',
           display: visible ? 'block' : 'none',
           width: '100%',
           height: '100%',
         }}
-      />,
-    );
+      />
+    ));
   }
 }
 

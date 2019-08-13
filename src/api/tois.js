@@ -7,6 +7,8 @@ export const colors = {
   purpleText: '#8A81C3',
   lightText: '#EAE8FF',
   dashboardText: '#8A9CAD',
+  salmon: '#F19278',
+  lightSalmon: '#F6C191',
 };
 
 const toisData = [
@@ -120,6 +122,16 @@ const toisData = [
     type: 'servo',
     description:
       'Este componente permite controlar el grado de rotación de sus ejes. Este componente se conecta al conector de servomotores.',
+    toText: (value) => {
+      if (value === undefined) {
+        return 'Desconocido';
+      }
+      if (value === 0) {
+        return 'Centrado';
+      }
+      return `Posición: ${value}°`;
+    },
+    chartColor: colors.lightSalmon,
   },
   {
     image: 'img/tois/motor.svg',
@@ -128,6 +140,19 @@ const toisData = [
     type: 'motor',
     description:
       'Este componente cuenta con los siguientes parámetros: iniciar movimiento, detener, velocidad y dirección de giro. Este componente se conecta al conector de motores.',
+    toText: (value) => {
+      if (value === undefined) {
+        return 'Desconocido';
+      }
+      if (value === 0) {
+        return 'Detenido';
+      }
+      if (value > 0) {
+        return `Hacia adelante ${value}%`;
+      }
+      return `Hacia atrás ${-value}%`;
+    },
+    chartColor: colors.salmon,
   },
   {
     image: 'img/tois/relay.svg',

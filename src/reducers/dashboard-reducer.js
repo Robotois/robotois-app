@@ -1,19 +1,26 @@
 import moment from 'moment';
 
 import {
+  GET_TOI_STATE,
+  ACCEPTED_GET_TOI_STATE,
+  RECEIVE_UPDATE_STATE,
   REQUEST_AVAILABLE_TOPICS,
   RECEIVE_AVAILABLE_TOPICS,
   RECEIVE_TOPIC_DATA,
-  SELECT_TOPIC,
+  SELECT_TOI,
   END_LOADING,
-  getTopicInfo,
 } from '../actions/dashboard-actions';
-import { isSensor, isDigitalOutput, isDigitalInput } from '../components/shared/tois-by-function';
+import { updateToiState, getTopicInfo } from '../containers/dashboard/transformer'
+import {
+  isSensor,
+  isDigitalOutput,
+  isDigitalInput,
+  isMechanical,
+} from '../components/shared/tois-by-function';
 
 const ioStatus = ['off', 'on'];
 
 const formatData = (data, toiType) => {
-  // console.log('toiType:', toiType);
   switch (true) {
     case isSensor(toiType):
       return Number(data);
@@ -21,6 +28,8 @@ const formatData = (data, toiType) => {
       return data !== 'blink' ? ioStatus[parseInt(data, 10)] : 'blink';
     case isDigitalInput(toiType):
       return ioStatus[parseInt(data, 10)];
+    case isMechanical(toiType):
+      return Number(data);
     default:
       return undefined;
   }
@@ -28,17 +37,61 @@ const formatData = (data, toiType) => {
 
 const initialState = {
   topics: [],
+  showTois: [],
   isFetching: false,
+  toiState: {},
+};
+
+const debugState = {
+  topics: [
+    {
+      topic: 'motors/motor101',
+      data: [-50, 50, 100, 25, 75],
+      timestamps: [
+        moment().subtract(20, 'seconds').format('HH:mm:ss'),
+        moment().subtract(15, 'seconds').format('HH:mm:ss'),
+        moment().subtract(10, 'seconds').format('HH:mm:ss'),
+        moment().subtract(5, 'seconds').format('HH:mm:ss'),
+        moment().format('HH:mm:ss'),
+      ],
+      selected: false,
+    },
+    {
+      topic: 'servos/servo101',
+      data: [-50, 50, 100, 25, 75],
+      timestamps: [
+        moment().subtract(20, 'seconds').format('HH:mm:ss'),
+        moment().subtract(15, 'seconds').format('HH:mm:ss'),
+        moment().subtract(10, 'seconds').format('HH:mm:ss'),
+        moment().subtract(5, 'seconds').format('HH:mm:ss'),
+        moment().format('HH:mm:ss'),
+      ],
+      selected: false,
+    },
+  ],
+  isFetching: false,
+  toiState: {
+    'sensors': {
+      'distance1': [
+        { value: 20, timestamp: moment().subtract(20, 'seconds').format('HH:mm:ss') },
+        { value: 23, timestamp: moment().subtract(15, 'seconds').format('HH:mm:ss') },
+        { value: 22, timestamp: moment().subtract(10, 'seconds').format('HH:mm:ss') },
+        { value: 19, timestamp: moment().subtract(5, 'seconds').format('HH:mm:ss') },
+        { value: 22, timestamp: moment().subtract(20, 'seconds').format('HH:mm:ss') },
+      ]
+    }
+  },
+  showTois: [],
 };
 
 const mergeData = (data, value) => {
-  const newData = data.concat(value);
+  const newData = data.concat(value)
   // console.log('value:', value);
   if (newData.length > 30) {
-    return newData.slice(1, newData.length);
+    return newData.slice(1, newData.length)
   }
-  return newData;
-};
+  return newData
+}
 
 const mergeTimestamps = momentData => mergeData(momentData, moment().format('HH:mm:ss'));
 
@@ -75,18 +128,33 @@ const buildTopicsData = (topics, prevTopics) => {
   );
 };
 
-const selectTopic = (topics, topic) => {
-  const index = topics.findIndex(to => to.topic === topic);
-  const prevTopic = topics[index];
-  topics.splice(index, 1, {
-    ...prevTopic,
-    selected: !prevTopic.selected,
-  });
-  return [...topics];
+const selectToi = (showTois, toi) => {
+  const index = showTois.findIndex(item => item === toi);
+  if (index !== -1) {
+    showTois.splice(index, 1);
+    return [...showTois];
+  }
+  return showTois.concat(toi);
 };
 
+// const dashboardReducer = (state = initialState, action) => {
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_TOI_STATE:
+      return {
+        ...state,
+        isFetching: true,
+      }
+    case ACCEPTED_GET_TOI_STATE:
+      return {
+        ...state,
+        isFetching: false,
+      }
+    case RECEIVE_UPDATE_STATE:
+      return {
+        ...state,
+        toiState: updateToiState(state.toiState, action.data),
+      }
     case REQUEST_AVAILABLE_TOPICS:
       return {
         ...state,
@@ -102,9 +170,10 @@ const dashboardReducer = (state = initialState, action) => {
         topics: mergeTopicData(state.topics, action.topic, action.data),
         isFetching: false,
       };
-    case SELECT_TOPIC:
+    case SELECT_TOI:
       return {
-        topics: selectTopic(state.topics, action.topic, action.data),
+        ...state,
+        showTois: selectToi(state.showTois, action.toi),
         isFetching: false,
       };
     case END_LOADING:
