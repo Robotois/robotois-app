@@ -5,7 +5,7 @@
   "main": "src/app-starter.js",
   "homepage": "./",
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "brace": "^0.10.0",
     "chart.js": "^2.7.1",
     "electron": "^1.8.2-beta.4",
