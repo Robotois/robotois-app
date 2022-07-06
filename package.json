@@ -9,7 +9,7 @@
     "brace": "^0.10.0",
     "chart.js": "^2.7.1",
     "electron": "^1.8.2-beta.4",
-    "moment": "^2.20.1",
+    "moment": "^2.29.4",
     "mqtt": "^2.16.0",
     "prop-types": "^15.6.0",
     "rc-slider": "^8.5.0",
